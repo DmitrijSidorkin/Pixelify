@@ -10,4 +10,7 @@
 
 .nav-link {
   color: rgba(3, 150, 3, 0.801);
+  padding: 0.25rem;
+  font-weight: 700;
+  margin-left: 1rem;
 }
