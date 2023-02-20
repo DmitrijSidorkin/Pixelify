@@ -60,15 +60,17 @@
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, in officia dolorem cum corrupti esse libero quidem doloremque, mollitia ipsum natus accusantium dolor impedit ea nam cupiditate maiores modi quasi!
         </p>
         <div><a
-          href="/campgrounds"
+          href="/play"
           class="btn btn-lg btn-secondary font-weight-bold bg-white"
           >Play as guest</a
         >
+        <% if(!currentUser) {%>
         <a
-          href="/campgrounds"
+          href="/login"
           class="btn btn-lg btn-secondary font-weight-bold bg-white"
           >Login</a
         >
+        <% } %>
       </div>
       </main>
       <footer class="mt-auto text-white-50">
