@@ -1,0 +1,13 @@
+.navbar-brand {
+  color: rgba(3, 209, 3, 0.801);
+}
+.navbar-brand:hover {
+  color: rgba(3, 209, 3, 0.801);
+}
+.navbar-brand:focus {
+  color: rgba(3, 209, 3, 0.801);
+}
+
+.nav-link {
+  color: rgba(3, 150, 3, 0.801);
+}
