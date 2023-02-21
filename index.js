@@ -13,6 +13,7 @@ const LocalStorage = require("node-localstorage").LocalStorage;
 localStorage = new LocalStorage("./scratch");
 const MongoStore = require("connect-mongo");
 const userRoutes = require("./routes/users");
+const mainRoutes = require("./routes/main");
 
 const dbUrl = "mongodb://localhost:27017/pixelify"; //process.env.DB_URL ||
 
@@ -83,11 +84,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", userRoutes);
-
-app.get("/", (req, res) => {
-  res.send("home");
-});
+app.use("/", mainRoutes, userRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

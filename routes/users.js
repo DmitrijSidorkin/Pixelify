@@ -5,10 +5,6 @@ const User = require("../models/user");
 const passport = require("passport");
 const users = require("../controllers/users");
 
-router.route("/").get((req, res) => {
-  res.render("home");
-});
-
 router
   .route("/register")
   .get(users.renderRegister)
@@ -25,6 +21,8 @@ router
     }),
     users.login
   );
+
+router.route("/account").get(users.renderAccount);
 
 router.get("/logout", users.logout);
 
