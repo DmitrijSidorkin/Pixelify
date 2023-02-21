@@ -29,9 +29,12 @@ body {
 }
 
 .btn-secondary,
-.btn-secondary:hover {
-  color: #333;
+#bootstrap-overrides .btn-secondary:hover {
+  color: #000000;
   text-shadow: none;
+}
+.btn-secondary:hover {
+  border-color: red;
 }
 #main-description {
   text-align: center;

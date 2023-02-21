@@ -16,7 +16,7 @@
   </head>
 
 
-  <body class="d-flex flex-column vh-100">
+  <body class="d-flex flex-column vh-100" id="bootstrap-overrides">
     <nav class="navbar sticky-top navbar-expand-sm navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand justify-start" href="/">Pixelify</a>
@@ -61,13 +61,15 @@
         </p>
         <div><a
           href="/play"
-          class="btn btn-lg btn-secondary font-weight-bold bg-white"
+          class="btn btn-lg btn-secondary btn-success font-weight-bold"
+          class="home-btn"
           >Play as guest</a
         >
         <% if(!currentUser) {%>
         <a
           href="/login"
-          class="btn btn-lg btn-secondary font-weight-bold bg-white"
+          class="btn btn-lg btn-secondary btn-success font-weight-bold "
+          class="home-btn"
           >Login</a
         >
         <% } %>
