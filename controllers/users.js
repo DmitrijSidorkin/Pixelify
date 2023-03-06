@@ -21,7 +21,7 @@ module.exports.register = async (req, res, next) => {
 };
 
 module.exports.renderLogin = (req, res) => {
-  res.render("users/login");
+  res.render("users/login", { myObj: req.stolenImage });
 };
 
 module.exports.login = (req, res) => {

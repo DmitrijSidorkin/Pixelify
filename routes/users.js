@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const User = require("../models/user");
 const passport = require("passport");
 const users = require("../controllers/users");
+const { fetchGameData } = require("../middleware");
 
 router
   .route("/register")
@@ -12,7 +13,7 @@ router
 
 router
   .route("/login")
-  .get(users.renderLogin)
+  .get(fetchGameData, users.renderLogin)
   .post(
     passport.authenticate("local", {
       failureFlash: true,
