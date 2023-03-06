@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 module.exports.renderRegister = (req, res) => {
-  res.render("users/register.ejs");
+  res.render("users/register.ejs", { myObj: req.gameImage });
 };
 
 module.exports.register = async (req, res, next) => {
@@ -21,7 +21,7 @@ module.exports.register = async (req, res, next) => {
 };
 
 module.exports.renderLogin = (req, res) => {
-  res.render("users/login", { myObj: req.stolenImage });
+  res.render("users/login", { myObj: req.gameImage });
 };
 
 module.exports.login = (req, res) => {

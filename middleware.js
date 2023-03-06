@@ -47,7 +47,7 @@ module.exports.fetchGameData = async (req, res, next) => {
     `https://api.rawg.io/api/games/${randGameId}?key=42d3994083024d64aebad13f6568556c`
   );
   console.log(results);
-  req.stolenImage = results.data.background_image;
+  req.gameImage = results.data.background_image;
 
   next();
 };

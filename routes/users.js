@@ -8,7 +8,7 @@ const { fetchGameData } = require("../middleware");
 
 router
   .route("/register")
-  .get(users.renderRegister)
+  .get(fetchGameData, users.renderRegister)
   .post(catchAsync(users.register));
 
 router
