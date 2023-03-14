@@ -41,13 +41,13 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   next();
 };
 
-module.exports.fetchGameData = async (req, res, next) => {
+module.exports.fetchRandomGameData = async (req, res, next) => {
   const randGameId = Math.floor(Math.random() * 1000 + 1);
   const results = await axios.get(
     `https://api.rawg.io/api/games/${randGameId}?key=42d3994083024d64aebad13f6568556c`
   );
   console.log(results);
-  req.gameImage = results.data.background_image;
+  req.gameData = results.data;
 
   next();
 };
