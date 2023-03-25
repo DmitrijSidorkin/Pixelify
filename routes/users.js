@@ -5,6 +5,7 @@ const User = require("../models/user");
 const passport = require("passport");
 const users = require("../controllers/users");
 const { fetchRandomGameData } = require("../middleware");
+const { render } = require("ejs");
 
 router
   .route("/register")
@@ -24,6 +25,8 @@ router
   );
 
 router.route("/account").get(users.renderAccount);
+
+router.route("/pixelate").get(fetchRandomGameData, users.renderPixelate);
 
 router.get("/logout", users.logout);
 

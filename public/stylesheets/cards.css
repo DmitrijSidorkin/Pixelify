@@ -1,0 +1,10 @@
+.image-box {
+  width: 50vw;
+  max-width: 800px;
+  min-width: 320px;
+  padding: 40px 10px;
+}
+
+.card-shadow {
+  height: 70vh;
+}

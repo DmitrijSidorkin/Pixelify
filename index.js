@@ -2,18 +2,18 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
-const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
-const User = require("./models/user");
 const LocalStrategy = require("passport-local");
 const LocalStorage = require("node-localstorage").LocalStorage;
-localStorage = new LocalStorage("./scratch");
 const MongoStore = require("connect-mongo");
+
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
+const User = require("./models/user");
+const ExpressError = require("./utils/ExpressError");
 
 const dbUrl = "mongodb://localhost:27017/pixelify"; //process.env.DB_URL ||
 
@@ -75,9 +75,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  if (!req.isAuthenticated() && !["/login", "/"].includes(req.originalUrl)) {
-    localStorage.setItem("redirectUrl", req.originalUrl);
-  }
+  // localStorage = new LocalStorage("./scratch");
+  // if (!req.isAuthenticated() && !["/login", "/"].includes(req.originalUrl)) {
+  //   localStorage.setItem("redirectUrl", req.originalUrl);
+  // }
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
