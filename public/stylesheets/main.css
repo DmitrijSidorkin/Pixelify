@@ -28,14 +28,18 @@ body {
   border-bottom-color: white;
 }
 
-.btn-secondary,
-#bootstrap-overrides .btn-secondary:hover {
-  color: #000000;
-  text-shadow: none;
-}
-.btn-secondary:hover {
-  border-color: red;
-}
 #main-description {
   text-align: center;
+}
+
+.home-button {
+  background-color: rgb(1, 172, 1);
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
 }

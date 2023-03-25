@@ -6,10 +6,7 @@ module.exports.renderRegister = async (req, res, next) => {
   const image = await pixelatedImage
     .pixelate(10)
     .getBase64Async(Jimp.MIME_JPEG);
-  res.render("users/login", { image });
-  res.render("users/register.ejs", {
-    cardImage: req.gameData.background_image,
-  });
+  res.render("users/register.ejs", { image });
 };
 
 module.exports.register = async (req, res, next) => {

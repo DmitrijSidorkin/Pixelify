@@ -8,3 +8,13 @@
 .card-shadow {
   height: 70vh;
 }
+
+.card-button {
+  background-color: rgba(1, 172, 1, 0.801);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+}
