@@ -20,17 +20,6 @@
     <nav class="navbar sticky-top navbar-expand-sm navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand justify-start" href="/">Pixelify</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <% if(!currentUser) {%>
@@ -62,18 +51,14 @@
         <div>
           <% if(!currentUser) {%><a
           href="/play"
-          class="btn btn-lg btn-secondary btn-success font-weight-bold"
-          class="home-btn"
-          >Play as guest</a>
-        
+          class="home-button"
+          >Play as guest</a>        
         <a href="/login"
-          class="btn btn-lg btn-secondary btn-success font-weight-bold "
-          class="home-btn"
+          class="home-button"
           >Login</a>
         <%} else {%>
           <a href="/play"
-          class="btn btn-lg btn-secondary btn-success font-weight-bold "
-          class="home-btn"
+          class="home-button"
           >Play</a>
           <% } %>
       </div>
