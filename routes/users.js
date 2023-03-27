@@ -26,8 +26,6 @@ router
 
 router.route("/account").get(users.renderAccount);
 
-router.route("/pixelate").get(fetchRandomGameData, users.renderPixelate);
-
 router.get("/logout", users.logout);
 
 module.exports = router;
