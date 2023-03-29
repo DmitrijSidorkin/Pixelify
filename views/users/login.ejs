@@ -1,48 +1,41 @@
 <% layout('layouts/boilerplate')%>
-
-<div
-  class="login-card container d-flex justify-content-center align-items-center"
->
-  <div class="row">
-    <div class="image-box col-sm-8 col-lg-6">
-      <div class="card shadow">
-        <img
-          class="card-image"
-          id="pixelatedImage"
-          src="<%=image%>"
-          alt=""
-          class="card-img-top"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Login</h5>
-          <form action="/login" method="POST" class="validated-form" novalidate>
-            <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
-              <input
-                class="form-control"
-                type="text"
-                id="username"
-                name="username"
-                autofocus
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="password">Password</label>
-              <input
-                class="form-control"
-                type="password"
-                id="password"
-                name="password"
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <button class="card-button">Login</button>
-          </form>
+<div class="card">
+  <div class="card-box">
+    <img
+      class="card-image"
+      id="pixelatedImage"
+      src="<%=image%>"
+      alt="pixelated image"
+    />
+    <div>
+      <div class="credentials-box">
+      <h5 class="card-title">Login</h5>
+      <form action="/login" method="POST" class="validated-form" novalidate>
+        
+          <div class="credentials">
+            <label class="credentials-label" for="username">Username</label>
+            <input
+              class="credentials-input"
+              type="text"
+              id="username"
+              name="username"
+              autofocus
+              required
+            />
+          </div>
+          <div class="credentials">
+            <label class="credentials-label" for="password">Password</label>
+            <input
+              class="credentials-input"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
         </div>
-      </div>
+        <button class="card-button">Login</button>
+      </form>
     </div>
   </div>
 </div>

@@ -7,7 +7,6 @@ const getPixelatedImage = async (image) => {
   const pixelatedImage = await originalImage
     .pixelate(10)
     .getBase64Async(Jimp.MIME_JPEG);
-  res.render("users/register.ejs", { image });
   return pixelatedImage;
 };
 
