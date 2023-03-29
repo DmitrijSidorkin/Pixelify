@@ -13,6 +13,7 @@ body {
   max-width: 60vw;
 }
 .nav-link {
+  font-family: "Silkscreen";
   padding: 0.25rem;
   font-weight: 700;
   margin-left: 1rem;
