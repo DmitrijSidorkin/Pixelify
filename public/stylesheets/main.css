@@ -1,32 +1,34 @@
 body {
+  margin: 0;
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
     url("https://res.cloudinary.com/dyguovdbc/image/upload/v1676470549/pixelify/main-background_gc3sxd.jpg");
   background-size: cover;
   background-position: center;
   color: rgb(187, 187, 187);
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.3);
+}
+.lr-nav {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+#main-description {
+  padding: 100px 20px;
+}
+.button-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.main-text {
+  margin-bottom: 40px;
+}
+#title {
+  padding-bottom: 15px;
 }
 
 .cover-container {
   max-width: 60vw;
-}
-.nav-link {
-  font-family: "Silkscreen";
-  padding: 0.25rem;
-  font-weight: 700;
-  margin-left: 1rem;
-}
-
-.nav-link:hover {
-  color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.nav-link.active {
-  color: white;
-  border-bottom-color: white;
 }
 
 #main-description {
@@ -43,6 +45,7 @@ body {
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
+  margin: 2px;
 }
 .home-button:hover {
   background-color: rgb(2, 146, 2);
@@ -54,4 +57,6 @@ body {
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
+  margin: 2px;
 }
+.nav-bar;
