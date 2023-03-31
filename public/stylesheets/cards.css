@@ -1,20 +1,70 @@
-.image-box {
-  width: 50vw;
-  max-width: 800px;
-  min-width: 320px;
-  padding: 40px 10px;
+.card {
+  display: flex;
+  justify-content: center;
+  padding: 80px 30px;
 }
-
+.image-box {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  overflow: hidden;
+}
+.card-image {
+  max-width: 100%;
+  max-height: 450px;
+  min-height: 162px;
+}
+.card-box {
+  max-width: 800px;
+  width: 100%;
+  min-width: 288px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.card-title {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 20px 30px;
+}
+.credentials {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.credentials-label {
+  margin-bottom: 3px;
+  display: block;
+}
+.credentials-input {
+  border-radius: 5px;
+  padding: 3px;
+  width: 95%;
+}
 .card-shadow {
   height: 70vh;
 }
 
 .card-button {
   background-color: rgba(1, 172, 1, 0.801);
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 22px;
+}
+.card-button:hover {
+  background-color: rgba(2, 146, 2, 0.801);
+  width: 100%;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
 }

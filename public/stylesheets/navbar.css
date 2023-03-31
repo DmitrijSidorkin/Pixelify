@@ -3,8 +3,7 @@
   display: flex;
   overflow: hidden;
   background-color: #333;
-  position: absolute;
-  z-index: 1;
+  position: fixed;
 }
 
 #logo {
@@ -29,19 +28,4 @@
 .nav-links a:hover {
   background-color: #424242;
   color: rgba(1, 172, 1, 0.801);
-}
-
-@media screen and (max-width: 600px) {
-  .lr-nav #nav-links {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .lr-nav a.burger {
-    display: none;
-  }
-  .lr-nav #nav-links {
-    display: block;
-  }
 }

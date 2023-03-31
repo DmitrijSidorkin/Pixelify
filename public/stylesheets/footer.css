@@ -1,0 +1,11 @@
+.empty-box {
+  height: 100%;
+}
+.my-footer {
+  width: 100%;
+  display: flex;
+  background-color: #333;
+  color: rgba(0, 231, 0, 0.801);
+  padding: 20px 0px;
+  justify-content: center;
+}

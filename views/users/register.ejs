@@ -1,57 +1,51 @@
 <% layout('layouts/boilerplate')%>
-<div
-  class="register-card container d-flex justify-content-center align-items-center"
->
-  <div class="row">
-    <div class="image-box col-sm-8 col-lg-6">
-      <div class="card shadow">
-        <img class="card-image" src="<%=image%>" alt="" class="card-img-top" />
-        <div class="card-body">
-          <h5 class="card-title">Register</h5>
-          <form
-            action="/register"
-            method="POST"
-            class="validated-form"
-            novalidate
-          >
-            <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
-              <input
-                class="form-control"
-                type="text"
-                id="username"
-                name="username"
-                required
-                autofocus
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="email">Email</label>
-              <input
-                class="form-control"
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="password">Password</label>
-              <input
-                class="form-control"
-                type="password"
-                id="password"
-                name="password"
-                required
-              />
-              <div class="valid-feedback">Looks good!</div>
-            </div>
-            <button class="card-button">Register</button>
-          </form>
+<div class="card">
+  <div class="card-box">
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=image%>"
+        alt="pixelated image"
+      />
+    </div>
+    <div class="credentials-box">
+      <h5 class="card-title">Register</h5>
+      <form action="/login" method="POST" class="validated-form" novalidate>
+        <div class="credentials">
+          <label class="credentials-label" for="username">Username</label>
+          <input
+            class="credentials-input"
+            type="text"
+            id="username"
+            name="username"
+            autofocus
+            required
+          />
         </div>
-      </div>
+        <div class="credentials">
+          <label class="credentials-label" for="password">Password</label>
+          <input
+            class="credentials-input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="credentials">
+          <label class="credentials-label" for="email">Email</label>
+          <input
+            class="credentials-input"
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <button class="card-button">Register</button>
+      </form>
     </div>
   </div>
 </div>

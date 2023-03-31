@@ -2,18 +2,19 @@ const Jimp = require("jimp");
 
 const User = require("../models/user");
 
+const extraStyles = '<link rel="stylesheet" href="/stylesheets/cards.css" />';
+
 const getPixelatedImage = async (image) => {
   const originalImage = await Jimp.read(image);
   const pixelatedImage = await originalImage
     .pixelate(10)
     .getBase64Async(Jimp.MIME_JPEG);
-  res.render("users/register.ejs", { image });
   return pixelatedImage;
 };
 
 module.exports.renderRegister = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-  res.render("users/register.ejs", { image });
+  res.render("users/register.ejs", { image, extraStyles });
 };
 
 module.exports.register = async (req, res, next) => {
@@ -34,7 +35,7 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.renderLogin = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-  res.render("users/login", { image });
+  res.render("users/login", { image, extraStyles });
 };
 
 module.exports.login = (req, res) => {
