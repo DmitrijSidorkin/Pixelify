@@ -1,49 +1,49 @@
 <% layout('layouts/boilerplate')%>
 <div class="card">
   <div class="card-box">
-    <img
-      class="card-image"
-      id="pixelatedImage"
-      src="<%=image%>"
-      alt="pixelated image"
-    />
-    <div>
-      <div class="credentials-box">
-      <h5 class="card-title">Login</h5>
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=image%>"
+        alt="pixelated image"
+      />
+    </div>
+    <div class="credentials-box">
+      <h5 class="card-title">Register</h5>
       <form action="/login" method="POST" class="validated-form" novalidate>
-        
-          <div class="credentials">
-            <label class="credentials-label" for="username">Username</label>
-            <input
-              class="credentials-input"
-              type="text"
-              id="username"
-              name="username"
-              autofocus
-              required
-            />
-          </div>
-          <div class="credentials">
-            <label class="credentials-label" for="password">Password</label>
-            <input
-              class="credentials-input"
-              type="password"
-              id="password"
-              name="password"
-              required
-            />
-          </div>
-          <div class="credentials">
-            <label class="credentials-label" for="password">Email</label>
-            <input
-              class="credentials-input"
-              type="email"
-              id="email"
-              name="email"
-              required
-            />
-          </div>
+        <div class="credentials">
+          <label class="credentials-label" for="username">Username</label>
+          <input
+            class="credentials-input"
+            type="text"
+            id="username"
+            name="username"
+            autofocus
+            required
+          />
         </div>
+        <div class="credentials">
+          <label class="credentials-label" for="password">Password</label>
+          <input
+            class="credentials-input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="credentials">
+          <label class="credentials-label" for="password">Email</label>
+          <input
+            class="credentials-input"
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
         <button class="card-button">Register</button>
       </form>
     </div>

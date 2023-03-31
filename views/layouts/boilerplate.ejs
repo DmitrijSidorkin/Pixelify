@@ -5,20 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PIXELIFY</title>
+    <link rel="stylesheet" href="/stylesheets/general.css" />
     <link rel="stylesheet" href="/stylesheets/navbar.css" />
     <link rel="stylesheet" href="/stylesheets/footer.css" />
-    <%if(extraStyles !== "undefined"){%> <%-extraStyles%><%}%>
+    <%if(extraStyles){%> <%-extraStyles%><%}%>
     <%-include("../partials/font.ejs")%>
   </head>
   <body>
     <%-include("../partials/navbar") %>
     <main><%-include("../partials/flash") %><%- body %></main>
+    <div class="empty-box"></div>
     <%-include("../partials/footer") %>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"
-    ></script>
     <script src="/javascripts/validateForms.js"></script>
   </body>
 </html>

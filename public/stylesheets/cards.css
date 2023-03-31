@@ -3,14 +3,15 @@
   justify-content: center;
   padding: 80px 10px;
 }
-.card-image {
+.image-box {
   background-color: black;
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+}
+.card-image {
   max-width: 100%;
-  width: 70vw;
-  min-width: 300px;
   max-height: 450px;
-  min-height: 260px;
+  min-height: 162px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom-style: solid;
@@ -19,7 +20,7 @@
 .card-box {
   max-width: 800px;
   width: 70vw;
-  min-width: 300px;
+  min-width: 288px;
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -27,9 +28,6 @@
   font-size: 30px;
   font-weight: 500;
   margin: 20px 30px;
-}
-.credentials-box {
-  padding-bottom: 10px;
 }
 .credentials {
   margin-left: 20px;
@@ -55,6 +53,7 @@
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
+  margin-top: 10px;
   text-align: center;
   text-decoration: none;
 }

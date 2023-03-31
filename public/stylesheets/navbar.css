@@ -1,13 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 .lr-nav {
   width: 100%;
   display: flex;
   overflow: hidden;
   background-color: #333;
-  position: absolute;
+  position: fixed;
 }
 
 #logo {
