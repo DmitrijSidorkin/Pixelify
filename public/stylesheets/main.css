@@ -1,7 +1,7 @@
 body {
-  margin: 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
-    url("https://res.cloudinary.com/dyguovdbc/image/upload/v1676470549/pixelify/main-background_gc3sxd.jpg");
+    url("https://res.cloudinary.com/dyguovdbc/image/upload/w_384/v1676470549/pixelify/main-background_gc3sxd.jpg");
+  image-rendering: pixelated;
   background-size: cover;
   background-position: center;
   color: rgb(187, 187, 187);
