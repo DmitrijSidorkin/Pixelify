@@ -23,8 +23,6 @@ router
     users.login
   );
 
-router.route("/account").get(users.renderAccount);
-
 router.get("/logout", users.logout);
 
 module.exports = router;

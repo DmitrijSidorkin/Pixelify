@@ -35,10 +35,6 @@ module.exports.login = (req, res) => {
   localStorage.removeItem("redirectUrl");
 };
 
-module.exports.renderAccount = (req, res) => {
-  res.render("users/account.ejs");
-};
-
 module.exports.logout = (req, res, next) => {
   req.logout(function (err) {
     if (err) {
