@@ -7,7 +7,6 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const LocalStorage = require("node-localstorage").LocalStorage;
 const MongoStore = require("connect-mongo");
 
 const userRoutes = require("./routes/users");
@@ -75,10 +74,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  // localStorage = new LocalStorage("./scratch");
-  // if (!req.isAuthenticated() && !["/login", "/"].includes(req.originalUrl)) {
-  //   localStorage.setItem("redirectUrl", req.originalUrl);
-  // }
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");

@@ -31,8 +31,7 @@ module.exports.renderLogin = async (req, res, next) => {
 
 module.exports.login = (req, res) => {
   req.flash("success", "Welcome back!");
-  res.redirect(localStorage.getItem("redirectUrl"));
-  localStorage.removeItem("redirectUrl");
+  res.redirect("/");
 };
 
 module.exports.logout = (req, res, next) => {
