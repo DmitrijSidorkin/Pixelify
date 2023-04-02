@@ -1,6 +1,8 @@
 const Jimp = require("jimp");
 const axios = require("axios");
 
+require("dotenv").config();
+
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.flash("error", "You must be logged in!");
@@ -12,9 +14,8 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.fetchRandomGameData = async (req, res, next) => {
   const randGameId = Math.floor(Math.random() * 1000 + 1);
   const results = await axios.get(
-    `https://api.rawg.io/api/games/${randGameId}?key=42d3994083024d64aebad13f6568556c`
+    `https://api.rawg.io/api/games/${randGameId}?key=${process.env.RAWG_KEY}`
   );
-  console.log(results);
   req.gameData = results.data;
 
   next();
