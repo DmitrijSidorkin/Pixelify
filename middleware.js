@@ -1,7 +1,9 @@
-const { reviewSchema } = require("./schemas.js");
-const ExpressError = require("./utils/ExpressError");
-const Review = require("./models/review");
+const Jimp = require("jimp");
 const axios = require("axios");
+
+const ExpressError = require("./utils/ExpressError");
+const { reviewSchema } = require("./schemas.js");
+const Review = require("./models/review");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -50,4 +52,12 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   req.gameData = results.data;
 
   next();
+};
+
+module.exports.getPixelatedImage = async (image) => {
+  const originalImage = await Jimp.read(image);
+  const pixelatedImage = await originalImage
+    .pixelate(10)
+    .getBase64Async(Jimp.MIME_JPEG);
+  return pixelatedImage;
 };

@@ -1,16 +1,7 @@
-const Jimp = require("jimp");
-
 const User = require("../models/user");
+const { getPixelatedImage } = require("../middleware");
 
 const extraStyles = '<link rel="stylesheet" href="/stylesheets/cards.css" />';
-
-const getPixelatedImage = async (image) => {
-  const originalImage = await Jimp.read(image);
-  const pixelatedImage = await originalImage
-    .pixelate(10)
-    .getBase64Async(Jimp.MIME_JPEG);
-  return pixelatedImage;
-};
 
 module.exports.renderRegister = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
