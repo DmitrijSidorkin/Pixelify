@@ -28,15 +28,15 @@
   font-weight: 500;
   margin: 20px 30px;
 }
-.credentials {
+.field {
   margin-left: 20px;
   margin-bottom: 10px;
 }
-.credentials-label {
+.field-label {
   margin-bottom: 3px;
   display: block;
 }
-.credentials-input {
+.field-input {
   border-radius: 5px;
   padding: 3px;
   width: 95%;

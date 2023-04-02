@@ -9,24 +9,22 @@
         alt="pixelated image"
       />
     </div>
-    <div>
-      <div class="credentials-box">
-        <h5 class="card-title">What form of game is this game?</h5>
-        <form action="/login" method="POST" class="validated-form" novalidate>
-          <div class="credentials">
-            <label class="credentials-label" for="username">Game name</label>
-            <input
-              class="credentials-input"
-              type="text"
-              id="gamename"
-              name="gamename"
-              autofocus
-              required
-            />
-          </div>
-          <button class="card-button">Next</button>
-        </form>
-      </div>
+    <div class="field-box">
+      <h5 class="card-title">What form of game is this game?</h5>
+      <form action="/login" method="POST" class="validated-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="username">Game name</label>
+          <input
+            class="field-input"
+            type="text"
+            id="gamename"
+            name="gamename"
+            autofocus
+            required
+          />
+        </div>
+        <button class="card-button">Next</button>
+      </form>
     </div>
   </div>
 </div>
