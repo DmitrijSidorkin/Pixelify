@@ -6,7 +6,6 @@ const catchAsync = require("../utils/catchAsync");
 const users = require("../controllers/users");
 const { fetchRandomGameData } = require("../middleware");
 const { ROUTES } = require("../controllers/routes");
-const { Route } = require("express");
 
 router
   .route(ROUTES.register)

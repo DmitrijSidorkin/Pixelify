@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/stylesheets/general.css" />
     <link rel="stylesheet" href="/stylesheets/navbar.css" />
     <link rel="stylesheet" href="/stylesheets/footer.css" />
-    <%if(extraStyles){%> <%-exrteStyles%><%}%>
-    <%-include("../partials/font.ejs")%>
+    <%-include("../partials/font.ejs")%> <% if(extraStyles){
+    %><%-extraStyles%><% } %>
   </head>
   <body>
     <%-include("../partials/navbar") %>
