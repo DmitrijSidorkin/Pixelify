@@ -5,4 +5,5 @@ module.exports.ROUTES = {
   logout: "/logout",
   register: "/register",
   account: "/account",
+  error: "/error",
 };
