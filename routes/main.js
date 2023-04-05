@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
 
-const catchAsync = require("../utils/catchAsync");
-const User = require("../models/user");
 const main = require("../controllers/main");
+const { fetchRandomGameData } = require("../middleware");
+const { ROUTES } = require("../controllers/routes");
 
-router.route("/").get((req, res) => {
+router.route(ROUTES.index).get((req, res) => {
   const extraStyles = '<link rel="stylesheet" href="/stylesheets/main.css" />';
   res.render("home", { extraStyles });
 });
 
-router.route("/play").get(main.renderPlay);
+router.route(ROUTES.play).get(fetchRandomGameData, main.renderPlay);
 
 module.exports = router;

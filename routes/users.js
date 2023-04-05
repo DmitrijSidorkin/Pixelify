@@ -3,29 +3,27 @@ const router = express.Router();
 const passport = require("passport");
 
 const catchAsync = require("../utils/catchAsync");
-const User = require("../models/user");
 const users = require("../controllers/users");
 const { fetchRandomGameData } = require("../middleware");
+const { ROUTES } = require("../controllers/routes");
 
 router
-  .route("/register")
+  .route(ROUTES.register)
   .get(fetchRandomGameData, users.renderRegister)
   .post(catchAsync(users.register));
 
 router
-  .route("/login")
+  .route(ROUTES.login)
   .get(fetchRandomGameData, users.renderLogin)
   .post(
     passport.authenticate("local", {
       failureFlash: true,
-      failureRedirect: "/login",
-      successRedirect: "/",
+      failureRedirect: ROUTES.login,
+      successRedirect: ROUTES.index,
     }),
     users.login
   );
 
-router.route("/account").get(users.renderAccount);
-
-router.get("/logout", users.logout);
+router.get(ROUTES.logout, users.logout);
 
 module.exports = router;

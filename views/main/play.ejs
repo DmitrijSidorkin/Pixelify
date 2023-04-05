@@ -1,33 +1,30 @@
 <% layout('layouts/boilerplate')%>
-
-<div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="row">
-    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-      <div class="card shadow">
-        <img
-          src="https://res.cloudinary.com/dyguovdbc/image/upload/w_40/v1676908287/pixelify/placeholder-image_ykgw2b.jpg"
-          alt=""
-          width="800"
-          style="image-rendering: pixelated"
-          class="card-img-top"
-        />
-        <div class="card-body pt-5">
-          <h5 class="card-title">What form of game is this game?</h5>
-          <form>
-            <div class="mb-3">
-              <input
-                class="credentials-input"
-                type="text"
-                id="gamename"
-                name="gamename"
-                autofocus
-                required
-              />
-            </div>
-            <button class="btn btn-success btn-block">Next</button>
-          </form>
+<div class="card">
+  <div class="card-box">
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=image%>"
+        alt="pixelated image"
+      />
+    </div>
+    <div class="field-box">
+      <h5 class="card-title">What form of game is this game?</h5>
+      <form action="/play" method="POST" class="validated-form" novalidate>
+        <div class="field">
+          <label class="field-label" for="gamename">Game name</label>
+          <input
+            class="field-input"
+            type="text"
+            id="gamename"
+            name="gamename"
+            autofocus
+            required
+          />
         </div>
-      </div>
+        <button class="card-button">Next</button>
+      </form>
     </div>
   </div>
 </div>
