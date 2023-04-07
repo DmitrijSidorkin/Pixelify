@@ -1,9 +1,9 @@
 const { getPixelatedImage } = require("../middleware");
 
-const style = require("../public/javascripts/extraStyles.js");
+const { cardStyle } = require("../public/javascripts/extraStyles.js");
 
 module.exports.renderPlay = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-  const extraStyles = style.cardStyle;
+  const extraStyles = cardStyle;
   res.render("main/play.ejs", { image, extraStyles });
 };

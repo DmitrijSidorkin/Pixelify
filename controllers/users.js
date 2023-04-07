@@ -2,8 +2,8 @@ const User = require("../models/user");
 const { getPixelatedImage } = require("../middleware");
 const { ROUTES } = require("./routes");
 
-const style = require("../public/javascripts/extraStyles.js");
-const extraStyles = style.cardStyle;
+const { cardStyle } = require("../public/javascripts/extraStyles.js");
+const extraStyles = cardStyle;
 
 module.exports.renderRegister = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
