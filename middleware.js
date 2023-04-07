@@ -2,6 +2,7 @@ const Jimp = require("jimp");
 const axios = require("axios");
 
 const { ROUTES } = require("./controllers/routes");
+const apiUrl = "https://api.rawg.io/api/";
 
 require("dotenv").config();
 
@@ -23,12 +24,14 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
     try {
       const randGameId = Math.floor(Math.random() * 500000 + 1);
       response = await axios.get(
-        `https://api.rawg.io/api/games/${randGameId}?key=${process.env.RAWG_KEY}`
+        `${apiUrl}games/${randGameId}?key=${process.env.RAWG_KEY}`
       );
       success = true;
       break;
     } catch (error) {
-      console.log(error.response.status);
+      if (process.env.IN_DEVELOPMENT) {
+        console.log(error.response.status);
+      }
       if (retries == maxRetries) {
         req.session.error = error.response.status;
         res.redirect(ROUTES.error);
@@ -38,7 +41,9 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   }
   if (response) {
     req.gameData = response.data;
-    console.log(req.gameData);
+    if (process.env.IN_DEVELOPMENT === true) {
+      console.log(req.gameData);
+    }
     next();
   }
 };

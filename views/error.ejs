@@ -1,10 +1,8 @@
 <% layout('layouts/boilerplate')%>
 <div class="card">
   <div class="card-box">
-    <div class="field-box">
-      <% if (process.env.NODE_ENV !== "production") { %>
-      <h5 class="card-title"><%- error%> - OOPS!</h5>
-      <% } %>
-    </div>
+    <% if (process.env.NODE_ENV !== "production") { %>
+    <h5 class="card-title"><%- error%> - OOPS!</h5>
+    <% } %>
   </div>
 </div>
