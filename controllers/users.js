@@ -2,11 +2,11 @@ const User = require("../models/user");
 const { getPixelatedImage } = require("../middleware");
 const { ROUTES } = require("./routes");
 
-const extraStyles = '<link rel="stylesheet" href="/stylesheets/cards.css" />';
+const { cardStyle } = require("../public/javascripts/extraStyles.js");
 
 module.exports.renderRegister = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-  res.render("users/register.ejs", { image, extraStyles });
+  res.render("users/register.ejs", { image, extraStyles: cardStyle });
 };
 
 module.exports.register = async (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.register = async (req, res, next) => {
 
 module.exports.renderLogin = async (req, res, next) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-  res.render("users/login", { image, extraStyles });
+  res.render("users/login", { image, extraStyles: cardStyle });
 };
 
 module.exports.login = (req, res) => {
