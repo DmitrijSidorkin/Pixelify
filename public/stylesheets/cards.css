@@ -68,3 +68,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+#result-div {
+  display: none;
+}

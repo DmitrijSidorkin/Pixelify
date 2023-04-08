@@ -9,20 +9,28 @@
         alt="pixelated image"
       />
     </div>
-    <h5 class="card-title">What form of game is this game?</h5>
-    <form action="/play" method="POST" class="validated-form" novalidate>
+    <div id="guess-div">
+      <h5 class="card-title">What form of game is this game?</h5>
       <div class="field">
-        <label class="field-label" for="gamename">Game name</label>
+        <label class="field-label" for="guess">Game name</label>
         <input
           class="field-input"
           type="text"
-          id="gamename"
-          name="gamename"
+          id="guess"
+          name="guess"
           autofocus
           required
         />
       </div>
-      <button class="card-button">Next</button>
-    </form>
+      <button onclick="checkGuess()" class="card-button">Next</button>
+    </div>
+    <div id="result-div">
+      <h5 class="card-title" id="gameName"><%-gameName%></h5>
+      <h5 class="card-title" id="feedback"></h5>
+
+      <button onclick="window.location='/play'" class="card-button">
+        Try again
+      </button>
+    </div>
   </div>
 </div>
