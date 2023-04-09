@@ -1,15 +1,15 @@
-function checkGuess() {
-  var hide = document.getElementById("guess-div");
+function checkGuess(gameName) {
+  const hide = document.getElementById("guess-div");
+  const result = document.getElementById("result-div");
+  const guessValue = document.getElementById("guess").value;
+  const feedback = document.getElementById("feedback");
+
   hide.style.display = "none";
-  var result = document.getElementById("result-div");
   result.style.display = "block";
 
-  if (
-    document.getElementById("guess").value ==
-    document.getElementById("gameName").innerHTML
-  ) {
-    document.getElementById("feedback").innerHTML = "Congratulations!";
+  if (guessValue === gameName.innerText) {
+    feedback.innerHTML = "Congratulations!";
   } else {
-    document.getElementById("feedback").innerHTML = "Now you fucked up!";
+    feedback.innerHTML = "Now you fucked up!";
   }
 }
