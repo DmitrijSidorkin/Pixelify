@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -34,5 +35,11 @@
     "path": "^0.12.7",
     "pixelate": "0.0.5",
     "sanitize-html": "^2.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-ejs": "^0.0.2",
+    "eslint-plugin-import": "^2.27.5"
   }
 }
