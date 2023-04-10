@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 function checkGuess(gameName) {
   const hide = document.getElementById("guess-div");
   const result = document.getElementById("result-div");
