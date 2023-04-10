@@ -13,3 +13,7 @@ function checkGuess(gameName) {
     feedback.innerHTML = "Now you fucked up!";
   }
 }
+
+module.exports = {
+  checkGuess,
+};
