@@ -1,7 +1,8 @@
 const Jimp = require("jimp");
 const axios = require("axios");
 
-const { ROUTES } = require("./controllers/routes");
+const { ROUTES } = require("../controllers/routes");
+const { generateUniqueRandomArr } = require("./helpers");
 
 const apiUrl = "https://api.rawg.io/api/";
 const apiParams = "page_size=40&parent_platforms=1,2,3,4&ordering=-metacritic";
@@ -15,17 +16,6 @@ module.exports.isLoggedIn = (req, res, next) => {
   }
   next();
 };
-
-function generateUniqueRandomArr() {
-  let numArr = [];
-  while (numArr.length < 5) {
-    let randomNum = Math.floor(Math.random() * 168 + 1);
-    if (!numArr.includes(randomNum)) {
-      numArr.push(randomNum);
-    }
-  }
-  return numArr;
-}
 
 module.exports.fetchRandomGameData = async (req, res, next) => {
   let response = null;
@@ -64,17 +54,17 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 module.exports.fetchRandomGameDataArr = async (req, res, next) => {
   const pageNumArr = generateUniqueRandomArr();
   let gameDataArr = [];
-  for (let j = 0; j < 5; j++) {
-    response = await axios.get(
+  for (let j = 0; j < pageNumArr.length; j++) {
+    let response = await axios.get(
       `${apiUrl}games?key=${process.env.RAWG_KEY}&page=${pageNumArr[j]}&${apiParams}`
     );
-    for (let i = 0; i < response.data.results.length; i++) {
-      gameDataArr.push({
-        name: response.data.results[i].name,
-        image: response.data.results[i].background_image,
-      });
-    }
+    response.data.results.forEach((result) => {
+      if (result.background_image) {
+        gameDataArr.push({ name: result.name, image: result.background_image });
+      }
+    });
   }
+  console.log(gameDataArr);
   req.gameDataArr = gameDataArr;
   next();
 };
