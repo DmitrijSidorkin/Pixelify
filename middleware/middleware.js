@@ -1,9 +1,11 @@
 const Jimp = require("jimp");
 const axios = require("axios");
 
-const { ROUTES } = require("./controllers/routes");
+const { ROUTES } = require("../controllers/routes");
+const { generateUniqueRandomArr } = require("./helpers");
 
 const apiUrl = "https://api.rawg.io/api/";
+const apiParams = "page_size=40&parent_platforms=1,2,3,4&ordering=-metacritic";
 
 require("dotenv").config();
 
@@ -47,6 +49,24 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
     }
     next();
   }
+};
+
+module.exports.fetchRandomGameDataArr = async (req, res, next) => {
+  const pageNumArr = generateUniqueRandomArr();
+  let gameDataArr = [];
+  for (let num of pageNumArr) {
+    let response = await axios.get(
+      `${apiUrl}games?key=${process.env.RAWG_KEY}&page=${pageNumArr[num]}&${apiParams}`
+    );
+    response.data.results.forEach((result) => {
+      if (result.background_image) {
+        gameDataArr.push({ name: result.name, image: result.background_image });
+      }
+    });
+  }
+  console.log(gameDataArr);
+  req.gameDataArr = gameDataArr;
+  next();
 };
 
 module.exports.getPixelatedImage = async (image) => {
