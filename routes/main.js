@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const main = require("../controllers/main");
-const { fetchRandomGameData } = require("../middleware/middleware");
+const { fetchRandomGameData } = require("../middleware");
 const { ROUTES } = require("../controllers/routes");
 const { mainStyle, cardStyle } = require("../public/javascripts/extraStyles");
 

@@ -1,4 +1,4 @@
-const { getPixelatedImage } = require("../middleware/middleware");
+const { getPixelatedImage } = require("../middleware");
 
 const { cardStyle } = require("../public/javascripts/extraStyles.js");
 

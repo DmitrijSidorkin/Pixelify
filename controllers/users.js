@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const { getPixelatedImage } = require("../middleware/middleware");
+const { getPixelatedImage } = require("../middleware");
 const { ROUTES } = require("./routes");
 
 const { cardStyle } = require("../public/javascripts/extraStyles.js");
