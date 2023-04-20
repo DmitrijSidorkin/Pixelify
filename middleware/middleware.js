@@ -54,9 +54,9 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 module.exports.fetchRandomGameDataArr = async (req, res, next) => {
   const pageNumArr = generateUniqueRandomArr();
   let gameDataArr = [];
-  for (let j = 0; j < pageNumArr.length; j++) {
+  for (let num of pageNumArr) {
     let response = await axios.get(
-      `${apiUrl}games?key=${process.env.RAWG_KEY}&page=${pageNumArr[j]}&${apiParams}`
+      `${apiUrl}games?key=${process.env.RAWG_KEY}&page=${pageNumArr[num]}&${apiParams}`
     );
     response.data.results.forEach((result) => {
       if (result.background_image) {
