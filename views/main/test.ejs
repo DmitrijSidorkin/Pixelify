@@ -1,0 +1,74 @@
+<% layout('layouts/boilerplate')%>
+<div class="card">
+  <div class="card-box">
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=image%>"
+        alt="pixelated image"
+      />
+    </div>
+    <div id="guess-div">
+      <h5 class="card-title">What form of game is this game?</h5>
+      <div class="field">
+        <fieldset class="guess-field">
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="a"
+              name="guess"
+              value="<%-gameName%>"
+            />
+            <label><%-gameName%></label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="b"
+              name="guess"
+              value="b"
+            />
+            <label>b</label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="c"
+              name="guess"
+              value="c"
+            />
+            <label>c</label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="d"
+              name="guess"
+              value="d"
+            />
+            <label>d</label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="guess-buttons">
+      <button onclick="nextGuess()" class="card-button" id="button-back">
+        Back
+      </button>
+      <div id="page-counter"></div>
+      <button onclick="nextGuess()" class="card-button" id="button-next">
+        Next
+      </button>
+    </div>
+  </div>
+</div>
+<div class="hidden-game-data">
+  <p id="game-name"><%-gameName%></p>
+  <p id="img-link"><%-imgLink%></p>
+</div>
+<script src="/javascripts/continuousPlay.js"></script>
