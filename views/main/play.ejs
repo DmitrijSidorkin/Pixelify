@@ -12,26 +12,63 @@
     <div id="guess-div">
       <h5 class="card-title">What form of game is this game?</h5>
       <div class="field">
-        <label class="field-label" for="guess">Game name</label>
-        <input
-          class="field-input"
-          type="text"
-          id="guess"
-          name="guess"
-          autofocus
-          required
-        />
+        <fieldset>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="a"
+              name="guess"
+              value="<%-gameName%>"
+            />
+            <label><%-gameName%></label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="b"
+              name="guess"
+              value="b"
+            />
+            <label>b</label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="c"
+              name="guess"
+              value="c"
+            />
+            <label>c</label>
+          </div>
+          <div>
+            <input
+              class="field-input"
+              type="radio"
+              id="d"
+              name="guess"
+              value="d"
+            />
+            <label>d</label>
+          </div>
+        </fieldset>
       </div>
-      <button onclick="checkGuess(gameName)" class="card-button">Next</button>
     </div>
-    <div id="result-div">
-      <h5 class="card-title" id="gameName"><%-gameName%></h5>
-      <h5 class="card-title" id="feedback"></h5>
-
-      <button onclick="window.location='/play'" class="card-button">
-        Try again
+    <div class="guess-buttons">
+      <button onclick="nextGuess()" class="card-button" id="button-back">
+        Back
+      </button>
+      <div id="page-counter"></div>
+      <button onclick="nextGuess()" class="card-button" id="button-next">
+        Next
       </button>
     </div>
   </div>
 </div>
-<script src="/javascripts/checkGuess.js"></script>
+<div class="hidden-game-data">
+  <p id="game-name"><%-gameName%></p>
+  <p id="img-link"><%-imgLink%></p>
+</div>
+<script src="/javascripts/continuousPlay.js"></script>
