@@ -3,14 +3,11 @@ let resultsHtml = "";
 let correctAnswers = 0;
 
 //going through all guesses (just 5 for now)
-for (let i = 1; i <= 5; i++) {
-  let guessStatus = userGuessData["userGuess" + i];
-  resultsHtml += `<div class=user-guess-${guessStatus}>${
-    userGuessData["gameName" + i]
-  }</div>`;
+for (let i = 0; i < userGuessData.length; i++) {
+  resultsHtml += `<div class=user-guess-${userGuessData[i].userGuess}>${userGuessData[i].gameName}</div>`;
 
   //checking for guess status, counting correct guesses and changing the display stuff accordingly
-  if (guessStatus === "correct") {
+  if (userGuessData[i].userGuess) {
     correctAnswers++;
   }
 }
@@ -30,6 +27,6 @@ if (correctAnswers > 2) {
 
 document.getElementById(
   "results-details"
-).innerText = `You guessed ${correctAnswers} out of 5`;
+).innerText = `You guessed ${correctAnswers} out of ${userGuessData.length}`;
 document.getElementById("all-answers").innerHTML = resultsHtml;
-localStorage.removeItem("userGuessData");
+// localStorage.removeItem("userGuessData");

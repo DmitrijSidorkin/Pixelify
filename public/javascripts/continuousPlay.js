@@ -4,7 +4,8 @@
 let pageNum = parseInt(localStorage.getItem("pageNum"));
 let pageCounter = document.getElementById("page-counter");
 let nextButtonText = document.getElementById("button-next");
-let userGuessData = JSON.parse(localStorage.getItem("userGuessData")) || {};
+let allUserGuessData = JSON.parse(localStorage.getItem("userGuessData")) || [];
+let currentUserGuessData = {};
 
 if (pageNum) {
   pageCounter.innerText = `${pageNum} of 5`;
@@ -19,28 +20,21 @@ if (pageNum === 5) {
 
 //on clicking next
 function nextGuess() {
-  const guesses = document.querySelectorAll('input[name="guess"]');
+  const userGuess = document.querySelector('input[name="guess"]:checked');
   const gameName = document.getElementById("game-name").innerText;
   const imgLink = document.getElementById("img-link").innerText;
 
   //saving currect guess data
-  userGuessData[`gameName${pageNum}`] = gameName;
-  userGuessData[`imgLink${pageNum}`] = imgLink;
+  currentUserGuessData["gameName"] = gameName;
+  currentUserGuessData["imgLink"] = imgLink;
 
   //checking for user guess and saving guess status (correct/wrong)
-  let thereIsCheckedGuess = 0;
-  for (const guess of guesses) {
-    if (guess.checked) {
-      thereIsCheckedGuess++;
-      guess.value === gameName
-        ? (userGuessData[`userGuess${pageNum}`] = "correct")
-        : (userGuessData[`userGuess${pageNum}`] = "wrong");
-    }
+  if (userGuess) {
+    currentUserGuessData["userGuess"] = userGuess.value === gameName;
+  } else {
+    currentUserGuessData["userGuess"] = false;
   }
-  if (!thereIsCheckedGuess) {
-    userGuessData[`userGuess${pageNum}`] = "wrong";
-  }
-
+  allUserGuessData[pageNum - 1] = currentUserGuessData;
   //checking for whether this is the last guess or not and redirecting accordingly
   if (pageNum === 5) {
     //results upload functionality (maybe)
@@ -50,7 +44,7 @@ function nextGuess() {
     localStorage.setItem("pageNum", pageNum + 1);
     location.href = "/play";
   }
-  localStorage.setItem("userGuessData", JSON.stringify(userGuessData));
+  localStorage.setItem("userGuessData", JSON.stringify(allUserGuessData));
 }
 
 //placeholder
