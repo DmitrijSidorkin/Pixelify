@@ -1,7 +1,7 @@
-.correct {
+.user-guess-correct {
   color: green;
 }
-.wrong {
+.user-guess-wrong {
   color: red;
 }
 .results-box {

@@ -2,38 +2,43 @@
 
 //page numeration
 let pageNum = parseInt(localStorage.getItem("pageNum"));
+let pageCounter = document.getElementById("page-counter");
+let nextButtonText = document.getElementById("button-next");
+let userGuessData = JSON.parse(localStorage.getItem("userGuessData")) || {};
+
 if (pageNum) {
-  console.log("there is a page num");
-  document.getElementById("page-counter").innerText = `${pageNum} of 20`;
+  pageCounter.innerText = `${pageNum} of 5`;
 } else {
-  console.log("there is NO page num");
-  document.getElementById("page-counter").innerText = "1 of 20";
+  pageCounter.innerText = "1 of 5";
   localStorage.setItem("pageNum", "1");
   pageNum = 1;
 }
 if (pageNum === 5) {
-  document.getElementsById("button-next").innerText = "Finish";
+  nextButtonText.innerText = "Finish";
 }
 
 //on clicking next
 function nextGuess() {
   const guesses = document.querySelectorAll('input[name="guess"]');
   const gameName = document.getElementById("game-name").innerText;
+  const imgLink = document.getElementById("img-link").innerText;
 
   //saving currect guess data
-  localStorage.setItem(`${pageNum}.gameName`, gameName);
-  localStorage.setItem(
-    `${pageNum}.imgLink`,
-    document.getElementById("img-link").innerText
-  );
+  userGuessData[`gameName${pageNum}`] = gameName;
+  userGuessData[`imgLink${pageNum}`] = imgLink;
 
   //checking for user guess and saving guess status (correct/wrong)
+  let thereIsCheckedGuess = 0;
   for (const guess of guesses) {
     if (guess.checked) {
+      thereIsCheckedGuess++;
       guess.value === gameName
-        ? localStorage.setItem(`${pageNum}.userGuess`, "correct")
-        : localStorage.setItem(`${pageNum}.userGuess`, "wrong");
+        ? (userGuessData[`userGuess${pageNum}`] = "correct")
+        : (userGuessData[`userGuess${pageNum}`] = "wrong");
     }
+  }
+  if (!thereIsCheckedGuess) {
+    userGuessData[`userGuess${pageNum}`] = "wrong";
   }
 
   //checking for whether this is the last guess or not and redirecting accordingly
@@ -45,9 +50,10 @@ function nextGuess() {
     localStorage.setItem("pageNum", pageNum + 1);
     location.href = "/play";
   }
+  localStorage.setItem("userGuessData", JSON.stringify(userGuessData));
 }
 
 //placeholder
 function prevGuess() {
-  console.log("prev nig");
+  console.log("hello world!");
 }
