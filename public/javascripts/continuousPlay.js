@@ -5,7 +5,6 @@ let pageNum = parseInt(localStorage.getItem("pageNum"));
 let pageCounter = document.getElementById("page-counter");
 let nextButtonText = document.getElementById("button-next");
 let allUserGuessData = JSON.parse(localStorage.getItem("userGuessData")) || [];
-let currentUserGuessData = {};
 
 if (pageNum) {
   pageCounter.innerText = `${pageNum} of 5`;
@@ -23,18 +22,26 @@ function nextGuess() {
   const userGuess = document.querySelector('input[name="guess"]:checked');
   const gameName = document.getElementById("game-name").innerText;
   const imgLink = document.getElementById("img-link").innerText;
-
-  //saving currect guess data
-  currentUserGuessData["gameName"] = gameName;
-  currentUserGuessData["imgLink"] = imgLink;
+  let userGuessStatus;
 
   //checking for user guess and saving guess status (correct/wrong)
   if (userGuess) {
-    currentUserGuessData["userGuess"] = userGuess.value === gameName;
+    userGuessStatus = userGuess.value === gameName;
   } else {
-    currentUserGuessData["userGuess"] = false;
+    userGuessStatus = false;
   }
-  allUserGuessData[pageNum - 1] = currentUserGuessData;
+  console.log(allUserGuessData[8]);
+  //saving current guess data
+  if (allUserGuessData[pageNum - 1]) {
+    allUserGuessData[pageNum - 1] = userGuessStatus;
+  } else {
+    allUserGuessData.push({
+      gameName: gameName,
+      imgLink: imgLink,
+      userGuess: userGuessStatus,
+    });
+  }
+
   //checking for whether this is the last guess or not and redirecting accordingly
   if (pageNum === 5) {
     //results upload functionality (maybe)
