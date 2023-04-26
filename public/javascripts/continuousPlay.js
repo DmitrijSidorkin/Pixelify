@@ -25,12 +25,8 @@ function nextGuess() {
   let userGuessStatus;
 
   //checking for user guess and saving guess status (correct/wrong)
-  if (userGuess) {
-    userGuessStatus = userGuess.value === gameName;
-  } else {
-    userGuessStatus = false;
-  }
-  console.log(allUserGuessData[8]);
+  userGuessStatus = userGuess?.value === gameName;
+
   //saving current guess data
   if (allUserGuessData[pageNum - 1]) {
     allUserGuessData[pageNum - 1] = userGuessStatus;
