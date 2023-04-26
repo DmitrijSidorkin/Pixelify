@@ -6,4 +6,6 @@ module.exports.ROUTES = {
   register: "/register",
   account: "/account",
   error: "/error",
+  results: "/results",
+  //test: "/test",
 };

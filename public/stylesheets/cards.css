@@ -30,6 +30,7 @@
 }
 .field {
   margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 10px;
 }
 .field-label {
@@ -47,7 +48,7 @@
 
 .card-button {
   background-color: rgba(1, 172, 1, 0.801);
-  width: 100%;
+  width: 50%;
   color: white;
   border: none;
   border-radius: 5px;
@@ -59,7 +60,7 @@
 }
 .card-button:hover {
   background-color: rgba(2, 146, 2, 0.801);
-  width: 100%;
+  width: 50%;
   color: white;
   border: none;
   border-radius: 5px;
@@ -71,4 +72,22 @@
 
 #result-div {
   display: none;
+}
+.hidden-game-data {
+  display: none;
+}
+.guess-buttons {
+  width: 100%;
+  display: flex;
+}
+#page-counter {
+  white-space: nowrap;
+  font-size: 25px;
+  padding: 0px 20px;
+  margin: auto;
+}
+.field-input {
+  width: auto;
+  justify-self: baseline;
+  padding: 2px, 10px;
 }

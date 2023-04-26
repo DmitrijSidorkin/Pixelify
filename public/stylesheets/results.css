@@ -1,0 +1,11 @@
+.user-guess-true {
+  color: green;
+}
+.user-guess-false {
+  color: red;
+}
+.results-box {
+  display: flex;
+  justify-content: center;
+  padding: 80px 30px;
+}
