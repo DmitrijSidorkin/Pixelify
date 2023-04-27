@@ -45,10 +45,9 @@
 .card-shadow {
   height: 70vh;
 }
-
 .card-button {
   background-color: rgba(1, 172, 1, 0.801);
-  width: 50%;
+  width: 100%;
   color: white;
   border: none;
   border-radius: 5px;
@@ -60,7 +59,7 @@
 }
 .card-button:hover {
   background-color: rgba(2, 146, 2, 0.801);
-  width: 50%;
+  width: 100%;
   color: white;
   border: none;
   border-radius: 5px;
@@ -68,6 +67,12 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+}
+.play-button {
+  width: 50%;
+}
+.play-button:hover {
+  width: 50%;
 }
 
 #result-div {
