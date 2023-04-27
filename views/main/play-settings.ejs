@@ -1,0 +1,112 @@
+<% layout('layouts/boilerplate')%>
+<div class="card">
+  <div class="card-box">
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=previewImage %>"
+        alt="pixelated image"
+      />
+    </div>
+    <div class="settings-select">
+      <div class="setting">
+        <h5 class="setting-title">Difficulty</h5>
+        <fieldset class="setting-fieldset" name="difficulty">
+          <input
+            class="field-input"
+            type="radio"
+            name="difficulty"
+            value="1"
+            id="1"
+            onchange="pixelationSettingPreview(this)"
+          />
+          <label for="1">Very Easy</label>
+          <input
+            class="field-input"
+            type="radio"
+            name="difficulty"
+            value="2"
+            id="2"
+            onchange="pixelationSettingPreview(this)"
+          />
+          <label for="2">Easy</label>
+          <input
+            class="field-input"
+            type="radio"
+            name="difficulty"
+            value="3"
+            id="3"
+            onchange="pixelationSettingPreview(this)"
+          />
+          <label for="3">Medium</label>
+          <input
+            class="field-input"
+            type="radio"
+            name="difficulty"
+            value="4"
+            id="4"
+            onchange="pixelationSettingPreview(this)"
+          />
+          <label for="4">Hard</label>
+          <input
+            class="field-input"
+            type="radio"
+            name="difficulty"
+            value="5"
+            id="5"
+            onchange="pixelationSettingPreview(this)"
+          />
+          <label for="5">Very Hard</label>
+        </fieldset>
+      </div>
+      <div class="setting">
+        <h5 class="setting-title">Session length</h5>
+        <fieldset class="setting-fieldset" name="sessions-length">
+          <input
+            class="field-input"
+            type="radio"
+            id="a"
+            name="session-length"
+            value="3"
+          />
+          <label for="a">3</label>
+          <input
+            class="field-input"
+            type="radio"
+            id="b"
+            name="session-length"
+            value="5"
+          />
+          <label for="b">5</label>
+          <input
+            class="field-input"
+            type="radio"
+            id="c"
+            name="session-length"
+            value="7"
+          />
+          <label for="c">7</label>
+          <input
+            class="field-input"
+            type="radio"
+            id="d"
+            name="session-length"
+            value="9"
+          />
+          <label for="d">9</label>
+          <input
+            class="field-input"
+            type="radio"
+            id="e"
+            name="session-length"
+            value="11"
+          />
+          <label for="e">11</label>
+        </fieldset>
+      </div>
+    </div>
+    <button class="card-button">Start</button>
+  </div>
+</div>
+<script src="/javascripts/playSettings.js"></script>

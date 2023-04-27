@@ -91,3 +91,18 @@
   justify-self: baseline;
   padding: 2px, 10px;
 }
+
+.settings-select {
+  font-size: 13px;
+}
+.setting {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+.setting-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+fieldset {
+  border: none;
+}

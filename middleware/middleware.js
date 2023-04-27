@@ -71,7 +71,8 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 //   next();
 // };
 
-module.exports.getPixelatedImage = async (image) => {
+module.exports.getPixelatedImage = async (image, pixelationDegree = 10) => {
+  console.log(pixelationDegree);
   const originalImage = await Jimp.read(image);
   const pixelatedImage = await originalImage
     .pixelate(10)
