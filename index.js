@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo");
 
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
+const accountRoutes = require("./routes/account");
 const User = require("./models/user");
 const ExpressError = require("./utils/ExpressError");
 
@@ -80,7 +81,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", mainRoutes, userRoutes);
+app.use("/", mainRoutes, userRoutes, accountRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

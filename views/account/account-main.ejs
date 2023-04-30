@@ -1,23 +1,46 @@
 <% layout('layouts/boilerplate')%>
 
-<div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="row">
-    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3">
-      <div class="card shadow">
-        <img
-          src="https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg"
-          alt=""
-          class="card-img-top"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Hello</h5>
-          <form method="POST">
-                <p>You are <%currentUser.username%></p>
-            </div>
-            <button class="btn btn-success btn-block">Zdarova</button>
-          </form>
-        </div>
-      </div>
+<div class="main-box">
+  <div class="sidebar">
+    <div class="profile-basic-info account-first-row">
+      <img
+        class="profile-img"
+        src="https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg"
+      />
+      <div class="profile-name"><%-username %></div>
     </div>
+    <div class="sidebar-all-tabs">
+      <div class="sidebar-tab">Change credentials</div>
+      <div class="sidebar-tab">Profile</div>
+      <div class="sidebar-tab">Play sessions</div>
+      <div class="sidebar-tab">Detailed stats</div>
+      <div class="sidebar-tab">Customize site</div>
+    </div>
+  </div>
+  <div class="info-box">
+    <div class="info-box-div account-first-row">more user info</div>
+    <div class="info-box-div">Player stats </br>
+      um dolor sit amet consectetur, adipisicing elit. Non inventore aut
+      nesciunt neque expedita molestias, dolor nisi labore enim laboriosam quos
+      quae aliquam? Et accusantium ducimus maiores ullam tempore ea. general
+      stats: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non
+      inventore aut nesciunt neque expedita molestias, dolor nisi labore enim
+      laboriosam quos quae aliquam? Et accusantium ducimus maiores ullam tempore
+      ea. general stats: Lorem ipsum dolor sit amet consectetur, adipisicing
+      elit. Non inventore aut nesciunt neque expedita molestias, dolor nisi
+      labore enim laboriosam quos quae aliquam? Et accusantium ducimus maiores
+      ullam tempore ea. general stats: Lorem ipsum dolor sit amet consectetur,
+      adipisicing elit. Non inventore aut nesciunt neque expedita molestias,
+      dolor nisi labore enim laboriosam quos quae aliquam? Et accusantium
+      ducimus maiores ullam tempore ea. general stats: Lorem ipsum dolor sit
+      amet consectetur, adipisicing elit. Non inventore aut nesciunt neque
+      expedita molestias, dolor nisi labore enim laboriosam quos quae aliquam?
+      Et accusantium ducimus maiores ullam tempore ea. general stats: Lorem
+      ipsum dolor sit amet consectetur, adipisicing elit. Non inventore aut
+      nesciunt neque expedita molestias, dolor nisi labore enim laboriosam quos
+      quae aliquam? Et accusantium ducimus maiores ullam tempore ea. general
+      stats: Lorem
+    </div>
+    <div class="info-box-div">player created lists</div>
   </div>
 </div>
