@@ -69,10 +69,7 @@
   cursor: pointer;
 }
 .play-button {
-  width: 50%;
-}
-.play-button:hover {
-  width: 50%;
+  width: 100%;
 }
 
 #result-div {
