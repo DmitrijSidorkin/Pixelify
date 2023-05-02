@@ -1,9 +1,23 @@
 /* eslint-disable no-unused-vars */
-const Jimp = require("jimp");
 
-const image =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
+let chosenDifficulty;
+let chosenLength;
+let sessionSettings = {};
 
-function pixelationSettingPreview(radio) {
-  console.log(radio.value);
+function chooseDifficulty(radio) {
+  chosenDifficulty = radio.value;
+}
+
+function chooseLength(radio) {
+  chosenLength = radio.value;
+}
+
+function start() {
+  if (chosenDifficulty && chosenLength) {
+    sessionSettings.playSessionId =
+      document.getElementById("sessionId").innerText;
+    sessionSettings.difficulty = chosenDifficulty;
+    sessionSettings.sessionLength = chosenLength;
+    localStorage.setItem("sessionSettings", JSON.stringify(sessionSettings));
+  }
 }

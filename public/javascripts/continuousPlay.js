@@ -5,15 +5,18 @@ let pageNum = parseInt(localStorage.getItem("pageNum"));
 let pageCounter = document.getElementById("page-counter");
 let nextButtonText = document.getElementById("button-next");
 let allUserGuessData = JSON.parse(localStorage.getItem("userGuessData")) || [];
+const { difficulty, sessionLength } = JSON.parse(
+  localStorage.getItem("sessionSettings")
+);
 
 if (pageNum) {
-  pageCounter.innerText = `${pageNum} of 5`;
+  pageCounter.innerText = `${pageNum} of ${sessionLength}`;
 } else {
-  pageCounter.innerText = "1 of 5";
+  pageCounter.innerText = `1 of ${sessionLength}`;
   localStorage.setItem("pageNum", "1");
   pageNum = 1;
 }
-if (pageNum === 5) {
+if (pageNum === sessionLength) {
   nextButtonText.innerText = "Finish";
 }
 

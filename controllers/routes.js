@@ -8,5 +8,6 @@ module.exports.ROUTES = {
   error: "/error",
   results: "/results",
   playSettings: "/play-settings",
+  sendPlayData: "/send-play-data",
   test: "/test",
 };

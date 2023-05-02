@@ -9,7 +9,14 @@
         alt="pixelated image"
       />
     </div>
-    <div class="settings-select">
+
+    <div id="sessionId" style="display: none"><%= playSessionId %></div>
+    <form
+      action="/send-play-data"
+      method="POST"
+      class="settings-select validated-form"
+      novalidate
+    >
       <div class="setting">
         <h5 class="setting-title">Difficulty</h5>
         <fieldset class="setting-fieldset" name="difficulty">
@@ -19,7 +26,7 @@
             name="difficulty"
             value="1"
             id="1"
-            onchange="pixelationSettingPreview(this)"
+            onchange="chooseDifficulty(this)"
           />
           <label for="1">Very Easy</label>
           <input
@@ -28,7 +35,7 @@
             name="difficulty"
             value="2"
             id="2"
-            onchange="pixelationSettingPreview(this)"
+            onchange="chooseDifficulty(this)"
           />
           <label for="2">Easy</label>
           <input
@@ -37,7 +44,7 @@
             name="difficulty"
             value="3"
             id="3"
-            onchange="pixelationSettingPreview(this)"
+            onchange="chooseDifficulty(this)"
           />
           <label for="3">Medium</label>
           <input
@@ -46,7 +53,7 @@
             name="difficulty"
             value="4"
             id="4"
-            onchange="pixelationSettingPreview(this)"
+            onchange="chooseDifficulty(this)"
           />
           <label for="4">Hard</label>
           <input
@@ -55,7 +62,7 @@
             name="difficulty"
             value="5"
             id="5"
-            onchange="pixelationSettingPreview(this)"
+            onchange="chooseDifficulty(this)"
           />
           <label for="5">Very Hard</label>
         </fieldset>
@@ -67,46 +74,52 @@
             class="field-input"
             type="radio"
             id="a"
-            name="session-length"
+            name="sessionLength"
             value="3"
+            onchange="chooseLength(this)"
           />
           <label for="a">3</label>
           <input
             class="field-input"
             type="radio"
             id="b"
-            name="session-length"
+            name="sessionLength"
             value="5"
+            onchange="chooseLength(this)"
           />
           <label for="b">5</label>
           <input
             class="field-input"
             type="radio"
             id="c"
-            name="session-length"
+            name="sessionLength"
             value="7"
+            onchange="chooseLength(this)"
           />
           <label for="c">7</label>
           <input
             class="field-input"
             type="radio"
             id="d"
-            name="session-length"
+            name="sessionLength"
             value="9"
+            onchange="chooseLength(this)"
           />
           <label for="d">9</label>
           <input
             class="field-input"
             type="radio"
             id="e"
-            name="session-length"
+            name="sessionLength"
             value="11"
+            onchange="chooseLength(this)"
           />
           <label for="e">11</label>
         </fieldset>
       </div>
-    </div>
-    <button class="card-button">Start</button>
+
+      <button class="card-button" onclick="start()">Start</button>
+    </form>
   </div>
 </div>
 <script src="/javascripts/playSettings.js"></script>
