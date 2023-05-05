@@ -30,5 +30,3 @@ const PlaySessionSchema = new Schema({
 const PlaySession = mongoose.model("playSession", PlaySessionSchema);
 
 module.exports = PlaySession;
-
-// module.exports = mongoose.model("Session", SessionSchema);

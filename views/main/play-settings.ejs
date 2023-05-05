@@ -10,7 +10,6 @@
       />
     </div>
 
-    <div id="sessionId" style="display: none"><%= playSessionId %></div>
     <form
       action="/send-play-data"
       method="POST"
@@ -76,7 +75,6 @@
             id="session-length-1"
             name="sessionLength"
             value="3"
-            onchange="chooseLength(this)"
           />
           <label for="session-length-1">3</label>
           <input
@@ -85,7 +83,6 @@
             id="session-length-2"
             name="sessionLength"
             value="5"
-            onchange="chooseLength(this)"
           />
           <label for="session-length-2">5</label>
           <input
@@ -94,7 +91,6 @@
             id="session-length-3"
             name="sessionLength"
             value="7"
-            onchange="chooseLength(this)"
           />
           <label for="session-length-3">7</label>
           <input
@@ -103,7 +99,6 @@
             id="session-length-4"
             name="sessionLength"
             value="9"
-            onchange="chooseLength(this)"
           />
           <label for="session-length-4">9</label>
           <input
@@ -112,13 +107,12 @@
             id="session-length-5"
             name="sessionLength"
             value="11"
-            onchange="chooseLength(this)"
           />
           <label for="session-length-5">11</label>
         </fieldset>
       </div>
 
-      <button class="card-button" onclick="start()">Start</button>
+      <button class="card-button">Start</button>
     </form>
   </div>
 </div>

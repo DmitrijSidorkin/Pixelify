@@ -5,6 +5,7 @@ const { getPixelatedImage } = require("../middleware");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 
+const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
@@ -12,7 +13,6 @@ const {
 
 module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
-    playSessionId: uuidv4(),
     extraStyles: cardStyle,
     previewImage: playSettingsImage,
   });
@@ -20,25 +20,40 @@ module.exports.renderPlaySettings = (req, res) => {
 
 module.exports.renderPlay = async (req, res) => {
   const image = await getPixelatedImage(req.gameData.background_image);
-
+  const playSessionData = await fetchPlaySessionData(req.user.username);
   res.render("main/play.ejs", {
     image,
     gameName: req.gameData.name,
     imgLink: req.gameData.background_image,
     extraStyles: cardStyle,
+    fetchedSession: playSessionData,
   });
 };
 
 module.exports.sendPlayData = async (req, res, next) => {
   const id = uuidv4();
   const playSession = new PlaySession({
-    userId: req.user.username,
+    userId: req.user?.username || "guest",
     sessionId: id,
     difficulty: req.body.difficulty,
     length: req.body.sessionLength,
   });
-  console.log(playSession);
   await playSession.save();
+  res.redirect("/play");
+  next();
+};
+
+module.exports.updatePlayData = async (req, res, next) => {
+  // await PlaySession.findOneAndUpdate()
+  const guessData = {
+    gameName: req.body.gameName,
+    imgLink: req.body.imageLink,
+    userGuess: req.body.guess === req.body.gameName,
+  };
+  await PlaySession.updateOne(
+    { sessionId: req.body.sessionId },
+    { $push: { sessionData: guessData } }
+  );
   res.redirect("/play");
   next();
 };
@@ -59,7 +74,3 @@ module.exports.renderResults = (req, res) => {
     extraStyles: resultsStyle,
   });
 };
-
-// module.exports.postPlaySettings = async () => {
-//   console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-// };
