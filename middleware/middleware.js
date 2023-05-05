@@ -2,7 +2,6 @@ const Jimp = require("jimp");
 const axios = require("axios");
 
 const { ROUTES } = require("../controllers/routes");
-// const { generateUniqueRandomArr } = require("./helpers");
 
 const apiUrl = "https://api.rawg.io/api/";
 // const apiParams = "page_size=40&parent_platforms=1,2,3,4&ordering=-metacritic";
@@ -37,7 +36,7 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
       if (process.env.IN_DEVELOPMENT === "true") {
         console.log(error.response.status);
       }
-      if (retries == maxRetries) {
+      if (retries === maxRetries) {
         req.session.error = error.response.status;
         res.redirect(ROUTES.error);
       }
@@ -46,9 +45,7 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   }
   if (response) {
     req.gameData = response.data;
-    if (process.env.IN_DEVELOPMENT === "true") {
-      console.log(req.gameData);
-    }
+
     next();
   }
 };

@@ -9,5 +9,6 @@ module.exports.ROUTES = {
   results: "/results",
   playSettings: "/play-settings",
   sendPlayData: "/send-play-data",
+  updatePlayData: "/update-play-data",
   test: "/test",
 };
