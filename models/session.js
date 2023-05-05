@@ -18,9 +18,13 @@ const PlaySessionSchema = new Schema({
     type: Number,
     required: true,
   },
-  sessionData: {
-    type: Array,
-  },
+  sessionData: [
+    {
+      gameName: { type: String },
+      imgLink: { type: String },
+      userGuess: { type: Boolean },
+    },
+  ],
 });
 
 const PlaySession = mongoose.model("playSession", PlaySessionSchema);

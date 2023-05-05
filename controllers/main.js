@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
 const { getPixelatedImage } = require("../middleware");
+const playSettingsImage =
+  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 
 const {
   cardStyle,
@@ -12,8 +14,7 @@ module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
     playSessionId: uuidv4(),
     extraStyles: cardStyle,
-    previewImage:
-      "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg",
+    previewImage: playSettingsImage,
   });
 };
 
