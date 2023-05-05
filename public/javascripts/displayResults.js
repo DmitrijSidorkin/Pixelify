@@ -29,4 +29,4 @@ document.getElementById(
   "results-details"
 ).innerText = `You guessed ${correctAnswers} out of ${userGuessData.length}`;
 document.getElementById("all-answers").innerHTML = resultsHtml;
-// localStorage.removeItem("userGuessData");
+localStorage.removeItem("userGuessData");
