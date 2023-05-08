@@ -64,13 +64,13 @@
       />
       <input type="hidden" name="gameName" value="<%=gameName%>" />
       <input type="hidden" name="imageLink" value="<%=imgLink%>" />
+      <input type="hidden" name="pageNum" value="<%=pageNum%>" />
       <div class="guess-buttons">
         <button onclick="prevGuess()" class="card-button" id="button-back">
           Back
         </button>
         <div id="page-counter">
-          <%= fetchedSession.sessionData.length+1 %> out of
-          <%=fetchedSession.length%>
+          <%- pageNum %> of <%=fetchedSession.length%>
         </div>
         <button type="submit" class="card-button" id="button-next">Next</button>
       </div>
