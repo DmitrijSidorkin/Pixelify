@@ -1,7 +1,13 @@
 <% layout('layouts/boilerplate')%>
+<input
+  id="results-data"
+  type="hidden"
+  name="results-data"
+  value="<%=playSessionData%>"
+/>
 <div class="results-box">
-  <div>
-    <img src="" alt="results" id="results-image" />
+  <img src="" alt="results" id="results-image" />
+  <div class="results-text">
     <h1 id="results-title"></h1>
     <div id="results-details"></div>
     <div id="all-answers"></div>

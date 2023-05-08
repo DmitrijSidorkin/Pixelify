@@ -69,8 +69,14 @@ module.exports.updatePlayData = async (req, res, next) => {
 //   });
 // };
 
-module.exports.renderResults = (req, res) => {
+module.exports.renderResults = async (req, res, next) => {
+  const playSessionData = JSON.stringify(
+    await fetchPlaySessionData(req.user.username)
+  );
+  console.log(playSessionData);
   res.render("main/results.ejs", {
     extraStyles: resultsStyle,
+    playSessionData: playSessionData,
   });
+  next();
 };

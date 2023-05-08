@@ -1,22 +1,23 @@
-const userGuessData = JSON.parse(localStorage.getItem("userGuessData"));
-let resultsHtml = "";
+const userGuessData = JSON.parse(document.getElementById("results-data").value);
+let resultsHtml = "<ul>";
 let correctAnswers = 0;
-
+console.log(userGuessData);
 //going through all guesses (just 5 for now)
 for (let i = 0; i < userGuessData.length; i++) {
-  resultsHtml += `<div class=user-guess-${userGuessData[i].userGuess}>${userGuessData[i].gameName}</div>`;
+  resultsHtml += `<li class=user-guess-${userGuessData.sessionData[i].userGuess}>${userGuessData.sessionData[i].gameName}</li>`;
 
   //checking for guess status, counting correct guesses and changing the display stuff accordingly
-  if (userGuessData[i].userGuess) {
+  if (userGuessData.sessionData[i].userGuess) {
     correctAnswers++;
   }
 }
+resultsHtml += "</ul>";
 
 //if the majority of guesses are correct (just >2 for now)
 let resultsTitle = document.getElementById("results-title");
 let resultsImage = document.getElementById("results-image");
 
-if (correctAnswers > 2) {
+if (correctAnswers > Math.floor(userGuessData.length / 2)) {
   resultsTitle.innerText = "Congratulations!!!";
   resultsImage.src =
     "https://i.kym-cdn.com/photos/images/original/000/707/322/fac.gif";
