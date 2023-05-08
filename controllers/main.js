@@ -19,9 +19,12 @@ module.exports.renderPlaySettings = (req, res) => {
 };
 
 module.exports.renderPlay = async (req, res) => {
-  const image = await getPixelatedImage(req.gameData.background_image);
   const playSessionData = await fetchPlaySessionData(req.user.username);
   const pageNum = playSessionData.sessionData.length + 1;
+  const image = await getPixelatedImage(
+    req.gameData.background_image,
+    playSessionData.difficulty
+  );
   res.render("main/play.ejs", {
     image,
     gameName: req.gameData.name,

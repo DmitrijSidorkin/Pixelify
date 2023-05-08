@@ -2,6 +2,7 @@ const Jimp = require("jimp");
 const axios = require("axios");
 
 const { ROUTES } = require("../controllers/routes");
+const { calculatePixelationDegree } = require("./helpers");
 
 const apiUrl = "https://api.rawg.io/api/";
 // const apiParams = "page_size=40&parent_platforms=1,2,3,4&ordering=-metacritic";
@@ -68,11 +69,15 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 //   next();
 // };
 
-module.exports.getPixelatedImage = async (image, pixelationDegree = 10) => {
-  console.log(pixelationDegree);
+module.exports.getPixelatedImage = async (image, difficulty = 3) => {
   const originalImage = await Jimp.read(image);
+  const minDimmension = Math.min(
+    originalImage.bitmap.width,
+    originalImage.bitmap.height
+  );
+  const pixelationDegree = calculatePixelationDegree(minDimmension, difficulty);
   const pixelatedImage = await originalImage
-    .pixelate(10)
+    .pixelate(pixelationDegree)
     .getBase64Async(Jimp.MIME_JPEG);
   return pixelatedImage;
 };
