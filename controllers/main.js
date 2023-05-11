@@ -27,8 +27,9 @@ module.exports.renderPlay = async (req, res) => {
     gameName: req.gameData.name,
     imgLink: req.gameData.background_image,
     extraStyles: cardStyle,
-    fetchedSession: playSessionData,
-    pageNum: pageNum,
+    sessionLength: playSessionData.length,
+    sessionId: playSessionData.sessionId,
+    pageNum,
   });
 };
 
