@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate')%>
+<input
+  id="results-data"
+  type="hidden"
+  name="results-data"
+  value="<%=playSessionData%>"
+/>
+<div class="results-box">
+  <img src="" alt="results" id="results-image" />
+  <div class="results-text">
+    <h1 id="results-title"></h1>
+    <div id="results-details"></div>
+    <div id="all-answers"></div>
+  </div>
+</div>
+
+<!-- Slideshow container -->
+<div id="slideshow-container">
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br />
+
+<!-- The dots/circles -->
+<div id="dot-container">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script src="/javascripts/detailedResults.js"></script>
+<script src="/javascripts/detailedResultsSlides.js"></script>
