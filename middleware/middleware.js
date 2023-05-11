@@ -71,11 +71,11 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 
 module.exports.getPixelatedImage = async (image, difficulty = 3) => {
   const originalImage = await Jimp.read(image);
-  const minDimmension = Math.min(
+  const minDimension = Math.min(
     originalImage.bitmap.width,
     originalImage.bitmap.height
   );
-  const pixelationDegree = calculatePixelationDegree(minDimmension, difficulty);
+  const pixelationDegree = calculatePixelationDegree(minDimension, difficulty);
   const pixelatedImage = await originalImage
     .pixelate(pixelationDegree)
     .getBase64Async(Jimp.MIME_JPEG);

@@ -19,7 +19,7 @@ module.exports.generateUniqueRandomArr = () => {
   return numArr;
 };
 
-module.exports.calculatePixelationDegree = (minDimmension, difficulty) => {
+module.exports.calculatePixelationDegree = (minDimension, difficulty) => {
   const targetPixels = 120 - 20 * difficulty;
-  return Math.floor(minDimmension / targetPixels + 1);
+  return Math.floor(minDimension / targetPixels + 1);
 };
