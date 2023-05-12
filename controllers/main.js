@@ -9,6 +9,7 @@ const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
+  detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
 
 module.exports.renderPlaySettings = (req, res) => {
@@ -76,7 +77,7 @@ module.exports.renderDetailedResults = async (req, res, next) => {
   );
   console.log(playSessionData);
   res.render("main/detailed-results", {
-    extraStyles: resultsStyle,
+    extraStyles: detailedResultsStyle,
     playSessionData,
   });
   next();

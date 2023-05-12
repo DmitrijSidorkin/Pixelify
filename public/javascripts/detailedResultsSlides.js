@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 let slideIndex = 1;
 showSlides(slideIndex);
 
@@ -6,7 +8,7 @@ function plusSlides(n) {
   showSlides((slideIndex += n));
 }
 
-// Thumbnail image controls
+// Dots controlls
 function currentSlide(n) {
   showSlides((slideIndex = n));
 }
@@ -15,6 +17,7 @@ function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
+  let text = document.getElementsByClassName("detailed-results-text");
   if (n > slides.length) {
     slideIndex = 1;
   }
@@ -23,10 +26,12 @@ function showSlides(n) {
   }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
+    text[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex - 1].style.display = "block";
+  slides[slideIndex - 1].style.display = "flex";
+  text[slideIndex - 1].style.display = "flex";
   dots[slideIndex - 1].className += " active";
 }
