@@ -57,10 +57,25 @@
           </fieldset>
         </div>
       </div>
-      <input type="hidden" name="sessionId" value="<%=sessionId%>" />
-      <input type="hidden" name="gameName" value="<%=gameName%>" />
-      <input type="hidden" name="imageLink" value="<%=imgLink%>" />
-      <input type="hidden" name="pageNum" value="<%=pageNum%>" />
+      <input
+        type="hidden"
+        id="sessionId"
+        name="sessionId"
+        value="<%=sessionId%>"
+      />
+      <input
+        type="hidden"
+        id="gameName"
+        name="gameName"
+        value="<%=gameName%>"
+      />
+      <input
+        type="hidden"
+        id="imageLink"
+        name="imageLink"
+        value="<%=imgLink%>"
+      />
+      <input type="hidden" id="pageNum" name="pageNum" value="<%=pageNum%>" />
       <div class="guess-buttons">
         <button onclick="prevGuess()" class="card-button" id="button-back">
           Back

@@ -20,20 +20,21 @@ module.exports.renderPlaySettings = (req, res) => {
 };
 
 module.exports.renderPlay = async (req, res) => {
-  const playSessionData = await fetchPlaySessionData(req.user.username);
-  const pageNum = playSessionData.sessionData.length + 1;
-  const image = await getPixelatedImage(
-    req.gameData.background_image,
-    playSessionData.difficulty
-  );
+  const { id, pageNum } = req.params;
+  const image = await getPixelatedImage(req.gameData.background_image);
+  console.log(id);
+  const playSessionData = await PlaySession.findOne({ sessionId: id });
+  console.log(playSessionData);
+  const filledPages = playSessionData.sessionData?.length + 1 || 1;
   res.render("main/play.ejs", {
     image,
     gameName: req.gameData.name,
     imgLink: req.gameData.background_image,
     extraStyles: cardStyle,
     sessionLength: playSessionData.length,
-    sessionId: playSessionData.sessionId,
+    sessionId: id,
     pageNum,
+    filledPages,
   });
 };
 
@@ -46,25 +47,27 @@ module.exports.sendPlayData = async (req, res, next) => {
     length: req.body.sessionLength,
   });
   await playSession.save();
-  res.redirect("/play");
+  res.redirect(`/play/${id}/1`);
   next();
 };
 
 module.exports.updatePlayData = async (req, res, next) => {
+  const sessionId = req.body.sessionId;
+  const nextPageNum = parseInt(req.body.pageNum) + 1;
   const guessData = {
     gameName: req.body.gameName,
     imgLink: req.body.imageLink,
     userGuess: req.body.guess === req.body.gameName,
   };
   await PlaySession.updateOne(
-    { sessionId: req.body.sessionId },
+    { sessionId: sessionId },
     { $push: { sessionData: guessData } }
   );
   const playSessionData = await fetchPlaySessionData(req.user.username);
   if (playSessionData.length === parseInt(req.body.pageNum)) {
     res.redirect("/results");
   }
-  res.redirect("/play");
+  res.redirect(`/play/${sessionId}/${nextPageNum}`);
   next();
 };
 
