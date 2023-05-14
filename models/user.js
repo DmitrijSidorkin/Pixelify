@@ -7,6 +7,27 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  displayName: {
+    type: String,
+  },
+  profileImg: {},
+  realName: {
+    type: String,
+  },
+  birthDate: {
+    type: Date,
+  },
+  gender: {},
+  country: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+  mediaLinks: {},
 });
 
 UserSchema.plugin(passportLocalMongoose);
