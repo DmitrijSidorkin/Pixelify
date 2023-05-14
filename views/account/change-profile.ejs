@@ -2,30 +2,88 @@
 
 <div class="main-box">
   <%-include('../partials/account-sidebar')%>
+
   <div class="info-box">
-    <div class="info-box-div account-first-row">more user info</div>
-    <div class="info-box-div">Player stats </br>
-      um dolor sit amet consectetur, adipisicing elit. Non inventore aut
-      nesciunt neque expedita molestias, dolor nisi labore enim laboriosam quos
-      quae aliquam? Et accusantium ducimus maiores ullam tempore ea. general
-      stats: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non
-      inventore aut nesciunt neque expedita molestias, dolor nisi labore enim
-      laboriosam quos quae aliquam? Et accusantium ducimus maiores ullam tempore
-      ea. general stats: Lorem ipsum dolor sit amet consectetur, adipisicing
-      elit. Non inventore aut nesciunt neque expedita molestias, dolor nisi
-      labore enim laboriosam quos quae aliquam? Et accusantium ducimus maiores
-      ullam tempore ea. general stats: Lorem ipsum dolor sit amet consectetur,
-      adipisicing elit. Non inventore aut nesciunt neque expedita molestias,
-      dolor nisi labore enim laboriosam quos quae aliquam? Et accusantium
-      ducimus maiores ullam tempore ea. general stats: Lorem ipsum dolor sit
-      amet consectetur, adipisicing elit. Non inventore aut nesciunt neque
-      expedita molestias, dolor nisi labore enim laboriosam quos quae aliquam?
-      Et accusantium ducimus maiores ullam tempore ea. general stats: Lorem
-      ipsum dolor sit amet consectetur, adipisicing elit. Non inventore aut
-      nesciunt neque expedita molestias, dolor nisi labore enim laboriosam quos
-      quae aliquam? Et accusantium ducimus maiores ullam tempore ea. general
-      stats: Lorem
-    </div>
-    <div class="info-box-div">player created lists</div>
+    <form
+      action="/update-profile"
+      method="POST"
+      class="change-profile-form validated-form"
+      novalidate
+    >
+      <div class="form-section">
+        <div class="form-section-label">General</div>
+        <div class="profile-form-input-div">
+          <label for="display-name" class="form-input-label"
+            >Display Name</label
+          >
+          <input
+            type="text"
+            class="profile-form-input"
+            name="display-name"
+            id="display-name"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="profile-img" class="form-input-label"
+            >Profile Image</label
+          >
+          <input
+            type="file"
+            class="profile-form-input"
+            name="profile-img"
+            id="profile-img"
+          />
+        </div>
+        <div class="img-description">
+          (The image resolution has to be 150x150)
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Detailed Info</div>
+        <div class="profile-form-input-div">
+          <label for="real-name" class="form-input-label">Name</label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="real-name"
+            id="real-name"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="birth-date" class="form-input-label">Birtrh Date</label>
+          <input
+            type="date"
+            class="profile-form-input"
+            name="birth-date"
+            id="birth-date"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="country" class="form-input-label">Country</label>
+          <%-include('../partials/country-selection')%>
+        </div>
+        <div class="profile-form-input-div">
+          <label for="location" class="form-input-label">Location</label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="location"
+            id="location"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="bio" class="form-input-label">Bio</label>
+          <textarea
+            class="profile-form-input"
+            name="bio"
+            id="bio"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+      <!-- will add soc media link inputs here later -->
+
+      <button class="form-button">Update</button>
+    </form>
   </div>
 </div>
