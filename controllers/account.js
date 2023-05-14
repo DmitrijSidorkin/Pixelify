@@ -6,15 +6,16 @@ module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
   res.render("account/account-main.ejs", {
     extraStyles: accountStyle,
-    displayName: profileData.displayName,
+    profileData,
   });
 };
 
 module.exports.renderChangeProfile = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
+  console.log(profileData);
   res.render("account/change-profile.ejs", {
     extraStyles: accountStyle,
-    displayName: profileData.displayName,
+    profileData,
   });
 };
 module.exports.updateProfile = async (req, res) => {

@@ -76,9 +76,12 @@ main {
   padding-bottom: 30px;
 }
 .form-section-label {
-  font-size: 18px;
+  font-size: 20px;
   border-bottom: 1px solid black;
   margin-bottom: 10px;
+}
+.form-input-label {
+  font-size: 16px;
 }
 .form-button {
   float: right;
@@ -103,7 +106,9 @@ main {
   text-decoration: none;
   cursor: pointer;
 }
-
+#bio {
+  font-size: 11px;
+}
 .img-description {
   margin-left: 10px;
   margin-top: -3px;

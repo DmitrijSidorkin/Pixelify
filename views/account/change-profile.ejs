@@ -21,6 +21,7 @@
             class="profile-form-input"
             name="displayName"
             id="display-name"
+            value="<%= profileData.displayName %>"
           />
         </div>
         <div class="profile-form-input-div">
@@ -32,6 +33,7 @@
             class="profile-form-input"
             name="profileImg"
             id="profile-img"
+            value="<%= profileData.profileImg %>"
           />
         </div>
         <div class="img-description">
@@ -47,6 +49,7 @@
             class="profile-form-input"
             name="realName"
             id="real-name"
+            value="<%= profileData.realName %>"
           />
         </div>
         <div class="profile-form-input-div">
@@ -56,6 +59,7 @@
             class="profile-form-input"
             name="birthDate"
             id="birth-date"
+            value="<%=profileData.birthDate %>"
           />
         </div>
         <div class="profile-form-input-div">
@@ -70,16 +74,14 @@
             name="location"
             id="location"
             placeholder="(City/State/Province/etc)"
+            value="<%= profileData.location %>"
           />
         </div>
         <div class="profile-form-input-div">
           <label for="bio" class="form-input-label">Bio</label>
-          <textarea
-            class="profile-form-input"
-            name="bio"
-            id="bio"
-            rows="4"
-          ></textarea>
+          <textarea class="profile-form-input" name="bio" id="bio" rows="4">
+<%=profileData.bio%></textarea
+          >
         </div>
       </div>
       <!-- will add soc media link inputs here later -->
@@ -88,3 +90,5 @@
     </form>
   </div>
 </div>
+
+<script src="/javascripts/autofill-profile-form.js"></script>
