@@ -5,6 +5,7 @@ module.exports.ROUTES = {
   logout: "/logout",
   register: "/register",
   account: "/account",
+  changeProfile: "/account/change-profile",
   error: "/error",
   results: "/results",
   playSettings: "/play-settings",

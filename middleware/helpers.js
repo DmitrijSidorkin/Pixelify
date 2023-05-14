@@ -1,4 +1,5 @@
 const PlaySession = require("../models/session");
+const User = require("../models/user");
 // myCollection = "", myFilter = ""
 
 module.exports.fetchPlaySessionData = async (currentUser) => {
@@ -6,6 +7,9 @@ module.exports.fetchPlaySessionData = async (currentUser) => {
     $natural: -1,
   });
   return gameSession;
+};
+module.exports.fetchProfileData = async (currentUser) => {
+  return await User.findById(currentUser);
 };
 
 module.exports.generateUniqueRandomArr = () => {
