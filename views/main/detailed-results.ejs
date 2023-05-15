@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate')%>
+<input
+  id="results-data"
+  type="hidden"
+  name="results-data"
+  value="<%=playSessionData%>"
+/>
+
+<div class="detailed-results-box">
+  <div id="slideshow-container"></div>
+  <div id="dots-container"></div>
+  <div id="game-info-container"></div>
+</div>
+
+<script src="/javascripts/detailedResults.js"></script>
+<script src="/javascripts/detailedResultsSlides.js"></script>

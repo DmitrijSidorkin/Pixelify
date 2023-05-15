@@ -6,6 +6,15 @@
 }
 .results-box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 80px 30px;
+}
+#results-image {
+  max-width: 50%;
+  margin: auto;
+}
+.results-text {
+  max-width: 70%;
+  margin: auto;
 }

@@ -7,6 +7,7 @@ module.exports.ROUTES = {
   account: "/account",
   error: "/error",
   results: "/results",
+  detailedResults: "/detailed-results/:id",
   playSettings: "/play-settings",
   sendPlayData: "/send-play-data",
   updatePlayData: "/update-play-data",

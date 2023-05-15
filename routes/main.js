@@ -16,9 +16,10 @@ router.route(ROUTES.error).get((req, res) => {
 });
 
 router.route(ROUTES.playSettings).get(main.renderPlaySettings);
-
 router.route(ROUTES.play).get(fetchRandomGameData, main.renderPlay);
+
 router.route(ROUTES.results).get(main.renderResults);
+router.route(ROUTES.detailedResults).get(main.renderDetailedResults);
 
 router.route(ROUTES.sendPlayData).post(main.sendPlayData);
 router.route(ROUTES.updatePlayData).post(main.updatePlayData);

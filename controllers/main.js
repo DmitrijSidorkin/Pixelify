@@ -9,6 +9,7 @@ const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
+  detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
 
 module.exports.renderPlaySettings = (req, res) => {
@@ -67,6 +68,31 @@ module.exports.updatePlayData = async (req, res, next) => {
   next();
 };
 
+module.exports.renderResults = async (req, res, next) => {
+  const playSessionData = JSON.stringify(
+    await fetchPlaySessionData(req.user.username)
+  );
+  res.render("main/results", {
+    extraStyles: resultsStyle,
+    playSessionData,
+  });
+  next();
+};
+
+module.exports.renderDetailedResults = async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  const playSessionData = JSON.stringify(
+    await PlaySession.findOne({ sessionId: id })
+  );
+  console.log(playSessionData);
+  res.render("main/detailed-results", {
+    extraStyles: detailedResultsStyle,
+    playSessionData,
+  });
+  next();
+};
+
 // module.exports.renderTest = async (req, res) => {
 //   const image = await getPixelatedImage(req.gameData.background_image);
 
@@ -77,9 +103,3 @@ module.exports.updatePlayData = async (req, res, next) => {
 //     extraStyles: cardStyle,
 //   });
 // };
-
-module.exports.renderResults = (req, res) => {
-  res.render("main/results.ejs", {
-    extraStyles: resultsStyle,
-  });
-};
