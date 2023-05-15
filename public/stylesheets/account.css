@@ -71,6 +71,7 @@ main {
 }
 #bio {
   box-sizing: border-box;
+  font-size: 11px;
 }
 .form-section:first-of-type {
   padding-bottom: 30px;
@@ -97,17 +98,7 @@ main {
 }
 .form-button:hover {
   background-color: rgba(2, 146, 2, 0.801);
-
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
   cursor: pointer;
-}
-#bio {
-  font-size: 11px;
 }
 .img-description {
   margin-left: 10px;
