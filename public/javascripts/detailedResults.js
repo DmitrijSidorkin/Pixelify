@@ -8,26 +8,24 @@ let slides = `<div class="button-div prev" onclick="plusSlides(-1)">&#10094;</di
 let dots = "";
 //details for each game
 let gameInfo = "";
-
 //generating image slides and game info for each entry
-for (let i = 0; i < playSessionData.length; i++) {
-  slides += `<div class="mySlides fade"><img class="img-detailed" src="${playSessionData.sessionData[i].imgLink}"/></div>`;
+playSessionData.sessionData.forEach((game, index) => {
+  slides += `<div class="mySlides fade"><img class="img-detailed" src="${
+    game.imgLink
+  }" alt="unpixelated-game-${index + 1}"/></div>`;
   gameInfo += `<div class="detailed-results-text">
-  <div class="game-name user-guess-${
-    playSessionData.sessionData[i].userGuess
-  }">${playSessionData.sessionData[i].gameName}</div>
-  <div class="game-details">lorem${i + 1}</div>
-    <div class="page-num">${i + 1}/${playSessionData.length}</div>
+  <div class="game-name user-guess-${game.userGuess}">${game.gameName}</div>
+  <div class="game-details">lorem${index + 1}</div>
+    <div class="page-num">${index + 1}/${playSessionData.length}</div>
   </div>`;
-}
+});
 
 //if there are 20 slides of fewer generating the navigational dots
 if (playSessionData.length <= 20) {
-  for (let i = 0; i < playSessionData.length; i++) {
-    dots += `<span class="dot" onclick="currentSlide(${i + 1})"></span>`;
-  }
+  playSessionData.sessionData.forEach((a, index) => {
+    dots += `<span class="dot" onclick="currentSlide(${index + 1})"></span>`;
+  });
 }
-
 //adding the 2nd navigational button for slides
 slides += `<div class="button-div next" onclick="plusSlides(1)" style="right:0">&#10095;</div>`;
 
