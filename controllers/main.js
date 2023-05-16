@@ -35,6 +35,10 @@ module.exports.renderPlay = async (req, res) => {
       { sessionId: id },
       { $push: { sessionData: pageGameData } }
     );
+    const updatedSessionData = await PlaySession.findOne({ sessionId: id });
+    const sessionObjectId =
+      updatedSessionData.sessionData[parseInt(pageNum - 1)]._id.toString();
+    pageGameData._id = sessionObjectId;
   } else {
     pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
   }
