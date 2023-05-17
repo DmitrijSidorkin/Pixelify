@@ -101,3 +101,30 @@
 fieldset {
   border: none;
 }
+.page-title {
+  padding: 15px;
+  font-size: 40px;
+  text-align: center;
+}
+.prev-session-info {
+  font-size: 20px;
+  width: 70%;
+  margin: auto;
+  padding: 30px 50px 40px 0px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.continue-card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#button-start-new,
+#button-continue {
+  width: 200px;
+}
+#continue-card-title {
+  font-size: 25px;
+}

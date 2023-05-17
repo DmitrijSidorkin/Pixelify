@@ -2,15 +2,28 @@ const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
 const { getPixelatedImage } = require("../middleware");
+const { fetchPlaySessionData } = require("../middleware/helpers");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
-
-const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
+
+module.exports.playOrContinue = async (req, res) => {
+  const user = req.user.username;
+  const lastSessionData = await fetchPlaySessionData(user);
+  console.log(lastSessionData);
+  if (
+    lastSessionData.sessionData.length &&
+    lastSessionData.sessionData.length !== lastSessionData.length
+  ) {
+    res.redirect("/play/continue");
+  } else {
+    res.redirect("/play-settings");
+  }
+};
 
 module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
@@ -55,6 +68,26 @@ module.exports.renderPlay = async (req, res) => {
     sessionId: id,
     pageNum,
   });
+};
+
+module.exports.renderContinue = async (req, res) => {
+  const user = req.user.username;
+  const lastSessionData = await fetchPlaySessionData(user);
+  const randGameIndex = Math.floor(
+    Math.random() * lastSessionData.sessionData.length
+  );
+  const image = await getPixelatedImage(
+    lastSessionData.sessionData[randGameIndex].imgLink
+  );
+  const sessionData = {
+    difficulty: lastSessionData.difficulty,
+    length: lastSessionData.length,
+    progress: lastSessionData.sessionData.length,
+    id: lastSessionData.sessionId,
+    image,
+  };
+
+  res.render("main/continue.ejs", { extraStyles: cardStyle, sessionData });
 };
 
 module.exports.sendPlayData = async (req, res, next) => {

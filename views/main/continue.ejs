@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate')%>
+<div class="card">
+  <div class="card-box">
+    <h1 class="page-title">Continue?</h1>
+    <div class="image-box">
+      <img
+        class="card-image"
+        id="pixelatedImage"
+        src="<%=sessionData.image%>"
+        alt="pixelated image"
+      />
+    </div>
+    <h5 class="card-title" id="continue-card-title">
+      Do you want to continue your last session?
+    </h5>
+    <div class="prev-session-info">
+      <div>Difficulty:<%=sessionData.difficulty%></div>
+      <div>Progress:<%=sessionData.progress%>/<%=sessionData.length%></div>
+    </div>
+    <div class="continue-card-buttons">
+      <button
+        onclick="window.location='/play-settings';"
+        class="card-button"
+        id="button-start-new"
+      >
+        Start New
+      </button>
+      <button
+        onclick="window.location='/play/<%=sessionData.id%>/<%=sessionData.progress%>';"
+        class="card-button"
+        id="button-continue"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</div>

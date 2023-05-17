@@ -1,6 +1,8 @@
 module.exports.ROUTES = {
   index: "/",
+  playOrContinue: "/play",
   play: "/play/:id/:pageNum",
+  continue: "/play/continue",
   login: "/login",
   logout: "/logout",
   register: "/register",
