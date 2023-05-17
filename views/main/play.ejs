@@ -76,12 +76,27 @@
         value="<%=imgLink%>"
       />
       <input type="hidden" id="pageNum" name="pageNum" value="<%=pageNum%>" />
+      <input type="hidden" id="elemId" name="elemId" value="<%=elemId%>" />
       <div class="guess-buttons">
-        <button onclick="prevGuess()" class="card-button" id="button-back">
+        <button
+          onclick="prevGuess()"
+          class="card-button"
+          id="button-back"
+          value="back"
+          name="action"
+        >
           Back
         </button>
         <div id="page-counter"><%- pageNum %> of <%=sessionLength%></div>
-        <button type="submit" class="card-button" id="button-next">Next</button>
+        <button
+          type="submit"
+          class="card-button"
+          id="button-next"
+          value="next"
+          name="action"
+        >
+          Next
+        </button>
       </div>
     </form>
   </div>

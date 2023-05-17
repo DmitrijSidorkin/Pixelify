@@ -21,20 +21,39 @@ module.exports.renderPlaySettings = (req, res) => {
 
 module.exports.renderPlay = async (req, res) => {
   const { id, pageNum } = req.params;
-  const image = await getPixelatedImage(req.gameData.background_image);
-  console.log(id);
   const playSessionData = await PlaySession.findOne({ sessionId: id });
-  console.log(playSessionData);
-  const filledPages = playSessionData.sessionData?.length + 1 || 1;
+  let pageGameData;
+
+  //checking if the play session page already has data
+  if (pageNum > playSessionData.sessionData.length) {
+    pageGameData = {
+      gameName: req.gameData.name,
+      imgLink: req.gameData.background_image,
+      userGuess: false,
+    };
+    await PlaySession.updateOne(
+      { sessionId: id },
+      { $push: { sessionData: pageGameData } }
+    );
+    const updatedSessionData = await PlaySession.findOne({ sessionId: id });
+    const sessionObjectId =
+      updatedSessionData.sessionData[parseInt(pageNum - 1)]._id.toString();
+    pageGameData._id = sessionObjectId;
+  } else {
+    pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
+  }
+
+  const image = await getPixelatedImage(pageGameData.imgLink);
+
   res.render("main/play.ejs", {
     image,
-    gameName: req.gameData.name,
-    imgLink: req.gameData.background_image,
+    gameName: pageGameData.gameName,
+    imgLink: pageGameData.imgLink,
+    elemId: pageGameData._id,
     extraStyles: cardStyle,
     sessionLength: playSessionData.length,
     sessionId: id,
     pageNum,
-    filledPages,
   });
 };
 
@@ -53,21 +72,21 @@ module.exports.sendPlayData = async (req, res, next) => {
 
 module.exports.updatePlayData = async (req, res, next) => {
   const sessionId = req.body.sessionId;
-  const nextPageNum = parseInt(req.body.pageNum) + 1;
-  const guessData = {
-    gameName: req.body.gameName,
-    imgLink: req.body.imageLink,
-    userGuess: req.body.guess === req.body.gameName,
-  };
+  const pageNum = parseInt(req.body.pageNum);
+  const userGuess = req.body.guess === req.body.gameName;
+  const elemId = req.body.elemId;
   await PlaySession.updateOne(
     { sessionId: sessionId },
-    { $push: { sessionData: guessData } }
+    { $set: { "sessionData.$[elem].userGuess": userGuess } },
+    { arrayFilters: [{ "elem._id": elemId }] }
   );
   const playSessionData = await fetchPlaySessionData(req.user.username);
-  if (playSessionData.length === parseInt(req.body.pageNum)) {
+  if (req.body.action === "back") {
+    res.redirect(`/play/${sessionId}/${pageNum - 1}`);
+  } else if (playSessionData.length === parseInt(req.body.pageNum)) {
     res.redirect("/results");
   }
-  res.redirect(`/play/${sessionId}/${nextPageNum}`);
+  res.redirect(`/play/${sessionId}/${pageNum + 1}`);
   next();
 };
 
