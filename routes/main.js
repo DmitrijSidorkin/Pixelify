@@ -17,6 +17,8 @@ router.route(ROUTES.error).get((req, res) => {
 
 router.route(ROUTES.playSettings).get(main.renderPlaySettings);
 router.route(ROUTES.play).get(fetchRandomGameData, main.renderPlay);
+router.route(ROUTES.playOrContinue).get(main.playOrContinue);
+router.route(ROUTES.continue).get(main.renderContinue);
 
 router.route(ROUTES.results).get(main.renderResults);
 router.route(ROUTES.detailedResults).get(main.renderDetailedResults);

@@ -2,15 +2,27 @@ const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
 const { getPixelatedImage } = require("../middleware");
+const { fetchPlaySessionData } = require("../middleware/helpers");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
-
-const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
+
+module.exports.playOrContinue = async (req, res) => {
+  const user = req.user.username;
+  const lastSessionData = await fetchPlaySessionData(user);
+  if (
+    lastSessionData.sessionData.length &&
+    lastSessionData.sessionData.length !== lastSessionData.length
+  ) {
+    res.redirect("/play/continue");
+  } else {
+    res.redirect("/play-settings");
+  }
+};
 
 module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
@@ -55,6 +67,31 @@ module.exports.renderPlay = async (req, res) => {
     sessionId: id,
     pageNum,
   });
+};
+
+const remapDifficulty = {
+  1: "Very Easy",
+  2: "Easy",
+  3: "Medium",
+  4: "Hard",
+  5: "Very Hard",
+};
+
+module.exports.renderContinue = async (req, res) => {
+  const user = req.user.username;
+  const lastSessionData = await fetchPlaySessionData(user);
+  const image = await getPixelatedImage(
+    lastSessionData.sessionData[lastSessionData.sessionData.length - 1].imgLink
+  );
+  const sessionData = {
+    difficulty: remapDifficulty[lastSessionData.difficulty],
+    length: lastSessionData.length,
+    progress: lastSessionData.sessionData.length,
+    id: lastSessionData.sessionId,
+    image,
+  };
+
+  res.render("main/continue.ejs", { extraStyles: cardStyle, sessionData });
 };
 
 module.exports.sendPlayData = async (req, res, next) => {
@@ -103,11 +140,9 @@ module.exports.renderResults = async (req, res, next) => {
 
 module.exports.renderDetailedResults = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   const playSessionData = JSON.stringify(
     await PlaySession.findOne({ sessionId: id })
   );
-  console.log(playSessionData);
   res.render("main/detailed-results", {
     extraStyles: detailedResultsStyle,
     playSessionData,
