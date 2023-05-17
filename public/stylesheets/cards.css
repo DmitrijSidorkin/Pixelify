@@ -59,13 +59,6 @@
 }
 .card-button:hover {
   background-color: rgba(2, 146, 2, 0.801);
-  width: 100%;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
   cursor: pointer;
 }
 .play-button {

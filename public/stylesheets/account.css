@@ -55,3 +55,53 @@ main {
 .account-first-row {
   min-height: 180px;
 }
+.change-profile-form {
+  padding: 10px;
+  padding-right: 50px;
+}
+.profile-form-input-div {
+  display: flex;
+  width: 100%;
+  padding: 5px;
+}
+.profile-form-input {
+  flex-grow: 1;
+  margin-left: 10px;
+  min-width: 30px;
+}
+#bio {
+  box-sizing: border-box;
+  font-size: 11px;
+}
+.form-section:first-of-type {
+  padding-bottom: 30px;
+}
+.form-section-label {
+  font-size: 20px;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+.form-input-label {
+  font-size: 16px;
+}
+.form-button {
+  float: right;
+  background-color: rgba(1, 172, 1, 0.801);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+}
+.form-button:hover {
+  background-color: rgba(2, 146, 2, 0.801);
+  cursor: pointer;
+}
+.img-description {
+  margin-left: 10px;
+  margin-top: -3px;
+  font-size: 9px;
+}

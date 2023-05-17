@@ -1,0 +1,94 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="main-box">
+  <%-include('../partials/account-sidebar')%>
+
+  <div class="info-box">
+    <form
+      action="/update-profile"
+      method="POST"
+      class="change-profile-form validated-form"
+      novalidate
+    >
+      <div class="form-section">
+        <div class="form-section-label">General</div>
+        <div class="profile-form-input-div">
+          <label for="display-name" class="form-input-label"
+            >Display Name</label
+          >
+          <input
+            type="text"
+            class="profile-form-input"
+            name="displayName"
+            id="display-name"
+            value="<%= profileData.displayName %>"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="profile-img" class="form-input-label"
+            >Profile Image</label
+          >
+          <input
+            type="file"
+            class="profile-form-input"
+            name="profileImg"
+            id="profile-img"
+            value="<%= profileData.profileImg %>"
+          />
+        </div>
+        <div class="img-description">
+          (The image resolution has to be 150x150)
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-section-label">Detailed Info</div>
+        <div class="profile-form-input-div">
+          <label for="real-name" class="form-input-label">Name</label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="realName"
+            id="real-name"
+            value="<%= profileData.realName %>"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="birth-date" class="form-input-label">Birtrh Date</label>
+          <input
+            type="date"
+            class="profile-form-input"
+            name="birthDate"
+            id="birth-date"
+            value="<%=profileData.birthDate %>"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="country" class="form-input-label">Country</label>
+          <%-include('../partials/country-selection')%>
+        </div>
+        <div class="profile-form-input-div">
+          <label for="location" class="form-input-label">Location</label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="location"
+            id="location"
+            placeholder="(City/State/Province/etc)"
+            value="<%= profileData.location %>"
+          />
+        </div>
+        <div class="profile-form-input-div">
+          <label for="bio" class="form-input-label">Bio</label>
+          <textarea class="profile-form-input" name="bio" id="bio" rows="4">
+<%=profileData.bio%></textarea
+          >
+        </div>
+      </div>
+      <!-- will add soc media link inputs here later -->
+
+      <button class="form-button">Update</button>
+    </form>
+  </div>
+</div>
+
+<script src="/javascripts/autofill-profile-form.js"></script>

@@ -7,8 +7,29 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  displayName: {
+    type: String,
+  },
+  profileImg: {},
+  realName: {
+    type: String,
+  },
+  birthDate: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+  mediaLinks: {},
 });
 
 UserSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
+module.exports = User;
