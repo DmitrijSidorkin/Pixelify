@@ -14,7 +14,6 @@ const {
 module.exports.playOrContinue = async (req, res) => {
   const user = req.user.username;
   const lastSessionData = await fetchPlaySessionData(user);
-  console.log(lastSessionData);
   if (
     lastSessionData.sessionData.length &&
     lastSessionData.sessionData.length !== lastSessionData.length
@@ -70,17 +69,22 @@ module.exports.renderPlay = async (req, res) => {
   });
 };
 
+const remapDifficulty = {
+  1: "Very Easy",
+  2: "Easy",
+  3: "Medium",
+  4: "Hard",
+  5: "Very Hard",
+};
+
 module.exports.renderContinue = async (req, res) => {
   const user = req.user.username;
   const lastSessionData = await fetchPlaySessionData(user);
-  const randGameIndex = Math.floor(
-    Math.random() * lastSessionData.sessionData.length
-  );
   const image = await getPixelatedImage(
-    lastSessionData.sessionData[randGameIndex].imgLink
+    lastSessionData.sessionData[lastSessionData.sessionData.length - 1].imgLink
   );
   const sessionData = {
-    difficulty: lastSessionData.difficulty,
+    difficulty: remapDifficulty[lastSessionData.difficulty],
     length: lastSessionData.length,
     progress: lastSessionData.sessionData.length,
     id: lastSessionData.sessionId,
@@ -136,11 +140,9 @@ module.exports.renderResults = async (req, res, next) => {
 
 module.exports.renderDetailedResults = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   const playSessionData = JSON.stringify(
     await PlaySession.findOne({ sessionId: id })
   );
-  console.log(playSessionData);
   res.render("main/detailed-results", {
     extraStyles: detailedResultsStyle,
     playSessionData,
