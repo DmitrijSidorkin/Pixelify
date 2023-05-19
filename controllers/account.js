@@ -12,7 +12,6 @@ module.exports.renderAccountMain = async (req, res) => {
 
 module.exports.renderChangeProfile = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
-  console.log(profileData);
   res.render("account/change-profile.ejs", {
     extraStyles: accountStyle,
     profileData,

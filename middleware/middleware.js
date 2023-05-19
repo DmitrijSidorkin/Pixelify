@@ -42,7 +42,6 @@ module.exports.fetchFromApi = async (maxPage, pageSize = 1) => {
         console.log(error.response.status);
       }
       if (retries === maxRetries) {
-        console.log(error.response);
         return error.response;
       }
     }

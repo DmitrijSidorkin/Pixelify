@@ -34,7 +34,6 @@ module.exports.renderPlaySettings = (req, res) => {
 module.exports.renderPlay = async (req, res) => {
   const { id, pageNum } = req.params;
   const playSessionData = await PlaySession.findOne({ sessionId: id });
-  console.log(playSessionData);
   let pageGameData;
 
   //checking if the play session page already has data
