@@ -150,13 +150,6 @@ module.exports.renderDetailedResults = async (req, res, next) => {
   next();
 };
 
-// module.exports.renderTest = async (req, res) => {
-//   const image = await getPixelatedImage(req.gameData.background_image);
-
-//   res.render("main/test.ejs", {
-//     image,
-//     gameName: req.gameData.name,
-//     imgLink: req.gameData.background_image,
-//     extraStyles: cardStyle,
-//   });
-// };
+module.exports.renderTest = async (req, res) => {
+  res.render("main/test.ejs");
+};

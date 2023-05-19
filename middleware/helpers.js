@@ -11,15 +11,18 @@ module.exports.fetchProfileData = async (currentUser) => {
   return await User.findById(currentUser);
 };
 
-module.exports.generateUniqueRandomArr = () => {
+module.exports.generateUniqueRandomArr = (maxNum, arrSize) => {
   let numArr = [];
-  while (numArr.length < 5) {
-    let randomNum = Math.floor(Math.random() * 168 + 1);
+  while (numArr.length < arrSize) {
+    let randomNum = Math.floor(Math.random() * maxNum);
     if (!numArr.includes(randomNum)) {
       numArr.push(randomNum);
     }
   }
   return numArr;
+};
+module.exports.generateRandomNum = (maxNum) => {
+  return Math.floor(Math.random() * maxNum + 1);
 };
 
 module.exports.calculatePixelationDegree = (minDimension, difficulty) => {
