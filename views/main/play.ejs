@@ -20,9 +20,9 @@
                 type="radio"
                 id="guess-a"
                 name="guess"
-                value="<%-gameName%>"
+                value="<%-gamesArray[0].gameName%>"
               />
-              <label for="guess-a"><%-gameName%></label>
+              <label for="guess-a"><%-gamesArray[0].gameName%></label>
             </div>
             <div>
               <input
@@ -30,9 +30,9 @@
                 type="radio"
                 id="guess-b"
                 name="guess"
-                value="b"
+                value="<%-gamesArray[1].gameName%>"
               />
-              <label for="guess-b">b</label>
+              <label for="guess-b"><%-gamesArray[1].gameName%></label>
             </div>
             <div>
               <input
@@ -40,9 +40,9 @@
                 type="radio"
                 id="guess-c"
                 name="guess"
-                value="c"
+                value="<%-gamesArray[2].gameName%>"
               />
-              <label for="guess-c">c</label>
+              <label for="guess-c"><%-gamesArray[2].gameName%></label>
             </div>
             <div>
               <input
@@ -50,9 +50,9 @@
                 type="radio"
                 id="guess-d"
                 name="guess"
-                value="d"
+                value="<%-gamesArray[3].gameName%>"
               />
-              <label for="guess-d">d</label>
+              <label for="guess-d"><%-gamesArray[3].gameName%></label>
             </div>
           </fieldset>
         </div>
@@ -62,12 +62,6 @@
         id="sessionId"
         name="sessionId"
         value="<%=sessionId%>"
-      />
-      <input
-        type="hidden"
-        id="gameName"
-        name="gameName"
-        value="<%=gameName%>"
       />
       <input
         type="hidden"

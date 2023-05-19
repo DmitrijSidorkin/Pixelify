@@ -3,10 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 const main = require("../controllers/main");
-const {
-  fetchRandomGameData,
-  fetchRandomGameDataArr,
-} = require("../middleware");
 const { ROUTES } = require("../controllers/routes");
 const { mainStyle, cardStyle } = require("../public/javascripts/extraStyles");
 
@@ -19,7 +15,7 @@ router.route(ROUTES.error).get((req, res) => {
 });
 
 router.route(ROUTES.playSettings).get(main.renderPlaySettings);
-router.route(ROUTES.play).get(fetchRandomGameData, main.renderPlay);
+router.route(ROUTES.play).get(main.renderPlay);
 router.route(ROUTES.playOrContinue).get(main.playOrContinue);
 router.route(ROUTES.continue).get(main.renderContinue);
 
@@ -28,6 +24,6 @@ router.route(ROUTES.detailedResults).get(main.renderDetailedResults);
 
 router.route(ROUTES.sendPlayData).post(main.sendPlayData);
 router.route(ROUTES.updatePlayData).post(main.updatePlayData);
-router.route(ROUTES.test).get(fetchRandomGameDataArr, main.renderTest);
+router.route(ROUTES.test).get(main.renderTest);
 
 module.exports = router;

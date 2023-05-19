@@ -66,7 +66,7 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   next();
 };
 
-module.exports.fetchRandomGameDataArr = async (req, res, next) => {
+module.exports.fetchRandomGameDataArr = async (req, res) => {
   const maxPage = 168;
   const pageSize = 40;
   const gameNumArr = generateUniqueRandomArr(40, 4);
@@ -83,7 +83,7 @@ module.exports.fetchRandomGameDataArr = async (req, res, next) => {
   if (response) {
     filteredGamesData.background_image =
       response.data.results[gameNumArr[0]].background_image;
-
+    filteredGamesData.name = response.data.results[gameNumArr[0]].name;
     gameNumArr.forEach((num) => {
       const game = {
         gameName: response.data.results[num].name,
@@ -91,10 +91,9 @@ module.exports.fetchRandomGameDataArr = async (req, res, next) => {
       };
       filteredGamesData.gamesArray.push(game);
     });
-    req.gameData = filteredGamesData;
+    filteredGamesData.gamesArray.sort((a, b) => a.gameId - b.gameId);
+    return filteredGamesData;
   }
-
-  next();
 };
 
 module.exports.getPixelatedImage = async (image, difficulty = 3) => {
