@@ -13,47 +13,19 @@
       <div id="guess-div">
         <h5 class="card-title">What form of game is this?</h5>
         <div class="field">
-          <fieldset>
+          <fieldset id="gameGuesses">
+            <%gamesArray.forEach((game, index) => {%>
             <div>
               <input
                 class="field-input"
                 type="radio"
-                id="guess-a"
+                id="guess-<%-index%>"
                 name="guess"
-                value="<%-gamesArray[0].gameName%>"
+                value="<%-game.gameName%>"
               />
-              <label for="guess-a"><%-gamesArray[0].gameName%></label>
+              <label for="guess-<%-index%>"><%-game.gameName%></label>
             </div>
-            <div>
-              <input
-                class="field-input"
-                type="radio"
-                id="guess-b"
-                name="guess"
-                value="<%-gamesArray[1].gameName%>"
-              />
-              <label for="guess-b"><%-gamesArray[1].gameName%></label>
-            </div>
-            <div>
-              <input
-                class="field-input"
-                type="radio"
-                id="guess-c"
-                name="guess"
-                value="<%-gamesArray[2].gameName%>"
-              />
-              <label for="guess-c"><%-gamesArray[2].gameName%></label>
-            </div>
-            <div>
-              <input
-                class="field-input"
-                type="radio"
-                id="guess-d"
-                name="guess"
-                value="<%-gamesArray[3].gameName%>"
-              />
-              <label for="guess-d"><%-gamesArray[3].gameName%></label>
-            </div>
+            <%})%>
           </fieldset>
         </div>
       </div>
@@ -70,6 +42,12 @@
         value="<%=imgLink%>"
       />
       <input type="hidden" id="pageNum" name="pageNum" value="<%=pageNum%>" />
+      <input
+        type="hidden"
+        id="gamesArray"
+        name="gamesArray"
+        value="<%=gamesArray%>"
+      />
       <input type="hidden" id="elemId" name="elemId" value="<%=elemId%>" />
       <div class="guess-buttons">
         <button

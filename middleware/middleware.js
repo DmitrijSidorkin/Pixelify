@@ -70,29 +70,26 @@ module.exports.fetchRandomGameDataArr = async (req, res) => {
   const pageSize = 40;
   const gameNumArr = generateUniqueRandomArr(40, 4);
 
-  let filteredGamesData = { gamesArray: [] };
+  const filteredGamesData = { gamesArray: [] };
 
   const response = await this.fetchFromApi(maxPage, pageSize);
 
-  if (response.status >= 400) {
-    req.session.error = response.status;
-    res.redirect(ROUTES.error);
-  }
-
-  if (response) {
+  if (response.status === 200) {
     filteredGamesData.background_image =
       response.data.results[gameNumArr[0]].background_image;
     filteredGamesData.name = response.data.results[gameNumArr[0]].name;
     gameNumArr.forEach((num) => {
-      const game = {
+      filteredGamesData.gamesArray.push({
         gameName: response.data.results[num].name,
         gameId: response.data.results[num].id,
-      };
-      filteredGamesData.gamesArray.push(game);
+      });
     });
     filteredGamesData.gamesArray.sort((a, b) => a.gameId - b.gameId);
     return filteredGamesData;
   }
+
+  req.session.error = response.status;
+  res.redirect(ROUTES.error);
 };
 
 module.exports.getPixelatedImage = async (image, difficulty = 3) => {
@@ -107,41 +104,3 @@ module.exports.getPixelatedImage = async (image, difficulty = 3) => {
     .getBase64Async(Jimp.MIME_JPEG);
   return pixelatedImage;
 };
-
-//leaving the old fetchRandomGameData middleware here for now just in case, will remove it after the comment reviews
-
-// module.exports.fetchRandomGameData = async (req, res, next) => {
-//   let response = null;
-//   let retries = 1;
-//   let success = false;
-//   const maxRetries = 5;
-//   const maxGameId = 6720;
-//   const pageSize = 1;
-
-//   while (retries <= maxRetries && !success) {
-//     try {
-//       const randGameId = generateRandomNum(maxGameId);
-//       response = await axios.get(
-//         `${apiUrl}games?key=${process.env.RAWG_KEY}&page=${randGameId}&page_size=${pageSize}&${apiParams}`
-//       );
-//       if (response.data.results[0].background_image) {
-//         success = true;
-//         break;
-//       }
-//     } catch (error) {
-//       if (process.env.IN_DEVELOPMENT === "true") {
-//         console.log(error.response.status);
-//       }
-//       if (retries === maxRetries) {
-//         req.session.error = error.response.status;
-//         res.redirect(ROUTES.error);
-//       }
-//     }
-//     retries++;
-//   }
-//   if (response) {
-//     req.gameData = response.data.results[0];
-
-//     next();
-//   }
-// };

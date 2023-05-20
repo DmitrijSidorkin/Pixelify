@@ -57,7 +57,6 @@ module.exports.renderPlay = async (req, res) => {
   } else {
     pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
   }
-
   const image = await getPixelatedImage(pageGameData.imgLink);
 
   res.render("main/play.ejs", {
