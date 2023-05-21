@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
-const { getPixelatedImage } = require("../middleware");
+const { getPixelatedImage, fetchRandomGameDataArr } = require("../middleware");
 const { fetchPlaySessionData } = require("../middleware/helpers");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
@@ -38,9 +38,12 @@ module.exports.renderPlay = async (req, res) => {
 
   //checking if the play session page already has data
   if (pageNum > playSessionData.sessionData.length) {
+    const gameData = await fetchRandomGameDataArr();
+
     pageGameData = {
-      gameName: req.gameData.name,
-      imgLink: req.gameData.background_image,
+      gamesArray: gameData.gamesArray,
+      gameName: gameData.name,
+      imgLink: gameData.background_image,
       userGuess: false,
     };
     await PlaySession.updateOne(
@@ -54,11 +57,11 @@ module.exports.renderPlay = async (req, res) => {
   } else {
     pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
   }
-
   const image = await getPixelatedImage(pageGameData.imgLink);
 
   res.render("main/play.ejs", {
     image,
+    gamesArray: pageGameData.gamesArray,
     gameName: pageGameData.gameName,
     imgLink: pageGameData.imgLink,
     elemId: pageGameData._id,
@@ -101,6 +104,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     sessionId: id,
     difficulty: req.body.difficulty,
     length: req.body.sessionLength,
+    sessionData: [],
   });
   await playSession.save();
   res.redirect(`/play/${id}/1`);
@@ -110,11 +114,18 @@ module.exports.sendPlayData = async (req, res, next) => {
 module.exports.updatePlayData = async (req, res, next) => {
   const sessionId = req.body.sessionId;
   const pageNum = parseInt(req.body.pageNum);
-  const userGuess = req.body.guess === req.body.gameName;
+  const playSession = await PlaySession.findOne({ sessionId: sessionId });
+  const userGuess =
+    req.body.guess === playSession.sessionData[pageNum - 1].gameName;
   const elemId = req.body.elemId;
   await PlaySession.updateOne(
     { sessionId: sessionId },
-    { $set: { "sessionData.$[elem].userGuess": userGuess } },
+    {
+      $set: {
+        "sessionData.$[elem].userGuess": userGuess,
+        "sessionData.$[elem].userGuessText": req.body.guess,
+      },
+    },
     { arrayFilters: [{ "elem._id": elemId }] }
   );
   const playSessionData = await fetchPlaySessionData(req.user.username);
@@ -150,13 +161,6 @@ module.exports.renderDetailedResults = async (req, res, next) => {
   next();
 };
 
-// module.exports.renderTest = async (req, res) => {
-//   const image = await getPixelatedImage(req.gameData.background_image);
-
-//   res.render("main/test.ejs", {
-//     image,
-//     gameName: req.gameData.name,
-//     imgLink: req.gameData.background_image,
-//     extraStyles: cardStyle,
-//   });
-// };
+module.exports.renderTest = async (req, res) => {
+  res.render("main/test.ejs");
+};

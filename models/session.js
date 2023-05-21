@@ -20,9 +20,11 @@ const PlaySessionSchema = new Schema({
   },
   sessionData: [
     {
-      gameName: { type: String },
+      gamesArray: { type: Array },
       imgLink: { type: String },
+      gameName: { type: String },
       userGuess: { type: Boolean },
+      userGuessText: { type: String },
     },
   ],
 });
