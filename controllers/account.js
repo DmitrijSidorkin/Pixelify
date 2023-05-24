@@ -28,12 +28,7 @@ module.exports.updateProfile = async (req, res) => {
   if (req.file) {
     const user = await User.findById(req.user._id);
     if (user.profileImg) {
-      cloudinary.uploader.destroy(
-        user.profileImg.filename,
-        function (error, result) {
-          console.log(result, error);
-        }
-      );
+      cloudinary.uploader.destroy(user.profileImg.filename);
     }
     await User.findByIdAndUpdate(req.user._id, {
       profileImg: { url: req.file.path, filename: req.file.filename },

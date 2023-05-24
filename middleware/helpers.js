@@ -38,13 +38,3 @@ module.exports.calculatePixelationDegree = (minDimension, difficulty) => {
   const targetPixels = 120 - 20 * difficulty;
   return Math.floor(minDimension / targetPixels + 1);
 };
-
-// module.exports.hasProfileImage = (profileData) => {
-//   console.log(profileData);
-//   if (profileData.profileImg) {
-//     return profileData;
-//   } else {
-//     profileData.profileImg = { url: defaultProfileImg };
-//   }
-//   return profileData;
-// };
