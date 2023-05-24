@@ -2,9 +2,14 @@
   <div class="profile-basic-info account-first-row">
     <img
       class="profile-img"
-      src="https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg"
+      src="<%-profileData.profileImg.url%>"
+      onerror="this.onerror=null; this.src='<%-defaultProfileImg%>'"
     />
+    <% if(!profileData.displayName) {%>
+    <div class="profile-name"><%-profileData.username %></div>
+    <% } else { %>
     <div class="profile-name"><%-profileData.displayName %></div>
+    <% } %>
     <div id="user-country"><%-profileData.country%></div>
   </div>
   <div class="sidebar-all-tabs">
