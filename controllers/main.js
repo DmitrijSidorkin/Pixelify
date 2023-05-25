@@ -34,6 +34,9 @@ module.exports.renderPlaySettings = (req, res) => {
 module.exports.renderPlay = async (req, res) => {
   const { id, pageNum } = req.params;
   const playSessionData = await PlaySession.findOne({ sessionId: id });
+  if (playSessionData.sessionEnded) {
+    res.redirect("/results");
+  }
   let pageGameData;
 
   //checking if the play session page already has data
@@ -105,6 +108,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     difficulty: req.body.difficulty,
     length: req.body.sessionLength,
     sessionData: [],
+    sessionEnd: false,
   });
   await playSession.save();
   res.redirect(`/play/${id}/1`);
@@ -113,29 +117,38 @@ module.exports.sendPlayData = async (req, res, next) => {
 
 module.exports.updatePlayData = async (req, res, next) => {
   const sessionId = req.body.sessionId;
-  const pageNum = parseInt(req.body.pageNum);
-  const playSession = await PlaySession.findOne({ sessionId: sessionId });
-  const userGuess =
-    req.body.guess === playSession.sessionData[pageNum - 1].gameName;
-  const elemId = req.body.elemId;
-  await PlaySession.updateOne(
-    { sessionId: sessionId },
-    {
-      $set: {
-        "sessionData.$[elem].userGuess": userGuess,
-        "sessionData.$[elem].userGuessText": req.body.guess,
-      },
-    },
-    { arrayFilters: [{ "elem._id": elemId }] }
-  );
-  const playSessionData = await fetchPlaySessionData(req.user.username);
-  if (req.body.action === "back") {
-    res.redirect(`/play/${sessionId}/${pageNum - 1}`);
-  } else if (playSessionData.length === parseInt(req.body.pageNum)) {
+  const thisSession = await PlaySession.findOne({ sessionId: sessionId });
+  if (thisSession.sessionEnded) {
     res.redirect("/results");
+  } else {
+    const pageNum = parseInt(req.body.pageNum);
+    const playSession = await PlaySession.findOne({ sessionId: sessionId });
+    const userGuess =
+      req.body.guess === playSession.sessionData[pageNum - 1].gameName;
+    const elemId = req.body.elemId;
+    await PlaySession.updateOne(
+      { sessionId: sessionId },
+      {
+        $set: {
+          "sessionData.$[elem].userGuess": userGuess,
+          "sessionData.$[elem].userGuessText": req.body.guess,
+        },
+      },
+      { arrayFilters: [{ "elem._id": elemId }] }
+    );
+    const playSessionData = await fetchPlaySessionData(req.user.username);
+    if (req.body.action === "back") {
+      res.redirect(`/play/${sessionId}/${pageNum - 1}`);
+    } else if (playSessionData.length === parseInt(req.body.pageNum)) {
+      await PlaySession.updateOne(
+        { sessionId: sessionId },
+        { $set: { sessionEnded: true } }
+      );
+      res.redirect("/results");
+    }
+    res.redirect(`/play/${sessionId}/${pageNum + 1}`);
+    next();
   }
-  res.redirect(`/play/${sessionId}/${pageNum + 1}`);
-  next();
 };
 
 module.exports.renderResults = async (req, res, next) => {
