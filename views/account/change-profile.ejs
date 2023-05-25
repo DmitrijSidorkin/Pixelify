@@ -61,7 +61,9 @@
             class="profile-form-input"
             name="birthDate"
             id="birth-date"
+            max="<%= maxDate %>"
             value="<%=profileData.birthDate %>"
+            onchange="checkDate(this)"
           />
         </div>
         <div class="profile-form-input-div">

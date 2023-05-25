@@ -40,3 +40,21 @@ module.exports.calculatePixelationDegree = (minDimension, difficulty) => {
   const targetPixels = 120 - 20 * difficulty;
   return Math.floor(minDimension / targetPixels + 1);
 };
+
+module.exports.getMaxDate = () => {
+  const currentDate = new Date();
+  let currentMonth = "";
+  if (currentDate.getMonth() < 9) {
+    currentMonth = "0" + (currentDate.getMonth() + 1);
+  } else {
+    currentMonth = currentDate.getMonth() + 1;
+  }
+  return (
+    currentDate.getFullYear() -
+    3 +
+    "-" +
+    currentMonth +
+    "-" +
+    currentDate.getDate()
+  );
+};
