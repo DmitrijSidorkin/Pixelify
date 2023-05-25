@@ -5,12 +5,9 @@
       src="<%-profileData.profileImg.thumbnail%>"
       onerror="this.onerror=null; this.src='<%-defaultProfileImg%>'"
     />
-    <% if(!profileData.displayName) {%>
-    <div class="profile-name"><%-profileData.username %></div>
-    <% } else { %>
-    <div class="profile-name"><%-profileData.displayName %></div>
-    <% } %>
-    <div id="user-country"><%-profileData.country%></div>
+    <div class="profile-name">
+      <%-profileData?.displayName || profileData?.username %>
+    </div>
   </div>
   <div class="sidebar-all-tabs">
     <div class="sidebar-tab">Change credentials</div>

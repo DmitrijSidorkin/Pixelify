@@ -1,11 +1,11 @@
 const { cloudinary } = require("../cloudinary");
 
 const { accountStyle } = require("../public/javascripts/extraStyles.js");
-const { fetchProfileData } = require("../middleware/helpers.js");
+const {
+  fetchProfileData,
+  defaultProfileImg,
+} = require("../middleware/helpers.js");
 const User = require("../models/user");
-
-const defaultProfileImg =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/w_400/v1680099865/pixelify/PixelatedVergil_rl9cpv.jpg";
 
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
