@@ -7,6 +7,7 @@ const {
   getMaxDate,
 } = require("../middleware/helpers.js");
 const User = require("../models/user");
+const { countries } = require("../public/javascripts/countries.js");
 
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
@@ -25,6 +26,7 @@ module.exports.renderChangeProfile = async (req, res) => {
     profileData,
     defaultProfileImg,
     maxDate,
+    countries,
   });
 };
 
@@ -32,13 +34,16 @@ module.exports.updateProfile = async (req, res) => {
   const profileData = {
     displayName: req.body.displayName,
     realName: req.body.realName,
-    country: req.body.country,
     location: req.body.location,
     bio: req.body.bio,
   };
+
   const maxDate = getMaxDate();
   if (req.body.birthDate <= maxDate) {
     profileData.birthDate = req.body.birthDate;
+  }
+  if (countries.some((country) => country.value === req.body.country)) {
+    profileData.country = req.body.country;
   }
 
   if (req.file) {

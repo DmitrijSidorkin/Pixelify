@@ -9,7 +9,6 @@ for (let i = 0; i < countrySelect.options.length; i++) {
 }
 
 const maxDate = document.getElementById("birth-date").max;
-console.log(maxDate);
 
 function checkDate(date) {
   if (date.value > maxDate) {

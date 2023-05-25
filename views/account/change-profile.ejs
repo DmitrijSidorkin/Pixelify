@@ -68,7 +68,13 @@
         </div>
         <div class="profile-form-input-div">
           <label for="country" class="form-input-label">Country</label>
-          <%-include('../partials/country-selection')%>
+          <select class="profile-form-input" id="country" name="country">
+            <%countries.forEach((country) => {%>
+            <option value="<%-country.value%>">
+              <%-country.displayValue%>
+            </option>
+            <%})%>
+          </select>
         </div>
         <div class="profile-form-input-div">
           <label for="location" class="form-input-label">Location</label>
