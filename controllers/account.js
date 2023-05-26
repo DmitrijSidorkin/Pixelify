@@ -24,23 +24,44 @@ module.exports.renderChangeProfile = async (req, res) => {
     defaultProfileImg,
   });
 };
+// module.exports.updateProfile = async (req, res) => {
+//   if (req.file) {
+//     const user = await User.findById(req.user._id);
+//     if (user.profileImg) {
+//       cloudinary.uploader.destroy(user.profileImg.filename);
+//     }
+//     await User.findByIdAndUpdate(req.user._id, {
+//       profileImg: { url: req.file.path, filename: req.file.filename },
+//     });
+//   }
+//   await User.findByIdAndUpdate(req.user._id, {
+//     displayName: req.body.displayName,
+//     realName: req.body.realName,
+//     birthDate: req.body.birthDate,
+//     country: req.body.country,
+//     location: req.body.location,
+//     bio: req.body.bio,
+//   });
+//   res.redirect("/account");
+// };
+
 module.exports.updateProfile = async (req, res) => {
-  if (req.file) {
-    const user = await User.findById(req.user._id);
-    if (user.profileImg) {
-      cloudinary.uploader.destroy(user.profileImg.filename);
-    }
-    await User.findByIdAndUpdate(req.user._id, {
-      profileImg: { url: req.file.path, filename: req.file.filename },
-    });
-  }
-  await User.findByIdAndUpdate(req.user._id, {
+  const bigLoad = {
     displayName: req.body.displayName,
     realName: req.body.realName,
     birthDate: req.body.birthDate,
     country: req.body.country,
     location: req.body.location,
     bio: req.body.bio,
-  });
+  };
+
+  if (req.file) {
+    const user = await User.findById(req.user._id);
+    if (user.profileImg) {
+      cloudinary.uploader.destroy(user.profileImg.filename);
+    }
+    bigLoad.profileImg = { url: req.file.path, filename: req.file.filename };
+  }
+  await User.findByIdAndUpdate(req.user._id, bigLoad);
   res.redirect("/account");
 };
