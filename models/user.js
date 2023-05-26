@@ -2,6 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  return this.url.replace("/upload", "/upload/w_300");
+});
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -10,7 +19,7 @@ const UserSchema = new Schema({
   displayName: {
     type: String,
   },
-  profileImg: {},
+  profileImg: ImageSchema,
   realName: {
     type: String,
   },

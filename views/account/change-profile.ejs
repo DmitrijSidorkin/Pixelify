@@ -9,6 +9,7 @@
       method="POST"
       class="change-profile-form validated-form"
       novalidate
+      enctype="multipart/form-data"
     >
       <div class="form-section">
         <div class="form-section-label">General</div>
@@ -33,11 +34,12 @@
             class="profile-form-input"
             name="profileImg"
             id="profile-img"
-            value="<%= profileData.profileImg %>"
+            onchange="return fileValidation()"
           />
         </div>
         <div class="img-description">
-          (The image resolution has to be 150x150)
+          (The image has to be in allowed format (.jpg, .jpeg, .png) and cannot
+          be larger than 500kb)
         </div>
       </div>
       <div class="form-section">
@@ -91,4 +93,5 @@
   </div>
 </div>
 
+<script src="/javascripts/file-validation.js"></script>
 <script src="/javascripts/autofill-profile-form.js"></script>
