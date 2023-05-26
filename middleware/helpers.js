@@ -43,18 +43,16 @@ module.exports.calculatePixelationDegree = (minDimension, difficulty) => {
 
 module.exports.getMaxDate = () => {
   const currentDate = new Date();
-  let currentMonth = "";
+
+  const year = currentDate.getFullYear() - 3;
+  const day = currentDate.getDate();
+  let month = "";
+
   if (currentDate.getMonth() < 9) {
-    currentMonth = "0" + (currentDate.getMonth() + 1);
+    month = "0" + (currentDate.getMonth() + 1);
   } else {
-    currentMonth = currentDate.getMonth() + 1;
+    month = currentDate.getMonth() + 1;
   }
-  return (
-    currentDate.getFullYear() -
-    3 +
-    "-" +
-    currentMonth +
-    "-" +
-    currentDate.getDate()
-  );
+
+  return `${year}-${month}-${day}`;
 };
