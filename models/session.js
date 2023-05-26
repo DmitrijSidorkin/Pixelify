@@ -27,6 +27,7 @@ const PlaySessionSchema = new Schema({
       userGuessText: { type: String },
     },
   ],
+  sessionEnded: { type: Boolean },
 });
 
 const PlaySession = mongoose.model("playSession", PlaySessionSchema);
