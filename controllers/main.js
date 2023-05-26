@@ -108,7 +108,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     difficulty: req.body.difficulty,
     length: req.body.sessionLength,
     sessionData: [],
-    sessionEnd: false,
+    sessionEnded: false,
   });
   await playSession.save();
   res.redirect(`/play/${id}/1`);
@@ -127,7 +127,7 @@ module.exports.updatePlayData = async (req, res, next) => {
       req.body.guess === playSession.sessionData[pageNum - 1].gameName;
     const elemId = req.body.elemId;
     await PlaySession.updateOne(
-      { sessionId: sessionId },
+      { sessionId },
       {
         $set: {
           "sessionData.$[elem].userGuess": userGuess,
@@ -141,7 +141,7 @@ module.exports.updatePlayData = async (req, res, next) => {
       res.redirect(`/play/${sessionId}/${pageNum - 1}`);
     } else if (playSessionData.length === parseInt(req.body.pageNum)) {
       await PlaySession.updateOne(
-        { sessionId: sessionId },
+        { sessionId },
         { $set: { sessionEnded: true } }
       );
       res.redirect("/results");
