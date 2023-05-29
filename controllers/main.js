@@ -147,7 +147,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     length: req.body.sessionLength,
     sessionData: [],
     sessionEnded: false,
-    sessionStart: Math.floor(Date.now() / 1000),
+    sessionStarted: Math.floor(Date.now() / 1000),
   });
   await playSession.save();
   res.redirect(`/play/${id}/1`);

@@ -122,7 +122,7 @@ module.exports.calculateScore = (session, sessionEnd) => {
   const guessAccuracy = correctAnswers / session.length;
   const guessesScore = baseGuessScore * difficultyModifier * correctAnswers;
   const bonusSeconds =
-    secondsPerGuess * session.length - (sessionEnd - session.sessionStart);
+    secondsPerGuess * session.length - (sessionEnd - session.sessionStarted);
 
   if (bonusSeconds < 0) {
     return guessesScore;

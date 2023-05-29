@@ -11,29 +11,35 @@ ImageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_300");
 });
 
+const personalHighScoresSchema = new Schema({
+  veryEasy: Number,
+  easy: Number,
+  medium: Number,
+  hard: Number,
+  veryHard: Number,
+  customSessionHighScores: {},
+});
+const personalHighScore = mongoose.model(
+  "PersonalHighScore",
+  personalHighScoresSchema
+);
+module.exports = personalHighScore;
+
 const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
   },
-  displayName: {
-    type: String,
-  },
+  displayName: String,
   profileImg: ImageSchema,
-  realName: {
-    type: String,
-  },
-  birthDate: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  location: {
-    type: String,
-  },
-  bio: {
-    type: String,
+  realName: String,
+  birthDate: String,
+  country: String,
+  location: String,
+  bio: String,
+  highScores: {
+    type: Schema.Types.ObjectId,
+    ref: "PersonalHighScore",
   },
   mediaLinks: {},
 });
