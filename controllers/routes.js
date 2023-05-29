@@ -10,7 +10,7 @@ module.exports.ROUTES = {
   changeProfile: "/account/change-profile",
   updateProfile: "/update-profile",
   error: "/error",
-  results: "/results",
+  results: "/results/:id",
   detailedResults: "/detailed-results/:id",
   playSettings: "/play-settings",
   sendPlayData: "/send-play-data",

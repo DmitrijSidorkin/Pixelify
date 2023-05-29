@@ -16,13 +16,9 @@
           <fieldset id="gameGuesses">
             <%gamesArray.forEach((game, index) => {%>
             <div>
-              <input
-                class="field-input"
-                type="radio"
-                id="guess-<%-index%>"
-                name="guess"
-                value="<%-game.gameName%>"
-              />
+              <input class="field-input" type="radio" id="guess-<%-index%>"
+              name="guess" value="<%-game.gameName%>" <% if(game.gameName ===
+              userGuessText) { %> checked <% } %>/>
               <label for="guess-<%-index%>"><%-game.gameName%></label>
             </div>
             <%})%>

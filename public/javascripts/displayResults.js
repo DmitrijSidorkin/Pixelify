@@ -32,7 +32,6 @@ document.getElementById(
   "results-details"
 ).innerText = `You guessed ${correctAnswers} out of ${userGuessData.length}`;
 document.getElementById("all-answers").innerHTML = resultsHtml;
-localStorage.removeItem("userGuessData");
 
 //redirecting to detailed results of the session
 function detailedResults() {
