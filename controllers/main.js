@@ -1,7 +1,11 @@
 const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
-const { getPixelatedImage, fetchRandomGameDataArr } = require("../middleware");
+const {
+  getPixelatedImage,
+  fetchRandomGameDataArr,
+  calculateScore,
+} = require("../middleware");
 const { fetchPlaySessionData } = require("../middleware/helpers");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
@@ -132,6 +136,61 @@ module.exports.renderDetailedResults = async (req, res, next) => {
     playSessionData,
   });
   next();
+};
+
+module.exports.sendPlayData = async (req, res, next) => {
+  const id = uuidv4();
+  const playSession = new PlaySession({
+    userId: req.user?.username || "guest",
+    sessionId: id,
+    difficulty: req.body.difficulty,
+    length: req.body.sessionLength,
+    sessionData: [],
+    sessionEnded: false,
+    sessionStart: Math.floor(Date.now() / 1000),
+  });
+  await playSession.save();
+  res.redirect(`/play/${id}/1`);
+  next();
+};
+
+module.exports.updatePlayData = async (req, res, next) => {
+  const sessionId = req.body.sessionId;
+  const thisSession = await PlaySession.findOne({ sessionId: sessionId });
+  if (thisSession.sessionEnded) {
+    res.redirect("/results");
+  } else {
+    const pageNum = parseInt(req.body.pageNum);
+    const playSession = await PlaySession.findOne({ sessionId: sessionId });
+    const userGuess =
+      req.body.guess === playSession.sessionData[pageNum - 1].gameName;
+    const elemId = req.body.elemId;
+    await PlaySession.updateOne(
+      { sessionId },
+      {
+        $set: {
+          "sessionData.$[elem].userGuess": userGuess,
+          "sessionData.$[elem].userGuessText": req.body.guess,
+        },
+      },
+      { arrayFilters: [{ "elem._id": elemId }] }
+    );
+    const playSessionData = await fetchPlaySessionData(req.user.username);
+    if (req.body.action === "back") {
+      res.redirect(`/play/${sessionId}/${pageNum - 1}`);
+    } else if (playSessionData.length === parseInt(req.body.pageNum)) {
+      const sessionEnd = Math.floor(Date.now() / 1000);
+      const score = calculateScore(playSessionData, sessionEnd);
+      console.log(score);
+      await PlaySession.updateOne(
+        { sessionId },
+        { $set: { sessionEnded: true, sessionScore: score } }
+      );
+      res.redirect("/results");
+    }
+    res.redirect(`/play/${sessionId}/${pageNum + 1}`);
+    next();
+  }
 };
 
 module.exports.sendPlayData = async (req, res, next) => {

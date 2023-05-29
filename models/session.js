@@ -28,6 +28,9 @@ const PlaySessionSchema = new Schema({
     },
   ],
   sessionEnded: { type: Boolean },
+  sessionScore: { type: Number },
+  sessionStart: { type: Number },
+  sessionEnd: { type: Number },
 });
 
 const PlaySession = mongoose.model("playSession", PlaySessionSchema);

@@ -104,3 +104,33 @@ module.exports.getPixelatedImage = async (image, difficulty = 3) => {
     .getBase64Async(Jimp.MIME_JPEG);
   return pixelatedImage;
 };
+
+module.exports.calculateScore = (session, sessionEnd) => {
+  const difficultyModifier = 0.5 + 0.5 * session.difficulty;
+  const secondsPerGuess = 15;
+  const baseGuessScore = 1000;
+  const baseTimeBonusPoints = 50;
+
+  let correctAnswers = 0;
+
+  session.sessionData.forEach((guess) => {
+    if (guess.userGuess === true) {
+      correctAnswers++;
+    }
+  });
+
+  const guessAccuracy = correctAnswers / session.length;
+  const guessesScore = baseGuessScore * difficultyModifier * correctAnswers;
+  const bonusSeconds =
+    secondsPerGuess * session.length - (sessionEnd - session.sessionStart);
+
+  if (bonusSeconds < 0) {
+    return guessesScore;
+  }
+
+  const timeBonusScore = Math.floor(
+    bonusSeconds * difficultyModifier * baseTimeBonusPoints * guessAccuracy
+  );
+
+  return guessesScore + timeBonusScore;
+};
