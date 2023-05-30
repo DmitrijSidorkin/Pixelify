@@ -12,11 +12,15 @@ ImageSchema.virtual("thumbnail").get(function () {
 });
 
 const personalHighScoresSchema = new Schema({
-  veryEasy: Number,
-  easy: Number,
-  medium: Number,
-  hard: Number,
-  veryHard: Number,
+  bestScores: [
+    {
+      veryEasy: Number,
+      easy: Number,
+      medium: Number,
+      hard: Number,
+      veryHard: Number,
+    },
+  ],
   customSessionHighScores: {},
 });
 const personalHighScore = mongoose.model(
@@ -37,10 +41,14 @@ const UserSchema = new Schema({
   country: String,
   location: String,
   bio: String,
-  highScores: {
-    type: Schema.Types.ObjectId,
-    ref: "PersonalHighScore",
+  bestScores: {
+    veryEasy: Number,
+    easy: Number,
+    medium: Number,
+    hard: Number,
+    veryHard: Number,
   },
+  customSessionHighScores: {},
   mediaLinks: {},
 });
 

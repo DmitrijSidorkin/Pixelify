@@ -107,7 +107,7 @@ module.exports.getPixelatedImage = async (image, difficulty = 3) => {
 
 module.exports.calculateScore = (session, sessionEnd) => {
   const difficultyModifier = 0.5 + 0.5 * session.difficulty;
-  const secondsPerGuess = 15;
+  const msPerGuess = 15000;
   const baseGuessScore = 1000;
   const baseTimeBonusPoints = 50;
 
@@ -121,15 +121,18 @@ module.exports.calculateScore = (session, sessionEnd) => {
 
   const guessAccuracy = correctAnswers / session.length;
   const guessesScore = baseGuessScore * difficultyModifier * correctAnswers;
-  const bonusSeconds =
-    secondsPerGuess * session.length - (sessionEnd - session.sessionStarted);
+  const bonusTime =
+    msPerGuess * session.length - (sessionEnd - session.sessionStartTime);
 
-  if (bonusSeconds < 0) {
+  if (bonusTime <= 0) {
     return guessesScore;
   }
 
   const timeBonusScore = Math.floor(
-    bonusSeconds * difficultyModifier * baseTimeBonusPoints * guessAccuracy
+    (bonusTime / 1000) *
+      difficultyModifier *
+      baseTimeBonusPoints *
+      guessAccuracy
   );
 
   return guessesScore + timeBonusScore;

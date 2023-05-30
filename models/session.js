@@ -27,7 +27,7 @@ const PlaySessionSchema = new Schema({
       userGuessText: String,
     },
   ],
-  sessionStarted: Number,
+  sessionStartTime: Number,
   sessionEnded: Boolean,
   sessionScore: Number,
   sessionEnd: Number,
