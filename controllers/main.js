@@ -151,50 +151,52 @@ module.exports.sendPlayData = async (req, res, next) => {
 module.exports.updatePlayData = async (req, res, next) => {
   const sessionId = req.body.sessionId;
   const thisSession = await PlaySession.findOne({ sessionId });
+
   if (thisSession.sessionEnded) {
     res.redirect(`/results/${sessionId}`);
-  } else {
-    const pageNum = parseInt(req.body.pageNum);
-    const userGuess =
-      req.body.guess === thisSession.sessionData[pageNum - 1].gameName;
-    const elemId = req.body.elemId;
+  }
+
+  const pageNum = parseInt(req.body.pageNum);
+  const userGuess =
+    req.body.guess === thisSession.sessionData[pageNum - 1].gameName;
+  await PlaySession.updateOne(
+    { sessionId },
+    {
+      $set: {
+        "sessionData.$[elem].userGuess": userGuess,
+        "sessionData.$[elem].userGuessText": req.body.guess,
+      },
+    },
+    { arrayFilters: [{ "elem._id": req.body.elemId }] }
+  );
+  const thisUpdatedSession = await PlaySession.findOne({ sessionId });
+
+  if (req.body.action === "back") {
+    res.redirect(`/play/${sessionId}/${pageNum - 1}`);
+  }
+
+  if (thisUpdatedSession.length === parseInt(req.body.pageNum)) {
+    const userId = thisUpdatedSession.userId;
+    const sessionDifficulty = remapDifficultyScoreKey[thisSession.difficulty];
+    const currentUser = await User.findOne({ _id: userId });
+    const score = calculateScore(thisUpdatedSession, Date.now());
     await PlaySession.updateOne(
       { sessionId },
-      {
-        $set: {
-          "sessionData.$[elem].userGuess": userGuess,
-          "sessionData.$[elem].userGuessText": req.body.guess,
-        },
-      },
-      { arrayFilters: [{ "elem._id": elemId }] }
+      { $set: { sessionEnded: true, sessionScore: score } }
     );
-    const thisUpdatedSession = await PlaySession.findOne({ sessionId });
-    if (req.body.action === "back") {
-      res.redirect(`/play/${sessionId}/${pageNum - 1}`);
-    } else if (thisUpdatedSession.length === parseInt(req.body.pageNum)) {
-      const userId = thisUpdatedSession.userId;
-      const sessionDifficulty = remapDifficultyScoreKey[thisSession.difficulty];
-      const currentUser = await User.findOne({ _id: userId });
-      const sessionEnd = Date.now();
-      const score = calculateScore(thisUpdatedSession, sessionEnd);
-      await PlaySession.updateOne(
-        { sessionId },
-        { $set: { sessionEnded: true, sessionScore: score } }
+    if (
+      !currentUser.bestScores[sessionDifficulty] ||
+      currentUser.bestScores[sessionDifficulty] < score
+    ) {
+      await User.updateOne(
+        { _id: userId },
+        { $set: { bestScores: [{ [sessionDifficulty]: score }] } }
       );
-      if (
-        !currentUser.bestScores[sessionDifficulty] ||
-        currentUser.bestScores[sessionDifficulty] < score
-      ) {
-        await User.updateOne(
-          { _id: userId },
-          { $set: { bestScores: [{ [sessionDifficulty]: score }] } }
-        );
-      }
-      res.redirect(`/results/${sessionId}`);
     }
-    res.redirect(`/play/${sessionId}/${pageNum + 1}`);
-    next();
+    res.redirect(`/results/${sessionId}`);
   }
+  res.redirect(`/play/${sessionId}/${pageNum + 1}`);
+  next();
 };
 
 module.exports.renderTest = async (req, res) => {
