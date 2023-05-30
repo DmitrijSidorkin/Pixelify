@@ -11,24 +11,6 @@ ImageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_300");
 });
 
-const personalHighScoresSchema = new Schema({
-  bestScores: [
-    {
-      veryEasy: Number,
-      easy: Number,
-      medium: Number,
-      hard: Number,
-      veryHard: Number,
-    },
-  ],
-  customSessionHighScores: {},
-});
-const personalHighScore = mongoose.model(
-  "PersonalHighScore",
-  personalHighScoresSchema
-);
-module.exports = personalHighScore;
-
 const UserSchema = new Schema({
   email: {
     type: String,
