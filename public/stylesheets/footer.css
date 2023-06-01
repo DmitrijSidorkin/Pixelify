@@ -11,3 +11,9 @@
   position: fixed;
   bottom: 0px;
 }
+
+@media (max-width: 1024px) {
+  .my-footer {
+    font-size: 12px;
+  }
+}

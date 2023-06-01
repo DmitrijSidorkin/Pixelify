@@ -3,12 +3,29 @@
 
   <div class="nav-links">
     <% if(!currentUser) {%>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+    <a class="nav-link-guest" href="/login">Login</a>
+    <a class="nav-link-guest" href="/register">Register</a>
     <% } else { %>
-    <a href="/play">Play</a>
-    <a href="/account">My Account</a>
-    <a href="/logout">Log out</a>
+    <a class="nav-link" href="/play">Play</a>
+    <a class="nav-link" href="/account">My Account</a>
+    <a class="nav-link" href="/logout">Log out</a>
+
+    <a class="icon-wrapper" href="/play"
+      ><img
+        class="nav-icon"
+        src="https://res.cloudinary.com/dyguovdbc/image/upload/v1685537009/pixelify_assets/play_icon_q7dom6.png"
+    /></a>
+    <a class="icon-wrapper" href="/account"
+      ><img
+        class="nav-icon"
+        src="https://res.cloudinary.com/dyguovdbc/image/upload/v1685537009/pixelify_assets/account_icon_acb5hc.png"
+    /></a>
+    <a class="icon-wrapper" href="/logout"
+      ><img
+        class="nav-icon"
+        src="https://res.cloudinary.com/dyguovdbc/image/upload/v1685537009/pixelify_assets/logout_icon_qssaio.png"
+    /></a>
+    <div class="icon-wrapper"></div>
     <% } %>
   </div>
 </nav>

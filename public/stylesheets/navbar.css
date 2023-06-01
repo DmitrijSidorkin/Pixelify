@@ -9,6 +9,9 @@
 #logo {
   color: rgba(0, 231, 0, 0.801);
   font-weight: 900;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 .nav-links {
@@ -17,15 +20,48 @@
   flex-direction: row-reverse;
 }
 
-.lr-nav a {
+.nav-link,
+.nav-link-guest {
   color: rgba(1, 172, 1, 0.801);
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
   display: block;
+  align-self: center;
 }
 
 .nav-links a:hover {
   background-color: #424242;
   color: rgba(1, 172, 1, 0.801);
+}
+
+.nav-icon {
+  display: none;
+  max-height: 30px;
+  align-self: center;
+  padding: 0 0;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+@media (max-width: 1024px) {
+  .nav-link {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-icon {
+    display: block;
+  }
+  .nav-link {
+    display: none;
+  }
+  .nav-link-guest {
+    font-size: 12px;
+  }
 }
