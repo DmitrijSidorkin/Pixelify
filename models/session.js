@@ -20,14 +20,17 @@ const PlaySessionSchema = new Schema({
   },
   sessionData: [
     {
-      gamesArray: { type: Array },
-      imgLink: { type: String },
-      gameName: { type: String },
-      userGuess: { type: Boolean },
-      userGuessText: { type: String },
+      gamesArray: Array,
+      imgLink: String,
+      gameName: String,
+      userGuess: Boolean,
+      userGuessText: String,
     },
   ],
-  sessionEnded: { type: Boolean },
+  sessionStartTime: Number,
+  sessionEnded: Boolean,
+  sessionScore: Number,
+  sessionEnd: Number,
 });
 
 const PlaySession = mongoose.model("playSession", PlaySessionSchema);

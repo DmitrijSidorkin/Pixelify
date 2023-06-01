@@ -16,25 +16,21 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  displayName: {
-    type: String,
-  },
+  displayName: String,
   profileImg: ImageSchema,
-  realName: {
-    type: String,
+  realName: String,
+  birthDate: String,
+  country: String,
+  location: String,
+  bio: String,
+  bestScores: {
+    veryEasy: Number,
+    easy: Number,
+    medium: Number,
+    hard: Number,
+    veryHard: Number,
   },
-  birthDate: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  location: {
-    type: String,
-  },
-  bio: {
-    type: String,
-  },
+  customSessionHighScores: {},
   mediaLinks: {},
 });
 
