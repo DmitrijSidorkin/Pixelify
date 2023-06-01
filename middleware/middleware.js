@@ -126,14 +126,14 @@ module.exports.calculateScore = (session, sessionEnd) => {
 
   if (bonusTime <= 0) {
     return guessesScore;
+  } else {
+    const timeBonusScore = Math.floor(
+      (bonusTime / 1000) *
+        difficultyModifier *
+        baseTimeBonusPoints *
+        guessAccuracy
+    );
+
+    return guessesScore + timeBonusScore;
   }
-
-  const timeBonusScore = Math.floor(
-    (bonusTime / 1000) *
-      difficultyModifier *
-      baseTimeBonusPoints *
-      guessAccuracy
-  );
-
-  return guessesScore + timeBonusScore;
 };

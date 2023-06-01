@@ -15,10 +15,8 @@ const {
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
-const {
-  remapDifficultyTexts,
-  remapDifficultyScoreKey,
-} = require("../middleware/remaps");
+const { remapDifficultyScoreKey } = require("../middleware/remaps");
+const { remapDifficultyTexts } = require("../public/helpers.js");
 
 module.exports.playOrContinue = async (req, res) => {
   if (req.user?._id) {
