@@ -35,18 +35,12 @@
   color: rgba(1, 172, 1, 0.801);
 }
 
-.icon-wrapper {
-  display: none;
-}
-
 .nav-icon {
-  max-height: 30px;
+  max-height: 25px;
   align-self: center;
-  padding: 0 0;
-}
-
-.icon-wrapper {
-  flex-grow: 1;
+  padding: 0;
+  display: none;
+  margin: auto;
 }
 
 @media (max-width: 1024px) {
@@ -63,10 +57,19 @@
   .nav-icon {
     display: block;
   }
-  .nav-link {
+  .nav-text {
     display: none;
   }
   .nav-link-guest {
     font-size: 12px;
+  }
+  .nav-link {
+    flex-grow: 1;
+  }
+  #logo {
+    margin-right: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    margin: auto;
   }
 }

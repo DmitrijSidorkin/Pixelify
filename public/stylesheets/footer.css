@@ -17,3 +17,8 @@
     font-size: 12px;
   }
 }
+@media (max-width: 576px) {
+  .my-footer {
+    padding: 10px 0px;
+  }
+}

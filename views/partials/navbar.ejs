@@ -6,20 +6,19 @@
     <a class="nav-link-guest" href="/login">Login</a>
     <a class="nav-link-guest" href="/register">Register</a>
     <% } else { %>
-    <a class="nav-link" href="/play">Play</a>
-    <a class="nav-link" href="/account">My Account</a>
-    <a class="nav-link" href="/logout">Log out</a>
+    <a class="nav-link" href="/play"
+      ><img class="nav-icon" src="../icons/play_icon.png" alt="play" />
+      <p class="nav-text">Play</p></a
+    >
+    <a class="nav-link" href="/account"
+      ><img class="nav-icon" src="../icons/account_icon.png" alt="account" />
+      <p class="nav-text">My Account</p></a
+    >
+    <a class="nav-link" href="/logout"
+      ><img class="nav-icon" src="../icons/logout_icon.png" alt="logout" />
+      <p class="nav-text">Log out</p></a
+    >
 
-    <a class="icon-wrapper" href="/play"
-      ><img class="nav-icon" src="../icons/play_icon.png" alt="play"
-    /></a>
-    <a class="icon-wrapper" href="/account"
-      ><img class="nav-icon" src="../icons/account_icon.png" alt="account"
-    /></a>
-    <a class="icon-wrapper" href="/logout"
-      ><img class="nav-icon" src="../icons/logout_icon.png" alt="logout"
-    /></a>
-    <div class="icon-wrapper"></div>
     <% } %>
   </div>
 </nav>
