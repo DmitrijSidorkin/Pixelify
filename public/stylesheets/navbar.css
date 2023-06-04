@@ -27,7 +27,6 @@
   text-decoration: none;
   font-size: 17px;
   display: block;
-  align-self: center;
 }
 
 .nav-links a:hover {
@@ -37,7 +36,6 @@
 
 .nav-icon {
   max-height: 25px;
-  align-self: center;
   padding: 0;
   display: none;
   margin: auto;
