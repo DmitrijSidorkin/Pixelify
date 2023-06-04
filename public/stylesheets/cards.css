@@ -42,6 +42,10 @@
   padding: 3px;
   width: 95%;
 }
+.field-input-div {
+  display: inline;
+  margin-right: 10px;
+}
 .card-shadow {
   height: 70vh;
 }
@@ -127,4 +131,83 @@ fieldset {
 }
 #continue-card-title {
   font-size: 25px;
+}
+
+@media (max-width: 1024px) {
+  .card-title {
+    font-size: 25px;
+  }
+  #gameGuesses > div {
+    margin-bottom: 8px;
+  }
+  .setting-fieldset > label {
+    margin-right: 15px;
+  }
+  #gameGuesses {
+    font-size: 13px;
+  }
+  #page-counter {
+    font-size: 20px;
+  }
+  .page-title {
+    font-size: 30px;
+  }
+  .card-button {
+    font-size: 19px;
+  }
+  .prev-session-info {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 19px;
+    padding: 5px;
+  }
+  .setting {
+    padding: 6px 15px;
+  }
+  .setting-fieldset {
+    font-size: 11px;
+  }
+  .setting-title {
+    font-size: 14px;
+  }
+  #page-counter {
+    font-size: 13px;
+    padding: 0px 10px;
+  }
+  .card-title {
+    font-size: 18px;
+  }
+  .card-button {
+    font-size: 15px;
+  }
+  #gameGuesses {
+    font-size: 12px;
+  }
+  .field-input-div {
+    padding: 40px 0px;
+  }
+  .prev-session-info {
+    margin: 0;
+    display: block;
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+  .session-info-div {
+    padding: 4px 0px;
+  }
+  #continue-card-title {
+    margin: 10px 15px;
+    font-size: 14px;
+  }
+  .continue-card-buttons {
+    gap: 5px;
+  }
+  #button-continue,
+  #button-start-new {
+    font-size: 12px;
+  }
 }
