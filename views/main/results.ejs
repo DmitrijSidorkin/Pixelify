@@ -5,6 +5,18 @@
   name="results-data"
   value="<%=playSessionData%>"
 />
+<input
+  id="highscores-data"
+  type="hidden"
+  name="highscores-data"
+  value="<%=highscoresData%>"
+/>
+<input
+  id="default-profile-img"
+  type="hidden"
+  name="default-profile-img"
+  value="<%=defaultProfileImg%>"
+/>
 <div class="results-box">
   <img src="" alt="results" id="results-image" />
   <div class="results-text">
@@ -14,4 +26,9 @@
   </div>
 </div>
 <button onclick="detailedResults()">Detailed Results</button>
+
+<div class="highscores-box">
+  <div class="highscores-title"><%-highscoreText%></div>
+  <div id="highscores"></div>
+</div>
 <script src="/javascripts/displayResults.js"></script>

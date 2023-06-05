@@ -7,7 +7,7 @@ const {
   fetchRandomGameDataArr,
   calculateScore,
 } = require("../middleware");
-const { fetchPlaySessionData } = require("../middleware/helpers");
+const { fetchPlaySessionData } = require("../middleware/helpers.js");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 const {
@@ -15,10 +15,7 @@ const {
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
-const {
-  remapDifficultyScoreKey,
-  lengthSettingsOptions,
-} = require("../middleware/remaps");
+const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 
 module.exports.playOrContinue = async (req, res) => {
@@ -113,12 +110,24 @@ module.exports.renderPlay = async (req, res) => {
 
 module.exports.renderResults = async (req, res, next) => {
   const { id } = req.params;
-  const playSessionData = JSON.stringify(
-    await PlaySession.findOne({ sessionId: id })
+  let playSessionData = await PlaySession.findOne({ sessionId: id });
+  const highscoreText = `${
+    remapDifficultyTexts[playSessionData.difficulty] + playSessionData.length
+  }`;
+  const difficultyFilter = `bestScores.${playSessionData.difficulty}`;
+  const highscoresData = JSON.stringify(
+    await User.find()
+      .sort({ [difficultyFilter]: -1 })
+      .limit(10)
   );
+
+  playSessionData = JSON.stringify(playSessionData);
   res.render("main/results", {
     extraStyles: resultsStyle,
     playSessionData,
+    highscoresData,
+    highscoreText,
+    defaultProfileImg: playSettingsImage,
   });
   next();
 };
@@ -180,7 +189,6 @@ module.exports.updatePlayData = async (req, res, next) => {
 
   if (thisUpdatedSession.length === parseInt(req.body.pageNum)) {
     const userId = thisUpdatedSession.userId;
-    const sessionDifficulty = remapDifficultyScoreKey[thisSession.difficulty];
     const currentUser = await User.findOne({ _id: userId });
     const score = calculateScore(thisUpdatedSession, Date.now());
     await PlaySession.updateOne(
@@ -188,12 +196,12 @@ module.exports.updatePlayData = async (req, res, next) => {
       { $set: { sessionEnded: true, sessionScore: score } }
     );
     if (
-      currentUser.bestScores[sessionDifficulty] === undefined ||
-      currentUser.bestScores[sessionDifficulty] < score
+      currentUser.bestScores[thisSession.difficulty] === undefined ||
+      currentUser.bestScores[thisSession.difficulty] < score
     ) {
       await User.updateOne(
         { _id: userId },
-        { $set: { [`bestScores.${sessionDifficulty}`]: score } }
+        { $set: { [`bestScores.${thisSession.difficulty}`]: score } }
       );
     }
     res.redirect(`/results/${sessionId}`);
