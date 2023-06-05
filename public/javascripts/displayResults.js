@@ -37,3 +37,22 @@ document.getElementById("all-answers").innerHTML = resultsHtml;
 function detailedResults() {
   window.location = `/detailed-results/${userGuessData.sessionId}`;
 }
+
+const highscoresData = JSON.parse(
+  document.getElementById("highscores-data").value
+);
+const defaultProfileImg = document.getElementById("default-profile-img").value;
+let highscoreHtml = "";
+
+highscoresData.forEach((highscore, index) => {
+  highscoreHtml += `<div class="score">
+  <h4 class="player-place">${index + 1}</h4>
+  <img class="score-pfp" src="${
+    highscore.profileImg?.url || defaultProfileImg
+  }">
+  <p class="player-name">${highscore?.displayName || highscore.username}</p>
+  <p class="player-score">${highscore.bestScores[userGuessData.difficulty]}</p>
+</div>`;
+});
+
+document.getElementById("highscores").innerHTML = highscoreHtml;

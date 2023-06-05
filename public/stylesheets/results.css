@@ -18,3 +18,22 @@
   max-width: 70%;
   margin: auto;
 }
+.highscores-box {
+  display: flex;
+  flex-direction: column;
+  border: solid black 2px;
+}
+.score {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: solid black 2px;
+  align-items: center;
+}
+.score-pfp {
+  width: 70px;
+  height: 70px;
+}
+.player-score {
+  margin-left: auto;
+}
