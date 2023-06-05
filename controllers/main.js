@@ -188,12 +188,12 @@ module.exports.updatePlayData = async (req, res, next) => {
       { $set: { sessionEnded: true, sessionScore: score } }
     );
     if (
-      !currentUser.bestScores[sessionDifficulty] ||
+      currentUser.bestScores[sessionDifficulty] === undefined ||
       currentUser.bestScores[sessionDifficulty] < score
     ) {
       await User.updateOne(
         { _id: userId },
-        { $set: { bestScores: [{ [sessionDifficulty]: score }] } }
+        { $set: { [`bestScores.${sessionDifficulty}`]: score } }
       );
     }
     res.redirect(`/results/${sessionId}`);
