@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 const userGuessData = JSON.parse(document.getElementById("results-data").value);
-let resultsHtml = "<ul>";
+let resultsHtml = "<ol>";
 let correctAnswers = 0;
 
 //going through all guesses; counting correct guesses
@@ -12,7 +12,7 @@ for (let i = 0; i < userGuessData.length; i++) {
     correctAnswers++;
   }
 }
-resultsHtml += "</ul>";
+resultsHtml += "</ol>";
 
 let resultsTitle = document.getElementById("results-title");
 let resultsImage = document.getElementById("results-image");
@@ -54,5 +54,18 @@ highscoresData.forEach((highscore, index) => {
   <p class="player-score">${highscore.bestScores[userGuessData.difficulty]}</p>
 </div>`;
 });
+
+function switchTab(tab) {
+  const resultsTab = document.getElementById("results-box");
+  const highscoresTab = document.getElementById("highscores-box");
+  if (tab.id === "current-results-tab") {
+    resultsTab.style.display = "flex";
+    highscoresTab.style.display = "none";
+  }
+  if (tab.id === "highscores-tab") {
+    highscoresTab.style.display = "block";
+    resultsTab.style.display = "none";
+  }
+}
 
 document.getElementById("highscores").innerHTML = highscoreHtml;
