@@ -17,18 +17,33 @@
   name="default-profile-img"
   value="<%=defaultProfileImg%>"
 />
-<div class="results-box">
-  <img src="" alt="results" id="results-image" />
-  <div class="results-text">
-    <h1 id="results-title"></h1>
-    <div id="results-details"></div>
-    <div id="all-answers"></div>
-  </div>
-</div>
-<button onclick="detailedResults()">Detailed Results</button>
+<div class="card">
+  <div class="card-box">
+    <div class="results-tabs">
+      <a class="tab" id="current-results-tab" onclick="switchTab(this)">
+        Results
+      </a>
+      <a class="tab" id="highscores-tab" onclick="switchTab(this)">
+        Highscores
+      </a>
+    </div>
 
-<div class="highscores-box">
-  <div class="highscores-title"><%-highscoreText%></div>
-  <div id="highscores"></div>
+    <div id="results-box">
+      <img src="" alt="results" id="results-image" />
+      <div class="results-text">
+        <h1 id="results-title"></h1>
+        <div id="results-details"></div>
+        <div id="all-answers"></div>
+      </div>
+      <button class="card-button" onclick="detailedResults()">
+        Detailed Results
+      </button>
+    </div>
+
+    <div id="highscores-box">
+      <div class="highscores-title"><%-highscoreText%></div>
+      <div id="highscores"></div>
+    </div>
+  </div>
 </div>
 <script src="/javascripts/displayResults.js"></script>
