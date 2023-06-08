@@ -81,11 +81,6 @@
   padding: 0px 20px;
   margin: auto;
 }
-.field-input {
-  width: auto;
-  justify-self: baseline;
-  padding: 2px, 10px;
-}
 
 .settings-select {
   font-size: 13px;
