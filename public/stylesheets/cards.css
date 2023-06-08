@@ -40,11 +40,11 @@
 .field-input {
   border-radius: 5px;
   padding: 3px;
-  width: 95%;
 }
 .field-input-div {
   display: inline;
   margin-right: 10px;
+  white-space: nowrap;
 }
 .card-shadow {
   height: 70vh;
@@ -56,7 +56,7 @@
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
-  margin-top: 10px;
+  margin-top: 3px;
   text-align: center;
   text-decoration: none;
   font-size: 22px;
@@ -85,11 +85,6 @@
   padding: 0px 20px;
   margin: auto;
 }
-.field-input {
-  width: auto;
-  justify-self: baseline;
-  padding: 2px, 10px;
-}
 
 .settings-select {
   font-size: 13px;
@@ -97,6 +92,7 @@
 .setting {
   padding: 10px 20px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .setting-title {
   font-size: 16px;
@@ -187,9 +183,7 @@ fieldset {
   #gameGuesses {
     font-size: 12px;
   }
-  .field-input-div {
-    padding: 40px 0px;
-  }
+
   .prev-session-info {
     margin: 0;
     display: block;
