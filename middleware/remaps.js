@@ -5,3 +5,4 @@ module.exports.remapDifficultyScoreKey = {
   4: "hard",
   5: "veryHard",
 };
+module.exports.lengthSettingsOptions = [3, 5, 7, 9, 11];

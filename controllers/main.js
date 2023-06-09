@@ -15,7 +15,10 @@ const {
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
-const { remapDifficultyScoreKey } = require("../middleware/remaps");
+const {
+  remapDifficultyScoreKey,
+  lengthSettingsOptions,
+} = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 
 module.exports.playOrContinue = async (req, res) => {
@@ -37,6 +40,8 @@ module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
     extraStyles: cardStyle,
     previewImage: playSettingsImage,
+    remapDifficultyTexts,
+    lengthSettingsOptions,
   });
 };
 
