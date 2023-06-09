@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 const userGuessData = JSON.parse(document.getElementById("results-data").value);
-let resultsHtml = "<ol>";
+let resultsHtml = '<ol class="guesses-list">';
 let correctAnswers = 0;
 
 //going through all guesses; counting correct guesses

@@ -74,6 +74,7 @@ body {
 #results-title {
   color: white;
   font-size: 40px;
+  text-align: center;
 }
 #results-details {
   text-align: center;
@@ -118,4 +119,31 @@ body {
 .player-name {
   font-size: 22px;
   margin-left: 15px;
+}
+
+@media (max-width: 1024px) {
+  #results-title {
+    font-size: 30px;
+  }
+  .guesses-list,
+  #results-details {
+    font-size: 14px;
+  }
+  .tab,
+  .card-button {
+    font-size: 20px;
+  }
+}
+@media (max-width: 576px) {
+  #results-title {
+    font-size: 20px;
+  }
+  .guesses-list,
+  #results-details {
+    font-size: 12px;
+  }
+  .tab,
+  .card-button {
+    font-size: 16px;
+  }
 }
