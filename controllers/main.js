@@ -36,7 +36,6 @@ module.exports.playOrContinue = async (req, res) => {
 module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
     extraStyles: cardStyle,
-    previewImage: playSettingsImage,
     remapDifficultyTexts,
     lengthSettingsOptions,
   });
