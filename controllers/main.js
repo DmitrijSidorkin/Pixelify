@@ -7,9 +7,7 @@ const {
   fetchRandomGameDataArr,
   calculateScore,
 } = require("../middleware");
-const { fetchPlaySessionData } = require("../middleware/helpers.js");
-const playSettingsImage =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
+const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
@@ -126,7 +124,6 @@ module.exports.renderResults = async (req, res, next) => {
     playSessionData,
     highscoresData,
     highscoreText,
-    defaultProfileImg: playSettingsImage,
   });
   next();
 };
