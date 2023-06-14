@@ -28,7 +28,7 @@ const UserSchema = new Schema({
     2: Number,
     3: Number,
     4: Number,
-    8: Number,
+    5: Number,
   },
   customSessionHighScores: {},
   mediaLinks: {},
