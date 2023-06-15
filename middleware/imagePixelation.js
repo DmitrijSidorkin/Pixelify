@@ -1,14 +1,19 @@
-/* eslint-disable no-unused-vars */
+const axios = require("axios");
+const { createCanvas, loadImage } = require("canvas");
 
-//will later be used for image preview
-let chosenDifficulty;
-const img = document.getElementById("pixelatedImage");
-const imgCopy = img.cloneNode(true);
+async function pixelateImageFromURL(imageURL, chosenDifficulty = 2) {
+  const response = await axios.get(imageURL, { responseType: "arraybuffer" });
+  const originalImage = Buffer.from(response.data, "binary");
 
-function pixelateImage(imageElement, pixelSize) {
-  // Create a canvas element
-  var canvas = document.createElement("canvas");
-  var context = canvas.getContext("2d");
+  const imageElement = await loadImage(originalImage);
+  const minImageDimmension =
+    imageElement.width < imageElement.height
+      ? imageElement.width
+      : imageElement.height;
+  const pixelSize =
+    Math.floor(minImageDimmension / (60 / chosenDifficulty)) + 1;
+  const canvas = createCanvas(imageElement.width, imageElement.height);
+  const context = canvas.getContext("2d");
 
   // Set canvas size to match the pixelated dimensions
   canvas.width = imageElement.width - (imageElement.width % pixelSize);
@@ -18,20 +23,20 @@ function pixelateImage(imageElement, pixelSize) {
   context.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
 
   // Get the pixelated image data
-  var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-  var pixels = imageData.data;
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  const pixels = imageData.data;
 
   // Apply pixelation
-  for (var y = 0; y < canvas.height; y += pixelSize) {
-    for (var x = 0; x < canvas.width; x += pixelSize) {
-      var red = 0;
-      var green = 0;
-      var blue = 0;
+  for (let y = 0; y < canvas.height; y += pixelSize) {
+    for (let x = 0; x < canvas.width; x += pixelSize) {
+      let red = 0;
+      let green = 0;
+      let blue = 0;
 
       // Calculate average color within each pixel
       for (let pixelY = y; pixelY < y + pixelSize; pixelY++) {
         for (let pixelX = x; pixelX < x + pixelSize; pixelX++) {
-          let pixelIndex = (pixelX + pixelY * canvas.width) * 4;
+          const pixelIndex = (pixelX + pixelY * canvas.width) * 4;
 
           // Check if pixel coordinates exceed image boundaries
           if (pixelIndex >= 0 && pixelIndex < pixels.length) {
@@ -50,7 +55,7 @@ function pixelateImage(imageElement, pixelSize) {
       // Set pixel colors
       for (let pixelY = y; pixelY < y + pixelSize; pixelY++) {
         for (let pixelX = x; pixelX < x + pixelSize; pixelX++) {
-          let pixelIndex = (pixelX + pixelY * canvas.width) * 4;
+          const pixelIndex = (pixelX + pixelY * canvas.width) * 4;
 
           // Check if pixel coordinates exceed image boundaries
           if (pixelIndex >= 0 && pixelIndex < pixels.length) {
@@ -73,11 +78,4 @@ function pixelateImage(imageElement, pixelSize) {
   return pixelatedImageURL;
 }
 
-function chooseDifficulty(radio) {
-  chosenDifficulty = parseInt(radio.value);
-  const minImageDimmension = img.width < img.height ? img.width : img.height;
-  const pixelSize =
-    Math.floor(minImageDimmension / (60 / chosenDifficulty)) + 1;
-  const newImg = pixelateImage(imgCopy, pixelSize);
-  document.getElementById("pixelatedImage").src = newImg;
-}
+module.exports.pixelateImageFromURL = pixelateImageFromURL;

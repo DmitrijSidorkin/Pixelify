@@ -4,8 +4,8 @@
     <div class="image-box">
       <img
         class="card-image"
-        id="pixelatedImage"
-        src="<%=image%>"
+        id="gameImage"
+        src="<%-image%>"
         alt="pixelated image"
       />
     </div>
@@ -31,6 +31,7 @@
         name="sessionId"
         value="<%=sessionId%>"
       />
+      <input type="hidden" id="imgLink" name="imgLink" value="<%=imgLink%>" />
       <input
         type="hidden"
         id="imageLink"
