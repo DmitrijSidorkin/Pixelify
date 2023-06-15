@@ -13,6 +13,8 @@ const {
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
+const playSettingsImage =
+  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 
@@ -124,6 +126,7 @@ module.exports.renderResults = async (req, res, next) => {
     playSessionData,
     highscoresData,
     highscoreText,
+    defaultProfileImg: playSettingsImage,
   });
   next();
 };
