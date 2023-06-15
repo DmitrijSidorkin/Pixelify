@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 const userGuessData = JSON.parse(document.getElementById("results-data").value);
-let resultsHtml = "<ul>";
+let resultsHtml = '<ol class="guesses-list">';
 let correctAnswers = 0;
 
 //going through all guesses; counting correct guesses
@@ -12,7 +12,7 @@ for (let i = 0; i < userGuessData.length; i++) {
     correctAnswers++;
   }
 }
-resultsHtml += "</ul>";
+resultsHtml += "</ol>";
 
 let resultsTitle = document.getElementById("results-title");
 let resultsImage = document.getElementById("results-image");
@@ -37,3 +37,35 @@ document.getElementById("all-answers").innerHTML = resultsHtml;
 function detailedResults() {
   window.location = `/detailed-results/${userGuessData.sessionId}`;
 }
+
+const highscoresData = JSON.parse(
+  document.getElementById("highscores-data").value
+);
+const defaultProfileImg = document.getElementById("default-profile-img").value;
+let highscoreHtml = "";
+
+highscoresData.forEach((highscore, index) => {
+  highscoreHtml += `<div class="score">
+  <h4 class="player-place">${index + 1}</h4>
+  <img class="score-pfp" src="${
+    highscore.profileImg?.url || defaultProfileImg
+  }">
+  <p class="player-name">${highscore?.displayName || highscore.username}</p>
+  <p class="player-score">${highscore.bestScores[userGuessData.difficulty]}</p>
+</div>`;
+});
+
+function switchTab(tab) {
+  const resultsTab = document.getElementById("results-box");
+  const highscoresTab = document.getElementById("highscores-box");
+  if (tab.id === "current-results-tab") {
+    resultsTab.style.display = "flex";
+    highscoresTab.style.display = "none";
+  }
+  if (tab.id === "highscores-tab") {
+    highscoresTab.style.display = "block";
+    resultsTab.style.display = "none";
+  }
+}
+
+document.getElementById("highscores").innerHTML = highscoreHtml;
