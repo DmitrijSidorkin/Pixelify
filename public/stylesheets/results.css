@@ -146,4 +146,10 @@ body {
   .card-button {
     font-size: 16px;
   }
+  #results-box {
+    padding-top: 40px;
+  }
+  .guesses-list {
+    padding-left: 10px;
+  }
 }
