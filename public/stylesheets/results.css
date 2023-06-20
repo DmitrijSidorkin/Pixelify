@@ -65,7 +65,7 @@ body {
   padding: 80px 20px 20px;
 }
 .user-guess-false {
-  color: red;
+  color: rgb(255, 145, 0);
 }
 #results-image {
   max-width: 100%;
@@ -97,6 +97,7 @@ body {
   align-items: center;
 }
 .highscores-title {
+  color: white;
   text-align: center;
   padding: 11px;
   font-size: 41px;
@@ -127,29 +128,48 @@ body {
   }
   .guesses-list,
   #results-details {
-    font-size: 14px;
+    font-size: 18px;
   }
   .tab,
   .card-button {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 @media (max-width: 576px) {
   #results-title {
-    font-size: 20px;
+    font-size: 22px;
+    padding-bottom: 10px;
   }
-  .guesses-list,
+  .guesses-list {
+    font-size: 16px;
+  }
   #results-details {
-    font-size: 12px;
+    font-size: 15px;
   }
   .tab,
   .card-button {
-    font-size: 16px;
+    font-size: 18px;
   }
   #results-box {
     padding-top: 40px;
   }
   .guesses-list {
     padding-left: 10px;
+  }
+  .highscores-title {
+    font-size: 30px;
+  }
+  .player-place {
+    font-size: 25px;
+    min-width: 25px;
+    padding: 7px;
+  }
+  .score-pfp {
+    width: 55px;
+    height: 55px;
+  }
+  .player-score,
+  .player-name {
+    font-size: 16px;
   }
 }
