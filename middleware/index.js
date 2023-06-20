@@ -1,5 +1,4 @@
 const {
-  getPixelatedImage,
   fetchRandomGameData,
   fetchRandomGameDataPlay,
   fetchRandomGameDataArr,
@@ -9,7 +8,6 @@ const {
 const { generateUniqueRandomArr } = require("./helpers");
 
 module.exports = {
-  getPixelatedImage,
   fetchRandomGameData,
   fetchRandomGameDataPlay,
   fetchRandomGameDataArr,

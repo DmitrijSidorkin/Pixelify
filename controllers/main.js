@@ -2,21 +2,18 @@ const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
 const User = require("../models/user");
-const {
-  getPixelatedImage,
-  fetchRandomGameDataArr,
-  calculateScore,
-} = require("../middleware");
-const { fetchPlaySessionData } = require("../middleware/helpers.js");
-const playSettingsImage =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
+const { fetchRandomGameDataArr, calculateScore } = require("../middleware");
+const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
   resultsStyle,
   detailedResultsStyle,
 } = require("../public/javascripts/extraStyles.js");
+const playSettingsImage =
+  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
+const { pixelateImageFromURL } = require("../middleware/imagePixelation");
 
 module.exports.playOrContinue = async (req, res) => {
   if (req.user?._id) {
@@ -36,7 +33,6 @@ module.exports.playOrContinue = async (req, res) => {
 module.exports.renderPlaySettings = (req, res) => {
   res.render("./main/play-settings.ejs", {
     extraStyles: cardStyle,
-    previewImage: playSettingsImage,
     remapDifficultyTexts,
     lengthSettingsOptions,
   });
@@ -48,8 +44,9 @@ module.exports.renderContinue = async (req, res) => {
   }
   const user = req.user._id;
   const lastSessionData = await fetchPlaySessionData(user);
-  const image = await getPixelatedImage(
-    lastSessionData.sessionData[lastSessionData.sessionData.length - 1].imgLink
+  const image = await pixelateImageFromURL(
+    lastSessionData.sessionData[lastSessionData.sessionData.length - 1].imgLink,
+    lastSessionData.difficulty
   );
   const sessionData = {
     difficulty: remapDifficultyTexts[lastSessionData.difficulty],
@@ -93,14 +90,17 @@ module.exports.renderPlay = async (req, res) => {
   } else {
     pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
   }
-  const image = await getPixelatedImage(pageGameData.imgLink);
+  const image = await pixelateImageFromURL(
+    pageGameData.imgLink,
+    playSessionData.difficulty
+  );
   res.render("main/play.ejs", {
     image,
+    extraStyles: cardStyle,
     gamesArray: pageGameData.gamesArray,
     gameName: pageGameData.gameName,
     imgLink: pageGameData.imgLink,
     elemId: pageGameData._id,
-    extraStyles: cardStyle,
     sessionLength: playSessionData.length,
     sessionId: id,
     pageNum,
