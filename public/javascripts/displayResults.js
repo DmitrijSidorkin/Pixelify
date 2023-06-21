@@ -24,13 +24,16 @@ if (correctAnswers > Math.floor(userGuessData.length / 2)) {
     "https://i.kym-cdn.com/photos/images/original/000/707/322/fac.gif";
 } else {
   resultsTitle.innerText = "OOF...";
-  resultsImage.src = "https://i.gifer.com/1T2p.gif";
+  resultsImage.src =
+    "https://res.cloudinary.com/dyguovdbc/image/upload/v1686922995/pixelify/1T2p_y30bdx.gif";
 }
 
 //printing response depending on results
 document.getElementById(
   "results-details"
-).innerText = `You guessed ${correctAnswers} out of ${userGuessData.length}`;
+).innerText = `You guessed ${correctAnswers} out of ${
+  userGuessData.length
+} (${Math.floor((correctAnswers / userGuessData.length) * 100)}%)`;
 document.getElementById("all-answers").innerHTML = resultsHtml;
 
 //redirecting to detailed results of the session

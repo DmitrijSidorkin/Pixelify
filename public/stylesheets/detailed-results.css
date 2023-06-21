@@ -1,5 +1,14 @@
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+    url("https://res.cloudinary.com/dyguovdbc/image/upload/w_384/v1676470549/pixelify/main-background_gc3sxd.jpg");
+  image-rendering: pixelated;
+  background-size: cover;
+  background-position: center;
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.3);
+}
 .user-guess-true {
-  color: green;
+  color: rgb(1, 172, 1);
 }
 .user-guess-false {
   color: red;
@@ -12,15 +21,15 @@
   margin: 80px auto;
   align-items: center;
   max-width: 70%;
-  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.856);
+  color: rgb(1, 172, 1);
 }
 
 #slideshow-container {
   position: relative;
   display: flex;
   flex-direction: row;
-  background-color: black;
-  width: 95%;
+  background-color: rgba(0, 0, 0, 0.233);
   height: 500px;
   border: 2px black solid;
 }
@@ -97,6 +106,7 @@
 }
 .detailed-results-text {
   flex-direction: column;
+  background-color: #333;
 }
 .game-name {
   font-size: 25px;
@@ -106,12 +116,13 @@
 .game-details {
   font-size: 18px;
   flex-grow: 1;
-  margin-left: 10px;
+  margin-left: 28px;
 }
 .page-num {
   font-size: 25px;
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 8px;
 }
 
 .fade {
@@ -125,5 +136,40 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  #slideshow-container {
+    height: 400px;
+  }
+  .detailed-results-box {
+    max-width: 80%;
+  }
+  .game-name {
+    font-size: 20px;
+  }
+  .game-details {
+    font-size: 15px;
+  }
+  .page-num {
+    font-size: 18px;
+  }
+}
+@media (max-width: 576px) {
+  #slideshow-container {
+    height: 250px;
+  }
+  .detailed-results-box {
+    max-width: 90%;
+  }
+  .game-name {
+    font-size: 17px;
+  }
+  .game-details {
+    font-size: 13px;
+  }
+  .page-num {
+    font-size: 15px;
   }
 }
