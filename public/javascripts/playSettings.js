@@ -10,7 +10,6 @@ const sessionLengthArr = document
   .getElementById("lengthArr")
   .value.split(",")
   .map(Number);
-console.log(sessionLengthArr);
 
 function isValidLength(radio) {
   if (!sessionLengthArr.includes(parseInt(radio.value))) {
