@@ -5,6 +5,20 @@ let chosenDifficulty;
 const img = document.getElementById("pixelatedImage");
 const imgCopy = img.cloneNode(true);
 
+const sessionDifficultyArr = [1, 2, 3, 4, 5];
+const sessionLengthArr = document
+  .getElementById("lengthArr")
+  .value.split(",")
+  .map(Number);
+console.log(sessionLengthArr);
+
+function isValidLength(radio) {
+  if (!sessionLengthArr.includes(parseInt(radio.value))) {
+    console.log("This is not a valid value");
+    radio.checked = false;
+  }
+}
+
 function pixelateImage(originalImage, pixelationFactor) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -39,10 +53,15 @@ function pixelateImage(originalImage, pixelationFactor) {
 }
 
 function chooseDifficulty(radio) {
-  chosenDifficulty = parseInt(radio.value);
-  const minImageDimmension = img.width < img.height ? img.width : img.height;
-  const pixelSize =
-    Math.floor(minImageDimmension / (60 / chosenDifficulty)) + 1;
-  const newImg = pixelateImage(imgCopy, pixelSize);
-  document.getElementById("pixelatedImage").src = newImg;
+  const chosenDifficulty = parseInt(radio.value);
+  if (!sessionDifficultyArr.includes(chosenDifficulty)) {
+    console.log("This is not a valid value");
+    radio.checked = false;
+  } else {
+    const minImageDimmension = img.width < img.height ? img.width : img.height;
+    const pixelSize =
+      Math.floor(minImageDimmension / (60 / chosenDifficulty)) + 1;
+    const newImg = pixelateImage(imgCopy, pixelSize);
+    document.getElementById("pixelatedImage").src = newImg;
+  }
 }
