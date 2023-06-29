@@ -54,6 +54,7 @@
               id="session-length-<%-index+1%>"
               name="sessionLength"
               value="<%-length%>"
+              onchange="isValidLength(this)"
             />
             <label for="session-length-<%-index+1%>"><%-length%></label>
           </div>
@@ -65,4 +66,10 @@
     </form>
   </div>
 </div>
+<input
+  type="hidden"
+  id="lengthArr"
+  name="lengthArr"
+  value="<%=lengthSettingsOptions%>"
+/>
 <script src="/javascripts/playSettings.js"></script>

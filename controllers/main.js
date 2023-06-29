@@ -146,18 +146,28 @@ module.exports.renderDetailedResults = async (req, res, next) => {
 
 module.exports.sendPlayData = async (req, res, next) => {
   const id = uuidv4();
-  const playSession = new PlaySession({
-    userId: req.user?._id || "guest",
-    sessionId: id,
-    difficulty: req.body.difficulty,
-    length: req.body.sessionLength,
-    sessionData: [],
-    sessionEnded: false,
-    sessionStartTime: Date.now(),
-  });
-  await playSession.save();
-  res.redirect(`/play/${id}/1`);
-  next();
+  const difficulty = parseInt(req.body.difficulty);
+  const length = parseInt(req.body.sessionLength);
+  if (
+    !(difficulty in remapDifficultyTexts) ||
+    !lengthSettingsOptions.includes(length)
+  ) {
+    //send feedback to user on selected play settings being invalid
+    res.redirect("/play-settings");
+  } else {
+    const playSession = new PlaySession({
+      userId: req.user?._id || "guest",
+      sessionId: id,
+      difficulty,
+      length,
+      sessionData: [],
+      sessionEnded: false,
+      sessionStartTime: Date.now(),
+    });
+    await playSession.save();
+    res.redirect(`/play/${id}/1`);
+    next();
+  }
 };
 
 module.exports.updatePlayData = async (req, res, next) => {
