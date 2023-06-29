@@ -187,9 +187,10 @@
 }
 
 .media-buttons-div {
-  position: fixed;
-  bottom: 60px;
-  right: 0px;
+  margin: auto;
+  padding: 10px 0px 20px;
+  display: flex;
+  justify-content: center;
 }
 @media (max-width: 1024px) {
   .media-button-name {
