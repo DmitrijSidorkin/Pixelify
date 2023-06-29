@@ -13,7 +13,7 @@ const sessionLengthArr = document
 
 function isValidLength(radio) {
   if (!sessionLengthArr.includes(parseInt(radio.value))) {
-    console.log("This is not a valid value");
+    //send feedback to user on selected length setting being invalid
     radio.checked = false;
   }
 }
@@ -54,12 +54,15 @@ function pixelateImage(originalImage, pixelationFactor) {
 function chooseDifficulty(radio) {
   const chosenDifficulty = parseInt(radio.value);
   if (!sessionDifficultyArr.includes(chosenDifficulty)) {
-    console.log("This is not a valid value");
+    //send feedback to user on selected difficulty setting being invalid
     radio.checked = false;
   } else {
     const minImageDimmension = img.width < img.height ? img.width : img.height;
+    //this formula calculates the size of a single pixel in a pixelated image.
+    //The maximum amount of pixels that a pixelated image can have is 60 pixels on the shorter image dimension on the easiest difficulty.
+    //Increasing the difficulty reduces this number by 12.
     const pixelSize =
-      Math.floor(minImageDimmension / (60 / chosenDifficulty)) + 1;
+      Math.floor(minImageDimmension / (60 - (chosenDifficulty - 1) * 12)) + 1;
     const newImg = pixelateImage(imgCopy, pixelSize);
     document.getElementById("pixelatedImage").src = newImg;
   }

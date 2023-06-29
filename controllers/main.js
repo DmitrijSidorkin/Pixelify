@@ -152,7 +152,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     !(difficulty in remapDifficultyTexts) ||
     !lengthSettingsOptions.includes(length)
   ) {
-    console.log("selected settings are invalid");
+    //send feedback to user on selected play settings being invalid
     res.redirect("/play-settings");
   } else {
     const playSession = new PlaySession({
