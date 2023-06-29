@@ -8,6 +8,7 @@ const {
   cardStyle,
   resultsStyle,
   detailedResultsStyle,
+  mediaButtonsStyle,
 } = require("../public/javascripts/extraStyles.js");
 const playSettingsImage =
   "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
@@ -123,7 +124,7 @@ module.exports.renderResults = async (req, res, next) => {
 
   playSessionData = JSON.stringify(playSessionData);
   res.render("main/results", {
-    extraStyles: resultsStyle,
+    extraStyles: resultsStyle + mediaButtonsStyle,
     playSessionData,
     highscoresData,
     highscoreText,
@@ -138,7 +139,7 @@ module.exports.renderDetailedResults = async (req, res, next) => {
     await PlaySession.findOne({ sessionId: id })
   );
   res.render("main/detailed-results", {
-    extraStyles: detailedResultsStyle,
+    extraStyles: detailedResultsStyle + mediaButtonsStyle,
     playSessionData,
   });
   next();
