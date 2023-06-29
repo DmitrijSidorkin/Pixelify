@@ -1,6 +1,6 @@
 .resp-sharing-button__link,
 .resp-sharing-button__icon {
-  display: inline-block;
+  display: contents;
 }
 
 .resp-sharing-button__link {
@@ -19,8 +19,7 @@
 .resp-sharing-button__icon svg {
   width: 1em;
   height: 1em;
-  margin-right: 0.4em;
-  vertical-align: top;
+  margin-top: 5px;
 }
 
 .resp-sharing-button--small svg {
@@ -179,4 +178,30 @@
 .resp-sharing-button--whatsapp:active {
   background-color: #1da851;
   border-color: #1da851;
+}
+
+.media-button-name {
+  display: inline;
+  position: relative;
+  top: -2px;
+}
+
+.media-buttons-div {
+  position: fixed;
+  bottom: 60px;
+  right: 0px;
+}
+@media (max-width: 1024px) {
+  .media-button-name {
+    display: none;
+  }
+  .media-buttons-div {
+    bottom: 55px;
+  }
+}
+
+@media (max-width: 576px) {
+  .media-buttons-div {
+    bottom: 35px;
+  }
 }

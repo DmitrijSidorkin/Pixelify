@@ -129,6 +129,7 @@ module.exports.renderResults = async (req, res, next) => {
     highscoresData,
     highscoreText,
     defaultProfileImg: playSettingsImage,
+    sessionId: id,
   });
   next();
 };
