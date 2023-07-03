@@ -17,7 +17,6 @@ main {
   padding: 15px 10px;
   min-height: 85vh;
   width: 100%;
-  margin: auto;
 }
 .navigation {
   border-right: solid 2px rgba(1, 172, 1, 0.801);
@@ -143,6 +142,7 @@ main {
     background-color: transparent;
     flex-direction: column;
     width: 90%;
+    min-height: auto;
   }
   .navigation {
     border-right: none;
