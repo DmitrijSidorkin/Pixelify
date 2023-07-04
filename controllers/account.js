@@ -49,17 +49,21 @@ module.exports.updatePassword = async (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      user.changePassword(
-        req.body.oldPassword,
-        req.body.newPassword,
-        function (err) {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send("successfully change password");
+      if (req.body.newPassword === req.body.repeatPassword) {
+        user.changePassword(
+          req.body.oldPassword,
+          req.body.newPassword,
+          function (err) {
+            if (err) {
+              //error message
+              res.redirect("/account/change-password");
+            } else {
+              //password changed successfully message
+              res.redirect("/account");
+            }
           }
-        }
-      );
+        );
+      } // else error message
     }
   });
 };
