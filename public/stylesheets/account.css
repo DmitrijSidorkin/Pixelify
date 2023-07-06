@@ -135,6 +135,12 @@ main {
   main {
     padding: 70px 8% 70px 5%;
   }
+  .change-password-div {
+    flex-direction: column;
+  }
+  .change-password-input {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 576px) {

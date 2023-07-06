@@ -40,11 +40,6 @@ module.exports.renderChangeProfile = async (req, res) => {
 };
 
 module.exports.updatePassword = async (req, res) => {
-  console.log(req.body);
-  console.log(req.body.oldPassword);
-  console.log(req.body.newPassword);
-  console.log(req.body.repeatPassword);
-
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.send(err);
@@ -53,7 +48,7 @@ module.exports.updatePassword = async (req, res) => {
         user.changePassword(
           req.body.oldPassword,
           req.body.newPassword,
-          function (err) {
+          (err) => {
             if (err) {
               //error message
               res.redirect("/account/change-password");
