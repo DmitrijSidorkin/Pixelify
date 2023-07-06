@@ -17,7 +17,6 @@ main {
   padding: 15px 10px;
   min-height: 85vh;
   width: 100%;
-  margin: auto;
 }
 .navigation {
   border-right: solid 2px rgba(1, 172, 1, 0.801);
@@ -78,7 +77,6 @@ main {
 }
 .profile-form-input {
   flex-grow: 1;
-  margin-left: 10px;
   min-width: 30px;
 }
 #bio {
@@ -95,6 +93,7 @@ main {
 }
 .form-input-label {
   font-size: 16px;
+  margin-right: 10px;
 }
 .form-button {
   float: right;
@@ -136,6 +135,9 @@ main {
   main {
     padding: 70px 8% 70px 5%;
   }
+  .profile-form-input-div {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 576px) {
@@ -143,6 +145,7 @@ main {
     background-color: transparent;
     flex-direction: column;
     width: 90%;
+    min-height: auto;
   }
   .navigation {
     border-right: none;

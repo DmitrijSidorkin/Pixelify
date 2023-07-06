@@ -18,6 +18,15 @@ module.exports.renderAccountMain = async (req, res) => {
   });
 };
 
+module.exports.renderChangePassword = async (req, res) => {
+  const profileData = await fetchProfileData(req.user._id);
+  res.render("account/change-password.ejs", {
+    extraStyles: accountStyle,
+    profileData,
+    defaultProfileImg,
+  });
+};
+
 module.exports.renderChangeProfile = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
   const maxDate = getMaxDate();
@@ -27,6 +36,37 @@ module.exports.renderChangeProfile = async (req, res) => {
     defaultProfileImg,
     maxDate,
     countries,
+  });
+};
+
+module.exports.updatePassword = async (req, res) => {
+  if (
+    !req.body.oldPassword ||
+    !req.body.newPassword ||
+    !req.body.repeatPassword
+  ) {
+    res.redirect("/account/change-password");
+  }
+  User.findById(req.user._id, (err, user) => {
+    if (err) {
+      res.send(err);
+    } else {
+      if (req.body.newPassword === req.body.repeatPassword) {
+        user.changePassword(
+          req.body.oldPassword,
+          req.body.newPassword,
+          (err) => {
+            if (err) {
+              //error message
+              res.redirect("/account/change-password");
+            } else {
+              //password changed successfully message
+              res.redirect("/account");
+            }
+          }
+        );
+      } // else error message
+    }
   });
 };
 

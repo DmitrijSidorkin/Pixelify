@@ -10,8 +10,12 @@ const { isLoggedIn } = require("../middleware");
 const account = require("../controllers/account");
 
 router.route(ROUTES.account).get(isLoggedIn, account.renderAccountMain);
+router
+  .route(ROUTES.changePassword)
+  .get(isLoggedIn, account.renderChangePassword);
 router.route(ROUTES.changeProfile).get(isLoggedIn, account.renderChangeProfile);
 
+router.route(ROUTES.updatePassword).post(isLoggedIn, account.updatePassword);
 router
   .route(ROUTES.updateProfile)
   .post(isLoggedIn, upload.single("profileImg"), account.updateProfile);
