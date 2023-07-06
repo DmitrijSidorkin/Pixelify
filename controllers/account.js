@@ -40,6 +40,13 @@ module.exports.renderChangeProfile = async (req, res) => {
 };
 
 module.exports.updatePassword = async (req, res) => {
+  if (
+    !req.body.oldPassword ||
+    !req.body.newPassword ||
+    !req.body.repeatPassword
+  ) {
+    res.redirect("/account/change-password");
+  }
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.send(err);
