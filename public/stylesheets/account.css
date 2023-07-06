@@ -138,9 +138,6 @@ main {
   .profile-form-input-div {
     flex-direction: column;
   }
-  .form-input-label {
-    margin-right: 0px;
-  }
 }
 
 @media (max-width: 576px) {
