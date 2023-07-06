@@ -121,6 +121,10 @@ body {
   font-size: 22px;
   margin-left: 15px;
 }
+.share-text {
+  color: white;
+  text-align: center;
+}
 
 @media (max-width: 1024px) {
   #results-title {

@@ -5,4 +5,6 @@ module.exports = {
   detailedResultsStyle:
     '<link rel="stylesheet" href="/stylesheets/detailed-results.css"/>',
   accountStyle: '<link rel="stylesheet" href="/stylesheets/account.css"/>',
+  mediaButtonsStyle:
+    '<link rel="stylesheet" href="/stylesheets/social-media-buttons.css"/>',
 };
