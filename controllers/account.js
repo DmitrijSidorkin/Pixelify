@@ -57,15 +57,13 @@ module.exports.updatePassword = async (req, res) => {
           req.body.newPassword,
           (err) => {
             if (err) {
-              //error message
               res.redirect("/account/change-password?feedback=incorrectPw");
             } else {
-              //password changed successfully message
               res.redirect("/account?feedback=pwChangeSuccess");
             }
           }
         );
-      } // else error message
+      }
     }
   });
 };
