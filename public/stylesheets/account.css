@@ -116,6 +116,26 @@ main {
   margin-top: -3px;
   font-size: 12px;
 }
+.form-button:disabled {
+  color: rgb(189, 189, 189);
+}
+.form-button:hover:disabled {
+  background-color: rgba(1, 172, 1, 0.801);
+  cursor: auto;
+}
+#message-box {
+  font-size: 14px;
+  display: none;
+  justify-content: space-between;
+  color: rgb(253, 84, 84);
+  border: rgb(253, 84, 84) 1px solid;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 0px 0px 15px 10px;
+}
+.message-close:hover {
+  cursor: pointer;
+}
 
 @media (max-width: 1024px) {
   body {

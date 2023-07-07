@@ -58,10 +58,10 @@ module.exports.updatePassword = async (req, res) => {
           (err) => {
             if (err) {
               //error message
-              res.redirect("/account/change-password");
+              res.redirect("/account/change-password?feedback=incorrectPw");
             } else {
               //password changed successfully message
-              res.redirect("/account");
+              res.redirect("/account?feedback=pwChangeSuccess");
             }
           }
         );
