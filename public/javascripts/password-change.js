@@ -1,19 +1,24 @@
 /* eslint-disable no-unused-vars */
 
+const submitButton = document.getElementById("submit-password-change");
+submitButton.disabled = true;
+
+const oldPw = document.getElementById("old-password");
+const newPw = document.getElementById("new-password");
+const repeatPw = document.getElementById("repeat-password");
+
 function inputCheck() {
-  if (
-    document.getElementById("old-password").value === "" ||
-    document.getElementById("new-password").value === "" ||
-    document.getElementById("repeat-password").value === ""
-  ) {
-    document.getElementById("submit-password-change").disabled = true;
+  if (oldPw.value === "" || newPw.value === "" || repeatPw.value === "") {
+    submitButton.disabled = true;
   } else {
-    document.getElementById("submit-password-change").disabled = false;
+    submitButton.disabled = false;
   }
 }
 
 function closeMessage() {
-  document.getElementById("message-box").style.display = "none";
+  const messageBox = document.getElementById("message-box");
+  const parentElement = messageBox.parentNode;
+  parentElement.removeChild(messageBox);
 }
 
 function isValidForm() {
