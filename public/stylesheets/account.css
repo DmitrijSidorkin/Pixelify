@@ -66,7 +66,8 @@ main {
 .account-first-row {
   min-height: 200px;
 }
-.change-profile-form {
+.change-profile-form,
+#change-password-form {
   padding: 10px;
   padding-right: 50px;
 }
@@ -127,11 +128,18 @@ main {
   font-size: 14px;
   display: none;
   justify-content: space-between;
-  color: rgb(253, 84, 84);
-  border: rgb(253, 84, 84) 1px solid;
+  border: 1px solid;
   border-radius: 8px;
   padding: 5px 10px;
   margin: 0px 0px 15px 10px;
+}
+.message-box-success {
+  color: rgba(1, 172, 1, 0.801);
+  border: rgba(1, 172, 1, 0.801);
+}
+.message-box-alert {
+  color: rgb(253, 84, 84);
+  border: rgb(253, 84, 84);
 }
 .message-close:hover {
   cursor: pointer;
@@ -201,7 +209,8 @@ main {
   .img-description {
     font-size: 12px;
   }
-  .change-profile-form {
+  .change-profile-form,
+  #change-password-form {
     padding: 20px 15px 15px 0px;
   }
 }
