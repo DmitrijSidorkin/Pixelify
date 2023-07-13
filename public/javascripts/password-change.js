@@ -49,7 +49,6 @@ changePasswordForm.addEventListener("submit", (e) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.message);
       messageText.innerText = `${data.message}`;
       messageBox.className = `${data.style}`;
       messageBox.style.display = "flex";

@@ -42,9 +42,6 @@ module.exports.renderChangeProfile = async (req, res) => {
 module.exports.updatePassword = async (req, res) => {
   const { oldPassword, newPassword, repeatPassword } = req.body;
 
-  console.log(oldPassword);
-  console.log(newPassword);
-  console.log(repeatPassword);
   if (!oldPassword || !newPassword || !repeatPassword) {
     res.redirect("/account/change-password");
   }
