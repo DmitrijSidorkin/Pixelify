@@ -57,11 +57,3 @@ changePasswordForm.addEventListener("submit", (e) => {
       console.error("Error:", error);
     });
 });
-
-const urlParams = new URLSearchParams(window.location.search);
-const feedback = urlParams.get("feedback");
-
-if (feedback === "incorrectPw") {
-  messageText.innerText = "Provided old password is incorrect";
-  document.getElementById("message-box").style.display = "flex";
-}
