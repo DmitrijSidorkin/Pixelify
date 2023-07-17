@@ -54,15 +54,13 @@ module.exports.updatePassword = async (req, res) => {
           if (err) {
             res.send(
               JSON.stringify({
-                message: "Incorrect old password",
-                style: "message-box-alert",
+                error: "Incorrect old password",
               })
             );
           } else {
             res.send(
               JSON.stringify({
-                message: "Password updated successfully",
-                style: "message-box-success",
+                message: "Password changed successfully",
               })
             );
           }

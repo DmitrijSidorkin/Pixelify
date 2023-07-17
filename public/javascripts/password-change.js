@@ -49,8 +49,13 @@ changePasswordForm.addEventListener("submit", (e) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      messageText.innerText = `${data.message}`;
-      messageBox.className = `${data.style}`;
+      if (data.error) {
+        messageText.innerText = `${data.error}`;
+        messageBox.className = "message-box-alert";
+      } else {
+        messageText.innerText = `${data.message}`;
+        messageBox.className = "message-box-success";
+      }
       messageBox.style.display = "flex";
     })
     .catch((error) => {
