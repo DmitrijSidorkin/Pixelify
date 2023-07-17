@@ -32,6 +32,7 @@ body {
   background-color: rgba(0, 0, 0, 0.233);
   height: 500px;
   border: 2px black solid;
+  width: 100%;
 }
 
 .button-div {

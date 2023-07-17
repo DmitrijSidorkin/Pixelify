@@ -59,6 +59,7 @@ main {
   border-bottom: solid 2px rgba(1, 172, 1, 0.801);
   padding: 15px;
   text-align: justify;
+  font-size: 17px;
 }
 .info-box-div:last-of-type {
   border-bottom: none;
@@ -144,6 +145,31 @@ main {
 .message-close:hover {
   cursor: pointer;
 }
+.highscore-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.grid-text-full {
+  display: block;
+}
+.grid-text-short {
+  display: none;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+}
+.grid-score,
+.gird-difficulty {
+  text-align: center;
+}
+.personal-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 
 @media (max-width: 1024px) {
   body {
@@ -165,6 +191,16 @@ main {
   }
   .profile-form-input-div {
     flex-direction: column;
+  }
+  .grid-text-full {
+    display: none;
+  }
+  .grid-text-short {
+    display: block;
+  }
+  .info-box-div {
+    padding: 15px 6px;
+    font-size: 15px;
   }
 }
 
@@ -212,5 +248,12 @@ main {
   .change-profile-form,
   #change-password-form {
     padding: 20px 15px 15px 0px;
+  }
+  .info-box-div {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .highscore-title {
+    margin-bottom: 10px;
   }
 }

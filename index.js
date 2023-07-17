@@ -8,11 +8,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const MongoStore = require("connect-mongo");
-<<<<<<< HEAD
 const bodyParser = require("body-parser");
-=======
 const favicon = require("serve-favicon");
->>>>>>> 27428c9 (feat(PP-59): added favicon)
 
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
