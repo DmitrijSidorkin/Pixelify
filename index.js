@@ -8,6 +8,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const MongoStore = require("connect-mongo");
+const bodyParser = require("body-parser");
 
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
@@ -38,6 +39,7 @@ app.set("views"), path.join(__dirname, "views");
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
 
 const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 

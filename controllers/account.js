@@ -40,32 +40,24 @@ module.exports.renderChangeProfile = async (req, res) => {
 };
 
 module.exports.updatePassword = async (req, res) => {
-  if (
-    !req.body.oldPassword ||
-    !req.body.newPassword ||
-    !req.body.repeatPassword
-  ) {
+  const { oldPassword, newPassword, repeatPassword } = req.body;
+
+  if (!oldPassword || !newPassword || !repeatPassword) {
     res.redirect("/account/change-password");
   }
   User.findById(req.user._id, (err, user) => {
     if (err) {
       res.send(err);
     } else {
-      if (req.body.newPassword === req.body.repeatPassword) {
-        user.changePassword(
-          req.body.oldPassword,
-          req.body.newPassword,
-          (err) => {
-            if (err) {
-              //error message
-              res.redirect("/account/change-password");
-            } else {
-              //password changed successfully message
-              res.redirect("/account");
-            }
+      if (newPassword === repeatPassword) {
+        user.changePassword(oldPassword, newPassword, (err) => {
+          if (err) {
+            res.sendStatus(400);
+          } else {
+            res.sendStatus(200);
           }
-        );
-      } // else error message
+        });
+      }
     }
   });
 };
