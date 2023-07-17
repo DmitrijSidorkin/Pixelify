@@ -47,13 +47,13 @@ changePasswordForm.addEventListener("submit", (e) => {
       repeatPassword: repeatPassword,
     }),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.error) {
-        messageText.innerText = `${data.error}`;
+    .then((response) => {
+      if (response.status === 400) {
+        messageText.innerText = "Incorrect old password";
         messageBox.className = "message-box-alert";
-      } else {
-        messageText.innerText = `${data.message}`;
+      }
+      if (response.status === 200) {
+        messageText.innerText = "Password changed successfully";
         messageBox.className = "message-box-success";
       }
       messageBox.style.display = "flex";

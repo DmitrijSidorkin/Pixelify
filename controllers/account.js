@@ -52,17 +52,9 @@ module.exports.updatePassword = async (req, res) => {
       if (newPassword === repeatPassword) {
         user.changePassword(oldPassword, newPassword, (err) => {
           if (err) {
-            res.send(
-              JSON.stringify({
-                error: "Incorrect old password",
-              })
-            );
+            res.sendStatus(400);
           } else {
-            res.send(
-              JSON.stringify({
-                message: "Password changed successfully",
-              })
-            );
+            res.sendStatus(200);
           }
         });
       }
