@@ -73,10 +73,10 @@ module.exports.renderPlay = async (req, res) => {
   //checking if the play session page doesnt have play data yet
   if (pageNum > playSessionData.sessionData.length) {
     const gameData = await fetchRandomGameDataArr();
-
     pageGameData = {
       gamesArray: gameData.gamesArray,
       gameName: gameData.name,
+      gameId: gameData.gameId,
       imgLink: gameData.background_image,
       userGuess: false,
     };

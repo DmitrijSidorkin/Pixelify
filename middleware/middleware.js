@@ -73,6 +73,7 @@ module.exports.fetchRandomGameDataArr = async (req, res) => {
     filteredGamesData.background_image =
       response.data.results[gameNumArr[0]].background_image;
     filteredGamesData.name = response.data.results[gameNumArr[0]].name;
+    filteredGamesData.gameId = response.data.results[gameNumArr[0]].id;
     gameNumArr.forEach((num) => {
       filteredGamesData.gamesArray.push({
         gameName: response.data.results[num].name,

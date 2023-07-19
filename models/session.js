@@ -8,7 +8,7 @@ const PlaySessionSchema = new Schema({
   },
   sessionId: {
     type: String,
-    requires: true,
+    required: true,
   },
   difficulty: {
     type: Number,
@@ -23,6 +23,7 @@ const PlaySessionSchema = new Schema({
       gamesArray: Array,
       imgLink: String,
       gameName: String,
+      gameId: Number,
       userGuess: Boolean,
       userGuessText: String,
     },
