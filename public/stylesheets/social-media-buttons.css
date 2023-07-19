@@ -71,7 +71,7 @@
   margin-left: 5px;
 }
 
-.media-buttons-div {
+.media-buttons-wrapper {
   padding: 10px 0px 20px;
   display: flex;
   justify-content: center;
@@ -86,7 +86,7 @@
 }
 
 @media (max-width: 576px) {
-  .media-buttons-div {
+  .media-buttons-wrapper {
     bottom: 35px;
   }
 }

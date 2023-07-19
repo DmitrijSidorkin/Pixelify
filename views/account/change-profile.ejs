@@ -13,7 +13,7 @@
     >
       <div class="form-section">
         <div class="form-section-label">General</div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="display-name" class="form-input-label"
             >Display Name</label
           >
@@ -25,7 +25,7 @@
             value="<%= profileData.displayName %>"
           />
         </div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="profile-img" class="form-input-label"
             >Profile Image</label
           >
@@ -44,7 +44,7 @@
       </div>
       <div class="form-section">
         <div class="form-section-label">Detailed Info</div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="real-name" class="form-input-label">Name</label>
           <input
             type="text"
@@ -54,7 +54,7 @@
             value="<%= profileData.realName %>"
           />
         </div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="birth-date" class="form-input-label">Birtrh Date</label>
           <input
             type="date"
@@ -66,7 +66,7 @@
             onchange="checkDate(this)"
           />
         </div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="country" class="form-input-label">Country</label>
           <select class="profile-form-input" id="country" name="country">
             <%countries.forEach((country) => {%>
@@ -76,7 +76,7 @@
             <%})%>
           </select>
         </div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="location" class="form-input-label">Location</label>
           <input
             type="text"
@@ -87,7 +87,7 @@
             value="<%= profileData.location %>"
           />
         </div>
-        <div class="profile-form-input-div">
+        <div class="profile-form-input-wrapper">
           <label for="bio" class="form-input-label">Bio</label>
           <textarea class="profile-form-input" name="bio" id="bio" rows="4">
 <%=profileData.bio%></textarea

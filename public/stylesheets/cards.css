@@ -41,7 +41,7 @@
   border-radius: 5px;
   padding: 3px;
 }
-.field-input-div {
+.field-input-wrapper {
   display: inline;
   margin-right: 10px;
   white-space: nowrap;
@@ -69,7 +69,7 @@
   width: 100%;
 }
 
-#result-div {
+#result-wrapper {
   display: none;
 }
 .hidden-game-data {
@@ -190,7 +190,7 @@ fieldset {
     padding: 8px 20px;
     font-size: 12px;
   }
-  .session-info-div {
+  .session-info-wrapper {
     padding: 4px 0px;
   }
   #continue-card-title {
