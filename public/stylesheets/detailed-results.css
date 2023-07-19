@@ -35,7 +35,7 @@ body {
   width: 100%;
 }
 
-.button-div {
+.button-wrapper {
   position: absolute;
   font-size: 30px;
   color: rgb(255, 255, 255);
@@ -47,7 +47,7 @@ body {
   user-select: none;
   z-index: 3;
 }
-.button-div:hover {
+.button-wrapper:hover {
   color: rgb(1, 172, 1);
 }
 .prev:hover {

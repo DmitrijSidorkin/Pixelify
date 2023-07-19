@@ -25,7 +25,7 @@
         >
           <%Object.entries(remapDifficultyTexts).forEach(option => {%> <%const
           [key, value]=option%>
-          <div class="field-input-div">
+          <div class="field-input-wrapper">
             <input
               class="field-input"
               type="radio"
@@ -47,7 +47,7 @@
           name="sessions-length"
         >
           <%lengthSettingsOptions.forEach((length, index) => {%>
-          <div class="field-input-div">
+          <div class="field-input-wrapper">
             <input
               class="field-input"
               type="radio"
