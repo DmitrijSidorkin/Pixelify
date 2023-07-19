@@ -2,6 +2,7 @@ const axios = require("axios");
 
 const { ROUTES } = require("../controllers/routes");
 const { generateUniqueRandomArr, generateRandomNum } = require("./helpers");
+const GameData = require("../models/game-data");
 
 const apiUrl = "https://api.rawg.io/api/";
 const apiParams = "parent_platforms=1,2,3,4&ordering=-metacritic";
@@ -60,6 +61,46 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   next();
 };
 
+module.exports.fetchAdditionalGameData = async (fetchLink) => {
+  let response = null;
+  try {
+    response = await axios.get(fetchLink);
+  } catch (error) {
+    if (process.env.IN_DEVELOPMENT === "true") {
+      console.log(error.response.status);
+    }
+  }
+  return response.data;
+};
+
+//adds more detailed game data (stores, game website and developers) and stores in database
+module.exports.completeAndStoreGameData = async (detailedGameData) => {
+  const fetchGameDataLink = `${apiUrl}games/${detailedGameData.gameId}?key=${process.env.RAWG_KEY}`;
+  const gameData = await this.fetchAdditionalGameData(fetchGameDataLink);
+
+  detailedGameData.website = gameData.website;
+
+  let gameDevelopers = gameData.developers;
+  gameDevelopers = gameDevelopers.map((e) => ({ name: e.name }));
+  detailedGameData.developers = gameDevelopers;
+
+  const fetchStoresLink = `${apiUrl}games/${detailedGameData.gameId}/stores?key=${process.env.RAWG_KEY}`;
+  const gameStoresResponse = await this.fetchAdditionalGameData(
+    fetchStoresLink
+  );
+
+  const gameStoresLinks = gameStoresResponse.results;
+  gameStoresLinks.forEach((e) => {
+    delete e.id, delete e.game_id;
+  });
+  detailedGameData.stores = gameStoresLinks;
+
+  const newGameData = new GameData({
+    ...detailedGameData,
+  });
+  await newGameData.save();
+};
+
 module.exports.fetchRandomGameDataArr = async (req, res) => {
   const maxPage = 168;
   const pageSize = 40;
@@ -70,6 +111,20 @@ module.exports.fetchRandomGameDataArr = async (req, res) => {
   const response = await this.fetchFromApi(maxPage, pageSize);
 
   if (response.status === 200) {
+    //add a conditional to see if the game data is already in mongodb
+    let platforms = response.data.results[gameNumArr[0]].platforms;
+    platforms = platforms.map((e) => ({ name: e.platform.name }));
+    //detailed game data that is accessible on initial request
+    const detailedGameData = {
+      gameId: response.data.results[gameNumArr[0]].id,
+      gameName: response.data.results[gameNumArr[0]].name,
+      metaScore: response.data.results[gameNumArr[0]].metacritic,
+      genres: response.data.results[gameNumArr[0]].genres,
+      platforms,
+    };
+
+    this.completeAndStoreGameData(detailedGameData);
+
     filteredGamesData.background_image =
       response.data.results[gameNumArr[0]].background_image;
     filteredGamesData.name = response.data.results[gameNumArr[0]].name;

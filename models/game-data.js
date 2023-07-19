@@ -13,6 +13,9 @@ const GameDataSchema = new Schema({
   metaScore: {
     type: Number,
   },
+  developers: {
+    type: Array,
+  },
   genres: {
     type: Array,
   },
