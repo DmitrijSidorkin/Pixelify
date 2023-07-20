@@ -21,6 +21,7 @@ router.route(ROUTES.continue).get(main.renderContinue);
 
 router.route(ROUTES.results).get(main.renderResults);
 router.route(ROUTES.detailedResults).get(main.renderDetailedResults);
+router.route(ROUTES.fetchDetailedGameData).get(main.fetchDetailedGameData);
 
 router.route(ROUTES.sendPlayData).post(main.sendPlayData);
 router.route(ROUTES.updatePlayData).post(main.updatePlayData);

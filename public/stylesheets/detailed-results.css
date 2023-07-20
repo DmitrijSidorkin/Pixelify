@@ -104,26 +104,80 @@ body {
 
 #game-info-container {
   width: 100%;
+  min-height: 250px;
+  background-color: #333;
 }
 .detailed-results-text {
   flex-direction: column;
-  background-color: #333;
+  overflow-wrap: break-word;
+}
+.game-details-item {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.details-text,
+.game-website {
+  color: white;
+  display: inline;
+  margin-left: 10px;
 }
 .game-name {
-  font-size: 25px;
+  font-size: 35px;
   text-align: center;
   margin-bottom: 20px;
+  width: 80%;
+  align-self: center;
 }
 .game-details {
   font-size: 18px;
   flex-grow: 1;
   margin-left: 28px;
 }
+.store-icons {
+  height: 40px;
+  width: auto;
+  margin-left: 15px;
+  margin-bottom: -12px;
+}
+.meta-score-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  margin: 0px 30px 20px 0px;
+}
+.meta-score {
+  align-self: center;
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 30px;
+}
+.meta-green {
+  background-color: green;
+}
+.meta-yellow {
+  background-color: #dfa700;
+}
+.meta-red {
+  background-color: red;
+}
+
+.meta-score-text {
+  font-size: 12px;
+  align-self: end;
+  width: 80px;
+  text-align: center;
+  color: white;
+}
 .page-num {
   font-size: 25px;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 8px;
+}
+.game-website {
+  text-decoration: underline;
 }
 
 .fade {
@@ -148,7 +202,7 @@ body {
     max-width: 80%;
   }
   .game-name {
-    font-size: 20px;
+    font-size: 25px;
   }
   .game-details {
     font-size: 15px;
@@ -161,11 +215,17 @@ body {
   #slideshow-container {
     height: 250px;
   }
+  #game-info-container {
+    min-height: 200px;
+  }
   .detailed-results-box {
     max-width: 90%;
   }
+  .game-details-item {
+    font-size: 15px;
+  }
   .game-name {
-    font-size: 17px;
+    font-size: 22px;
   }
   .game-details {
     font-size: 13px;

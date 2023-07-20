@@ -61,6 +61,7 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
   next();
 };
 
+//function for making API requests for additional data
 module.exports.fetchAdditionalGameData = async (fetchLink) => {
   let response = null;
   try {
@@ -75,26 +76,29 @@ module.exports.fetchAdditionalGameData = async (fetchLink) => {
 
 //adds more detailed game data (stores, game website and developers) and stores in database
 module.exports.completeAndStoreGameData = async (detailedGameData) => {
+  //making an API request to fetch game developers data and game's official website (if there is one)
   const fetchGameDataLink = `${apiUrl}games/${detailedGameData.gameId}?key=${process.env.RAWG_KEY}`;
   const gameData = await this.fetchAdditionalGameData(fetchGameDataLink);
 
   detailedGameData.website = gameData.website;
 
   let gameDevelopers = gameData.developers;
-  gameDevelopers = gameDevelopers.map((e) => ({ name: e.name }));
+  gameDevelopers = gameDevelopers.map((e) => e.name);
   detailedGameData.developers = gameDevelopers;
 
+  //making another API request to fetch store links for the game
   const fetchStoresLink = `${apiUrl}games/${detailedGameData.gameId}/stores?key=${process.env.RAWG_KEY}`;
   const gameStoresResponse = await this.fetchAdditionalGameData(
     fetchStoresLink
   );
 
-  const gameStoresLinks = gameStoresResponse.results;
+  let gameStoresLinks = gameStoresResponse.results;
   gameStoresLinks.forEach((e) => {
     delete e.id, delete e.game_id;
   });
   detailedGameData.stores = gameStoresLinks;
 
+  //saving data in mongodb
   const newGameData = new GameData({
     ...detailedGameData,
   });
@@ -112,19 +116,27 @@ module.exports.fetchRandomGameDataArr = async (req, res) => {
 
   if (response.status === 200) {
     //add a conditional to see if the game data is already in mongodb
-    let platforms = response.data.results[gameNumArr[0]].platforms;
-    platforms = platforms.map((e) => ({ name: e.platform.name }));
-    //detailed game data that is accessible on initial request
-    const detailedGameData = {
+    const alreadyExists = await GameData.findOne({
       gameId: response.data.results[gameNumArr[0]].id,
-      gameName: response.data.results[gameNumArr[0]].name,
-      metaScore: response.data.results[gameNumArr[0]].metacritic,
-      genres: response.data.results[gameNumArr[0]].genres,
-      platforms,
-    };
+    });
+    if (!alreadyExists) {
+      //restructuring available initial data
+      let platforms = response.data.results[gameNumArr[0]].platforms;
+      platforms = platforms.map((object) => object.platform.name);
+      let genres = response.data.results[gameNumArr[0]].genres;
+      genres = genres.map((object) => object.name);
 
-    this.completeAndStoreGameData(detailedGameData);
-
+      //detailed game data that is accessible on initial request
+      const detailedGameData = {
+        gameId: response.data.results[gameNumArr[0]].id,
+        gameName: response.data.results[gameNumArr[0]].name,
+        metaScore: response.data.results[gameNumArr[0]].metacritic,
+        genres,
+        platforms,
+      };
+      //fetching missing detailed game data and storing it all on mongodb
+      await this.completeAndStoreGameData(detailedGameData);
+    }
     filteredGamesData.background_image =
       response.data.results[gameNumArr[0]].background_image;
     filteredGamesData.name = response.data.results[gameNumArr[0]].name;

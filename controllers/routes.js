@@ -15,6 +15,7 @@ module.exports.ROUTES = {
   error: "/error",
   results: "/results/:id",
   detailedResults: "/detailed-results/:id",
+  fetchDetailedGameData: "/fetch-detailed-game-data",
   playSettings: "/play-settings",
   sendPlayData: "/send-play-data",
   updatePlayData: "/update-play-data",
