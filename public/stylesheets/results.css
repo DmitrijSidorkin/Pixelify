@@ -125,6 +125,12 @@ body {
   color: white;
   text-align: center;
 }
+.highscores-wrapper {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
 
 @media (max-width: 1024px) {
   #results-title {

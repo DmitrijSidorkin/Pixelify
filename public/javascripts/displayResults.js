@@ -41,6 +41,7 @@ function detailedResults() {
   window.location = `/detailed-results/${userGuessData.sessionId}`;
 }
 
+//generating highscores html
 const highscoresData = JSON.parse(
   document.getElementById("highscores-data").value
 );
@@ -50,10 +51,12 @@ let highscoreHtml = "";
 highscoresData.forEach((highscore, index) => {
   highscoreHtml += `<div class="score">
   <h4 class="player-place">${index + 1}</h4>
-  <img class="score-pfp" src="${
+  <a class="highscores-wrapper" href="/view-profile/${
+    highscoresData[index]._id
+  }"><img class="score-pfp" src="${
     highscore.profileImg?.url || defaultProfileImg
   }">
-  <p class="player-name">${highscore?.displayName || highscore.username}</p>
+  <p class="player-name">${highscore?.displayName || highscore.username}</p></a>
   <p class="player-score">${highscore.bestScores[userGuessData.difficulty]}</p>
 </div>`;
 });
