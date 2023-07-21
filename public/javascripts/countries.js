@@ -797,10 +797,6 @@ const countries = [
     displayValue: "Serbia",
   },
   {
-    value: "CS",
-    displayValue: "Serbia and Montenegro",
-  },
-  {
     value: "SC",
     displayValue: "Seychelles",
   },
