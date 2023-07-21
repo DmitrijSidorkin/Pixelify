@@ -27,15 +27,27 @@ function fetchSlideData(textHtml) {
       data.stores.forEach((store) => {
         stores += `<a href="${store.url}"><img class="store-icons" src="../../icons/store-icons/${store.store_id}.png"></a>`;
       });
-      textHtml.innerHTML = `<div class="game-name user-guess-${playSessionData.sessionData.userGuess}">${data.gameName}</div>
-        <div class="meta-score-wrapper"><div class="meta-score ${metaScoreStyle}">${data.metaScore}</div>
+      textHtml.innerHTML = `<div class="game-name user-guess-${
+        playSessionData.sessionData[slideIndex - 1].userGuess
+      }">${data.gameName}</div>
+        <div class="meta-score-wrapper"><div class="meta-score ${metaScoreStyle}">${
+        data.metaScore
+      }</div>
         <p class="meta-score-text">Metacritic score</p></div>
         <div class="game-details">
-        <div class="game-details-item">Genres:<p class="details-text">${data.genres}</p></div>
-        <div class="game-details-item">Developers:<p class="details-text">${data.developers}</p></div>
-        <div class="game-details-item">Platforms:<p class="details-text">${data.platforms}</p></div>
+        <div class="game-details-item">Genres:<p class="details-text">${
+          data.genres
+        }</p></div>
+        <div class="game-details-item">Developers:<p class="details-text">${
+          data.developers
+        }</p></div>
+        <div class="game-details-item">Platforms:<p class="details-text">${
+          data.platforms
+        }</p></div>
         <div class="game-details-item">Stores:${stores}</div>
-        <div class="game-details-item">Official Website:<a class="game-website" href="${data.website}">${data.website}</a></div>
+        <div class="game-details-item">Official Website:<a class="game-website" href="${
+          data.website
+        }">${data.website}</a></div>
         </div>
           <div class="page-num">${slideIndex}/${playSessionData.length}</div>`;
     })
