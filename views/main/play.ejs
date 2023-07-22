@@ -1,66 +1,39 @@
 <% layout('layouts/boilerplate')%>
 <div class="card">
   <div class="card-box">
-    <div class="image-box">
-      <img
-        class="card-image"
-        id="gameImage"
-        src="<%-image%>"
-        alt="pixelated image"
-      />
-    </div>
-    <form action="/update-play-data" method="POST">
-      <div id="guess-wrapper">
-        <h5 class="card-title">What form of game is this?</h5>
-        <div class="field">
-          <fieldset id="gameGuesses">
-            <%gamesArray.forEach((game, index) => {%>
-            <div>
-              <input class="field-input" type="radio" id="guess-<%-index%>"
-              name="guess" value="<%-game.gameName%>" <% if(game.gameName ===
-              userGuessText) { %> checked <% } %>/>
-              <label for="guess-<%-index%>"><%-game.gameName%></label>
-            </div>
-            <%})%>
-          </fieldset>
+    <div class="loader-wrapper"><div class="loader"></div></div>
+    <div class="card-content">
+      <div class="image-box"></div>
+      <form class="guess-form" action="/update-play-data" method="POST">
+        <div id="guess-wrapper">
+          <h5 class="card-title">What form of game is this?</h5>
+          <div class="field">
+            <fieldset id="gameGuesses"></fieldset>
+          </div>
         </div>
-      </div>
-      <input
-        type="hidden"
-        id="sessionId"
-        name="sessionId"
-        value="<%=sessionId%>"
-      />
-      <input type="hidden" id="pageNum" name="pageNum" value="<%=pageNum%>" />
-      <input
-        type="hidden"
-        id="gamesArray"
-        name="gamesArray"
-        value="<%=gamesArray%>"
-      />
-      <input type="hidden" id="elemId" name="elemId" value="<%=elemId%>" />
-      <div class="guess-buttons">
-        <button
-          onclick="prevGuess()"
-          class="card-button"
-          id="button-back"
-          value="back"
-          name="action"
-        >
-          Back
-        </button>
-        <div id="page-counter"><%- pageNum %> of <%=sessionLength%></div>
-        <button
-          type="submit"
-          class="card-button"
-          id="button-next"
-          value="next"
-          name="action"
-        >
-          Next
-        </button>
-      </div>
-    </form>
+        <div class="guess-buttons">
+          <button
+            onclick="prevGuess()"
+            class="card-button"
+            id="button-back"
+            value="back"
+            name="action"
+          >
+            Back
+          </button>
+          <div id="page-counter"></div>
+          <button
+            type="submit"
+            class="card-button"
+            id="button-next"
+            value="next"
+            name="action"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <script src="/javascripts/continuousPlay.js"></script>
