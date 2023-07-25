@@ -72,16 +72,6 @@ module.exports.fetchAdditionalGameData = async (fetchLink) => {
     }
   }
 };
-  let response = null;
-  try {
-    response = await axios.get(fetchLink);
-  } catch (error) {
-    if (process.env.IN_DEVELOPMENT === "true") {
-      console.log(error.response.status);
-    }
-  }
-  return response.data;
-};
 
 //adds more detailed game data (stores, game website and developers) and stores in database
 module.exports.completeAndStoreGameData = async (detailedGameData) => {
@@ -107,35 +97,6 @@ module.exports.completeAndStoreGameData = async (detailedGameData) => {
   //saving data in mongodb
   const newGameData = new GameData({
     ...updatedGameData,
-  });
-  await newGameData.save();
-};
-
-  //making an API request to fetch game developers data and game's official website (if there is one)
-  const fetchGameDataLink = `${apiUrl}games/${detailedGameData.gameId}?key=${process.env.RAWG_KEY}`;
-  const gameData = await this.fetchAdditionalGameData(fetchGameDataLink);
-
-  detailedGameData.website = gameData.website;
-
-  let gameDevelopers = gameData.developers;
-  gameDevelopers = gameDevelopers.map((e) => e.name);
-  detailedGameData.developers = gameDevelopers;
-
-  //making another API request to fetch store links for the game
-  const fetchStoresLink = `${apiUrl}games/${detailedGameData.gameId}/stores?key=${process.env.RAWG_KEY}`;
-  const gameStoresResponse = await this.fetchAdditionalGameData(
-    fetchStoresLink
-  );
-
-  let gameStoresLinks = gameStoresResponse.results;
-  gameStoresLinks.forEach((e) => {
-    delete e.id, delete e.game_id;
-  });
-  detailedGameData.stores = gameStoresLinks;
-
-  //saving data in mongodb
-  const newGameData = new GameData({
-    ...detailedGameData,
   });
   await newGameData.save();
 };

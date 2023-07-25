@@ -110,16 +110,16 @@ body {
 .detailed-results-text {
   flex-direction: column;
   overflow-wrap: break-word;
+  margin: 20px 15px 0px;
 }
-.game-details-item {
+.game-game-details-text-wrapper {
   font-size: 20px;
   margin-bottom: 15px;
 }
-.details-text,
+.game-details-text,
 .game-website {
   color: white;
   display: inline;
-  margin-left: 10px;
 }
 .game-name {
   font-size: 35px;
@@ -131,7 +131,6 @@ body {
 .game-details {
   font-size: 18px;
   flex-grow: 1;
-  margin-left: 28px;
 }
 .store-icons {
   height: 40px;
@@ -143,7 +142,7 @@ body {
   display: flex;
   flex-direction: column;
   align-self: end;
-  margin: 0px 30px 20px 0px;
+  margin: 0px 20px 20px 0px;
 }
 .meta-score {
   align-self: center;
@@ -221,7 +220,7 @@ body {
   .detailed-results-box {
     max-width: 90%;
   }
-  .game-details-item {
+  .game-game-details-text-wrapper {
     font-size: 15px;
   }
   .game-name {
