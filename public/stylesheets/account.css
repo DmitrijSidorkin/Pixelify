@@ -39,8 +39,17 @@ main {
   object-fit: cover;
   padding-bottom: 10px;
 }
+.profile-name-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .profile-name {
   overflow-wrap: break-word;
+  margin-right: 5px;
+}
+#user-country {
+  height: 14px;
 }
 .navigation-tab {
   border-bottom: solid 1px rgba(1, 172, 1, 0.801);

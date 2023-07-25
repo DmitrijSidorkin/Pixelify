@@ -5,10 +5,17 @@
       src="<%-profileData.profileImg.thumbnail%>"
       onerror="this.onerror=null; this.src='<%-defaultProfileImg%>'"
     />
-    <div class="profile-name">
-      <%-profileData?.displayName || profileData?.username %>
+    <div class="profile-name-div">
+      <div class="profile-name">
+        <%-profileData?.displayName || profileData?.username %>
+      </div>
+      <% if(profileData.country){ %>
+      <img
+        id="user-country"
+        src="../../icons/flags/<%-profileData.country%>.png"
+      />
+      <% } %>
     </div>
-    <div id="user-country"><%-profileData.country%></div>
   </div>
   <div class="navigation-all-tabs">
     <a class="navigation-tab" href="/account/change-password"
