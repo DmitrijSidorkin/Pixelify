@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const PlaySession = require("../models/session");
 const User = require("../models/user");
+const GameData = require("../models/game-data");
 const { fetchRandomGameDataArr, calculateScore } = require("../middleware");
 const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
@@ -73,10 +74,10 @@ module.exports.renderPlay = async (req, res) => {
   //checking if the play session page doesnt have play data yet
   if (pageNum > playSessionData.sessionData.length) {
     const gameData = await fetchRandomGameDataArr();
-
     pageGameData = {
       gamesArray: gameData.gamesArray,
       gameName: gameData.name,
+      gameId: gameData.gameId,
       imgLink: gameData.background_image,
       userGuess: false,
     };
@@ -228,6 +229,14 @@ module.exports.updatePlayData = async (req, res, next) => {
   //redirecting to next guess page
   res.redirect(`/play/${sessionId}/${pageNum + 1}`);
   next();
+};
+
+module.exports.fetchDetailedGameData = async (req, res) => {
+  const gameId = req.query.gameId;
+  const requestedGameData = JSON.stringify(
+    await GameData.findOne({ gameId: gameId })
+  );
+  res.json(requestedGameData);
 };
 
 module.exports.renderTest = async (req, res) => {

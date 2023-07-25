@@ -13,11 +13,7 @@ playSessionData.sessionData.forEach((game, index) => {
   slides += `<div class="mySlides fade"><img class="img-detailed" src="${
     game.imgLink
   }" alt="unpixelated-game-${index + 1}"/></div>`;
-  gameInfo += `<div class="detailed-results-text">
-  <div class="game-name user-guess-${game.userGuess}">${game.gameName}</div>
-  <div class="game-details">lorem${index + 1}</div>
-    <div class="page-num">${index + 1}/${playSessionData.length}</div>
-  </div>`;
+  gameInfo += `<div class="detailed-results-text"></div>`;
 });
 
 //if there are 20 slides of fewer generating the navigational dots
