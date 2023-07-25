@@ -10,7 +10,6 @@
         <%-profileData?.displayName || profileData?.username %>
       </div>
       <img
-        onerror='this.style.display="none"'
         id="user-country"
         src="../../icons/flags/<%-profileData.country%>.png"
       />
@@ -26,3 +25,4 @@
     <a class="navigation-tab">Customize site</a>
   </div>
 </div>
+<script src="/javascripts/flag-check.js"></script>
