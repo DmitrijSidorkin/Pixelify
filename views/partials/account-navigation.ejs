@@ -9,10 +9,12 @@
       <div class="profile-name">
         <%-profileData?.displayName || profileData?.username %>
       </div>
+      <% if(profileData.country){ %>
       <img
         id="user-country"
         src="../../icons/flags/<%-profileData.country%>.png"
       />
+      <% } %>
     </div>
   </div>
   <div class="navigation-all-tabs">
@@ -25,4 +27,3 @@
     <a class="navigation-tab">Customize site</a>
   </div>
 </div>
-<script src="/javascripts/flag-check.js"></script>
