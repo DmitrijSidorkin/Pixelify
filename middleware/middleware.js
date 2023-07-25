@@ -85,6 +85,32 @@ module.exports.fetchAdditionalGameData = async (fetchLink) => {
 
 //adds more detailed game data (stores, game website and developers) and stores in database
 module.exports.completeAndStoreGameData = async (detailedGameData) => {
+  //making API requests to fetch developers, website and store links for the game
+  const GAME_DATA_URL = `${apiUrl}games/${detailedGameData.gameId}?key=${process.env.RAWG_KEY}`;
+  const STORES_URL = `${apiUrl}games/${detailedGameData.gameId}/stores?key=${process.env.RAWG_KEY}`;
+
+  const gameData = await this.fetchAdditionalGameData(GAME_DATA_URL);
+  const gameStoresResponse = await this.fetchAdditionalGameData(STORES_URL);
+
+  const developerNames = gameData.developers.map((developer) => developer.name);
+  const gameStoresLinks = gameStoresResponse.results.map(
+    ({ url, store_id }) => ({ url, store_id })
+  );
+
+  const updatedGameData = {
+    ...detailedGameData,
+    website: gameData.website,
+    developers: developerNames,
+    stores: gameStoresLinks,
+  };
+
+  //saving data in mongodb
+  const newGameData = new GameData({
+    ...updatedGameData,
+  });
+  await newGameData.save();
+};
+
   //making an API request to fetch game developers data and game's official website (if there is one)
   const fetchGameDataLink = `${apiUrl}games/${detailedGameData.gameId}?key=${process.env.RAWG_KEY}`;
   const gameData = await this.fetchAdditionalGameData(fetchGameDataLink);
