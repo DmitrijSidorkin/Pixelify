@@ -8,6 +8,7 @@ const {
 } = require("../middleware/helpers.js");
 const User = require("../models/user");
 const { countries } = require("../public/javascripts/countries.js");
+const { lengthSettingsOptions } = require("../middleware/remaps.js");
 
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
@@ -16,6 +17,14 @@ module.exports.renderAccountMain = async (req, res) => {
     profileData,
     defaultProfileImg,
   });
+};
+
+module.exports.fetchUserHighscores = async (req, res) => {
+  const responseData = {
+    lengthSettingsOptions,
+    highscores: req.user.bestScores,
+  };
+  res.json(responseData);
 };
 
 module.exports.renderChangePassword = async (req, res) => {

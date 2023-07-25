@@ -24,11 +24,13 @@ const UserSchema = new Schema({
   location: String,
   bio: String,
   bestScores: {
-    1: Number,
-    2: Number,
-    3: Number,
-    4: Number,
-    5: Number,
+    //1/2/3/4/5 represent sessiong difficulty
+    //3/5/7/9/11 represent session length
+    1: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
+    2: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
+    3: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
+    4: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
+    5: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
   },
   customSessionHighScores: {},
   mediaLinks: {},

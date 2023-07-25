@@ -175,11 +175,11 @@ module.exports.sendPlayData = async (req, res, next) => {
 module.exports.updatePlayData = async (req, res, next) => {
   const sessionId = req.body.sessionId;
   const thisSession = await PlaySession.findOne({ sessionId });
-
+  //if session has already previously ended redirect to results page
   if (thisSession.sessionEnded) {
     res.redirect(`/results/${sessionId}`);
   }
-
+  //update session data with user guess
   const pageNum = parseInt(req.body.pageNum);
   const userGuess =
     req.body.guess === thisSession.sessionData[pageNum - 1].gameName;
@@ -194,11 +194,12 @@ module.exports.updatePlayData = async (req, res, next) => {
     { arrayFilters: [{ "elem._id": req.body.elemId }] }
   );
   const thisUpdatedSession = await PlaySession.findOne({ sessionId });
-
+  //if back button was pressed, go back a page in /play
   if (req.body.action === "back") {
     res.redirect(`/play/${sessionId}/${pageNum - 1}`);
   }
-
+  //if updating session data on last page, setting sessionEnded to true, calculating session score
+  //and (if necessary) updating highscores and redirecting to results page
   if (thisUpdatedSession.length === parseInt(req.body.pageNum)) {
     const userId = thisUpdatedSession.userId;
     const currentUser = await User.findOne({ _id: userId });
@@ -208,16 +209,23 @@ module.exports.updatePlayData = async (req, res, next) => {
       { $set: { sessionEnded: true, sessionScore: score } }
     );
     if (
-      currentUser.bestScores[thisSession.difficulty] === undefined ||
-      currentUser.bestScores[thisSession.difficulty] < score
+      currentUser.bestScores[thisSession.difficulty][thisSession.length] ===
+        undefined ||
+      currentUser.bestScores[thisSession.difficulty][thisSession.length] < score
     ) {
       await User.updateOne(
         { _id: userId },
-        { $set: { [`bestScores.${thisSession.difficulty}`]: score } }
+        {
+          $set: {
+            [`bestScores.${thisSession.difficulty}.${thisSession.length}`]:
+              score,
+          },
+        }
       );
     }
     res.redirect(`/results/${sessionId}`);
   }
+  //redirecting to next guess page
   res.redirect(`/play/${sessionId}/${pageNum + 1}`);
   next();
 };
