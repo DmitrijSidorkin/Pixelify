@@ -63,6 +63,15 @@ module.exports.fetchRandomGameData = async (req, res, next) => {
 
 //function for making API requests for additional data
 module.exports.fetchAdditionalGameData = async (fetchLink) => {
+  try {
+    const response = await axios.get(fetchLink);
+    return response.data;
+  } catch (error) {
+    if (process.env.IN_DEVELOPMENT === "true") {
+      console.log(error.response.status);
+    }
+  }
+};
   let response = null;
   try {
     response = await axios.get(fetchLink);
