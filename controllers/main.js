@@ -11,8 +11,6 @@ const {
   detailedResultsStyle,
   mediaButtonsStyle,
 } = require("../public/javascripts/extraStyles.js");
-const playSettingsImage =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/v1676908287/pixelify/placeholder-image_ykgw2b.jpg";
 const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 const { pixelateImageFromURL } = require("../middleware/imagePixelation");
@@ -123,26 +121,41 @@ module.exports.renderPlay = async (req, res) => {
 module.exports.renderResults = async (req, res, next) => {
   const { id } = req.params;
   let playSessionData = await PlaySession.findOne({ sessionId: id });
-  const highscoreText = `${
-    remapDifficultyTexts[playSessionData.difficulty] + playSessionData.length
-  }`;
-  const difficultyFilter = `bestScores.${playSessionData.difficulty}`;
-  const highscoresData = JSON.stringify(
-    await User.find()
-      .sort({ [difficultyFilter]: -1 })
-      .limit(10)
-  );
 
   playSessionData = JSON.stringify(playSessionData);
   res.render("main/results", {
     extraStyles: resultsStyle + mediaButtonsStyle,
     playSessionData,
-    highscoresData,
-    highscoreText,
-    defaultProfileImg: playSettingsImage,
     sessionId: id,
   });
   next();
+};
+
+module.exports.fetchTopHighscores = async (req, res) => {
+  const { difficulty, length } = req.query;
+  const dbSearchFilter = `bestScores.${difficulty}.${length}`;
+  async function getTop10Users() {
+    const pipeline = [
+      { $sort: { [dbSearchFilter]: -1 } },
+      { $limit: 10 },
+      {
+        $project: {
+          _id: 1,
+          username: 1,
+          profileImage: 1,
+          country: 1,
+          profileImg: 1,
+          score: `$${dbSearchFilter}`,
+        },
+      },
+    ];
+    const topUsers = await User.aggregate(pipeline);
+    return topUsers;
+  }
+  const highscoresData = await getTop10Users();
+  const highscoreText = `${remapDifficultyTexts[difficulty]} ${length}`;
+  const responseData = { highscoresData, highscoreText };
+  res.json(JSON.stringify(responseData));
 };
 
 module.exports.renderDetailedResults = async (req, res, next) => {

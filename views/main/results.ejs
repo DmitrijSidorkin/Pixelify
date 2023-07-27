@@ -5,18 +5,7 @@
   name="results-data"
   value="<%=playSessionData%>"
 />
-<input
-  id="highscores-data"
-  type="hidden"
-  name="highscores-data"
-  value="<%=highscoresData%>"
-/>
-<input
-  id="default-profile-img"
-  type="hidden"
-  name="default-profile-img"
-  value="<%=defaultProfileImg%>"
-/>
+
 <div class="card">
   <div class="card-box">
     <div class="results-tabs">
@@ -40,10 +29,7 @@
       </button>
     </div>
 
-    <div id="highscores-box">
-      <div class="highscores-title"><%-highscoreText%></div>
-      <div id="highscores"></div>
-    </div>
+    <div id="highscores-box"></div>
     <p class="share-text">Share your results:</p>
     <%-include('../partials/social-media-buttons.ejs')%>
   </div>
