@@ -31,9 +31,11 @@ if (correctAnswers > Math.floor(userGuessData.length / 2)) {
 //printing response depending on results
 document.getElementById(
   "results-details"
-).innerText = `You guessed ${correctAnswers} out of ${
+).innerHTML = `You guessed <p class="highlighted-text">${correctAnswers}</p> out of <p class="highlighted-text">${
   userGuessData.length
-} (${Math.floor((correctAnswers / userGuessData.length) * 100)}%)`;
+} (${Math.floor((correctAnswers / userGuessData.length) * 100)}%)</p><br>
+Your Score: <p class="highlighted-text">${userGuessData.sessionScore}</p>`;
+
 document.getElementById("all-answers").innerHTML = resultsHtml;
 
 //redirecting to detailed results of the session
@@ -41,22 +43,41 @@ function detailedResults() {
   window.location = `/detailed-results/${userGuessData.sessionId}`;
 }
 
-const highscoresData = JSON.parse(
-  document.getElementById("highscores-data").value
-);
-const defaultProfileImg = document.getElementById("default-profile-img").value;
-let highscoreHtml = "";
-
-highscoresData.forEach((highscore, index) => {
-  highscoreHtml += `<div class="score">
-  <h4 class="player-place">${index + 1}</h4>
-  <img class="score-pfp" src="${
-    highscore.profileImg?.url || defaultProfileImg
-  }">
-  <p class="player-name">${highscore?.displayName || highscore.username}</p>
-  <p class="player-score">${highscore.bestScores[userGuessData.difficulty]}</p>
-</div>`;
-});
+function fetchAndGenerateHighscores() {
+  fetch(
+    `/fetch-top-highscores?difficulty=${userGuessData.difficulty}&length=${userGuessData.length}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      data = JSON.parse(data);
+      console.log(data);
+      let highscoreHtml = `<div class="highscores-title">${data.highscoreText}</div><div id="highscores">`;
+      data.highscoresData.forEach((highscore, index) => {
+        highscoreHtml += `<div class="score" id="highscore-${index + 1}">
+        <h4 class="player-place">${index + 1}</h4>
+        <img class="score-pfp" src="${
+          highscore.profileImg?.url || "../../images/default-pfp.png"
+        }">
+        <p class="player-name">${
+          highscore?.displayName || highscore.username
+        }</p>
+        <p class="player-score">${highscore.score}</p>
+      </div>`;
+      });
+      highscoreHtml += "</div>";
+      document.getElementById("highscores-box").innerHTML = highscoreHtml;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+fetchAndGenerateHighscores();
 
 function switchTab(tab) {
   const resultsTab = document.getElementById("results-box");
@@ -70,5 +91,3 @@ function switchTab(tab) {
     resultsTab.style.display = "none";
   }
 }
-
-document.getElementById("highscores").innerHTML = highscoreHtml;

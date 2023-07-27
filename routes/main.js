@@ -20,6 +20,7 @@ router.route(ROUTES.playOrContinue).get(main.playOrContinue);
 router.route(ROUTES.continue).get(main.renderContinue);
 
 router.route(ROUTES.results).get(main.renderResults);
+router.route(ROUTES.fetchTopHighscores).get(main.fetchTopHighscores);
 router.route(ROUTES.detailedResults).get(main.renderDetailedResults);
 router.route(ROUTES.fetchDetailedGameData).get(main.fetchDetailedGameData);
 
