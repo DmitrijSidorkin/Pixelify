@@ -90,9 +90,10 @@ main {
   flex-grow: 1;
   min-width: 30px;
 }
-#bio {
+.bio {
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 17px;
+  word-wrap: break-word;
 }
 .form-section:first-of-type {
   padding-bottom: 30px;
@@ -245,7 +246,7 @@ main {
     font-size: 15px;
   }
   .profile-form-input,
-  #bio {
+  .bio {
     font-size: 12px;
   }
   .form-input-label {
@@ -264,5 +265,8 @@ main {
   }
   .highscore-title {
     margin-bottom: 10px;
+  }
+  .personal-info {
+    flex-direction: column;
   }
 }
