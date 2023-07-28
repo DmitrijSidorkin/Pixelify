@@ -27,6 +27,7 @@ module.exports.fetchUserHighscores = async (req, res) => {
   const responseData = {
     lengthSettingsOptions,
     highscores: req.user.bestScores,
+    userData: req.user,
   };
   res.json(responseData);
 };

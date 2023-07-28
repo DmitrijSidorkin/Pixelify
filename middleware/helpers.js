@@ -2,8 +2,7 @@ const PlaySession = require("../models/session");
 const User = require("../models/user");
 // myCollection = "", myFilter = ""
 
-const defaultProfileImg =
-  "https://res.cloudinary.com/dyguovdbc/image/upload/w_400/v1680099865/pixelify/PixelatedVergil_rl9cpv.jpg";
+const defaultProfileImg = "../../images/default-pfp.png";
 
 module.exports.defaultProfileImg;
 
