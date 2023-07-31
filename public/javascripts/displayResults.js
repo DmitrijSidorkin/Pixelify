@@ -56,7 +56,6 @@ function fetchAndGenerateHighscores() {
     .then((response) => response.json())
     .then((data) => {
       data = JSON.parse(data);
-      console.log(data);
       let highscoreHtml = `<div class="highscores-title">${data.highscoreText}</div><div id="highscores">`;
       data.highscoresData.forEach((highscore, index) => {
         highscoreHtml += `<div class="score" id="highscore-${index + 1}">
@@ -74,7 +73,7 @@ function fetchAndGenerateHighscores() {
       document.getElementById("highscores-box").innerHTML = highscoreHtml;
     })
     .catch((error) => {
-      console.error("Error:", error);
+      throw new Error("Error:", error);
     });
 }
 fetchAndGenerateHighscores();
