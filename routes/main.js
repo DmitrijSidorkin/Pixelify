@@ -16,6 +16,7 @@ router.route(ROUTES.error).get((req, res) => {
 
 router.route(ROUTES.playSettings).get(main.renderPlaySettings);
 router.route(ROUTES.play).get(main.renderPlay);
+router.route(ROUTES.fetchPlayGameData).get(main.fetchPlayGameData);
 router.route(ROUTES.playOrContinue).get(main.playOrContinue);
 router.route(ROUTES.continue).get(main.renderContinue);
 

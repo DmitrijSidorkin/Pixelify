@@ -2,6 +2,7 @@ module.exports.ROUTES = {
   index: "/",
   playOrContinue: "/play",
   play: "/play/:id/:pageNum",
+  fetchPlayGameData: "/fetch-play-game-data/:id/:pageNum",
   continue: "/play/continue",
   login: "/login",
   logout: "/logout",
