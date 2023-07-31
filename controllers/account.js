@@ -1,6 +1,10 @@
 const { cloudinary } = require("../cloudinary");
 
-const { accountStyle } = require("../public/javascripts/extraStyles.js");
+const {
+  accountStyle,
+  accountHighscoresGridStyle,
+  viewProfileStyle,
+} = require("../public/javascripts/extraStyles.js");
 const {
   fetchProfileData,
   defaultProfileImg,
@@ -13,7 +17,7 @@ const { lengthSettingsOptions } = require("../middleware/remaps.js");
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
   res.render("account/account-main.ejs", {
-    extraStyles: accountStyle,
+    extraStyles: accountStyle + accountHighscoresGridStyle,
     profileData,
     defaultProfileImg,
   });
@@ -99,4 +103,14 @@ module.exports.updateProfile = async (req, res) => {
   }
   await User.findByIdAndUpdate(req.user._id, profileData);
   res.redirect("/account");
+};
+
+module.exports.viewProfile = async (req, res) => {
+  const { id } = req.params;
+  const profileData = await fetchProfileData(id);
+  res.render("account/view-profile.ejs", {
+    extraStyles: viewProfileStyle + accountHighscoresGridStyle,
+    profileData,
+    defaultProfileImg,
+  });
 };

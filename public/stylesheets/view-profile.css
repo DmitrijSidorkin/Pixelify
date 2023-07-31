@@ -1,0 +1,49 @@
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+    url("https://res.cloudinary.com/dyguovdbc/image/upload/w_384/v1676470549/pixelify/main-background_gc3sxd.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 5rem rgba(179, 179, 179, 0.3);
+  font-size: 14px;
+}
+main {
+  padding: 70px 10%;
+}
+.main-box {
+  background-color: #272727;
+  color: rgba(1, 172, 1, 0.801);
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px;
+  min-height: 85vh;
+  width: 80%;
+  max-width: 1000px;
+  margin: auto;
+}
+.profile-first-row {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 30px 40px;
+  border-bottom: solid 2px rgba(1, 172, 1, 0.801);
+}
+.profile-basic-info {
+  padding-right: 30px;
+}
+
+@media (max-width: 1024px) {
+  .main-box {
+    width: 90%;
+  }
+}
+@media (max-width: 576px) {
+  .main-box {
+    width: 100%;
+  }
+  .profile-first-row {
+    flex-direction: column;
+    padding: 15px 15px 30px;
+  }
+  .profile-basic-info {
+    margin-bottom: 30px;
+  }
+}
