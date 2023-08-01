@@ -9,6 +9,7 @@ const {
   fetchProfileData,
   defaultProfileImg,
   getMaxDate,
+  mediaLinkValidation,
 } = require("../middleware/helpers.js");
 const User = require("../models/user");
 const { countries } = require("../public/javascripts/countries.js");
@@ -82,7 +83,16 @@ module.exports.updateProfile = async (req, res) => {
     realName: req.body.realName,
     location: req.body.location,
     bio: req.body.bio,
+    mediaLinks: {},
   };
+
+  const { facebook, twitter, instagram, tumblr } = req.body;
+  profileData.mediaLinks = mediaLinkValidation(
+    facebook,
+    twitter,
+    instagram,
+    tumblr
+  );
 
   const maxDate = getMaxDate();
   if (req.body.birthDate <= maxDate) {
@@ -102,6 +112,7 @@ module.exports.updateProfile = async (req, res) => {
       filename: req.file.filename,
     };
   }
+
   await User.findByIdAndUpdate(req.user._id, profileData);
   res.redirect("/account");
 };
