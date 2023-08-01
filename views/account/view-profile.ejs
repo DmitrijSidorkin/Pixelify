@@ -1,5 +1,12 @@
 <% layout('layouts/boilerplate')%>
 
+<input value="<%-jsonData%>" class="hidden-profile-data" hidden />
+<input
+  value="<%-lengthSettingsOptions%>"
+  class="hidden-length-settings"
+  hidden
+/>
+<input value="<%-highscores%>" class="hidden-highscores" hidden />
 <div class="main-box">
   <div class="profile-first-row">
     <div class="profile-basic-info">
@@ -13,14 +20,8 @@
       </div>
       <div id="user-country"><%-profileData?.country%></div>
     </div>
-    <div class="profile-detailed-info">
-      <div class="personal-info">
-        <p class="personal-info-item">Name:</p>
-        <p class="personal-info-item">Age:</p>
-        <p class="personal-info-item">Location:</p>
-      </div>
-      <br />
-      <p class="bio">bio</p>
+    <div class="user-info">
+      <div class="personal-info"></div>
     </div>
   </div>
   <div class="info-box-wrapper">

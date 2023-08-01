@@ -49,9 +49,10 @@ main {
   flex-grow: 1;
   min-width: 30px;
 }
-#bio {
+.bio {
   resize: vertical;
   word-wrap: break-word;
+  flex-grow: 1;
 }
 .form-section {
   padding-bottom: 30px;
@@ -125,6 +126,24 @@ main {
 }
 .link-warning {
   color: rgb(253, 84, 84);
+}
+.social-media-icon {
+  display: inline;
+  width: 30px;
+  height: 30px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+.account-media-links {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.social-media-link {
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {
