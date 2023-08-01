@@ -53,7 +53,6 @@ module.exports.getMaxDate = () => {
 
 function checkMediaLink(mediaLink, linkRegex) {
   const match = mediaLink.match(linkRegex);
-  console.log(match && match[3]);
   return match && match[3];
 }
 

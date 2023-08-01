@@ -10,7 +10,7 @@ const { isLoggedIn } = require("../middleware");
 const account = require("../controllers/account");
 
 router.route(ROUTES.account).get(isLoggedIn, account.renderAccountMain);
-router.route(ROUTES.fetchUserHighscores).get(account.fetchUserHighscores);
+router.route(ROUTES.fetchUserData).get(account.fetchUserData);
 router
   .route(ROUTES.changePassword)
   .get(isLoggedIn, account.renderChangePassword);

@@ -29,7 +29,30 @@ main {
 .profile-basic-info {
   padding-right: 30px;
 }
-
+.bio {
+  resize: vertical;
+  word-wrap: break-word;
+  flex-grow: 1;
+}
+.social-media-icon {
+  display: inline;
+  width: 30px;
+  height: 30px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.account-media-links {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.social-media-link {
+  text-decoration: none;
+}
 @media (max-width: 1024px) {
   .main-box {
     width: 90%;

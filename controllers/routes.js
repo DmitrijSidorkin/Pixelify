@@ -8,7 +8,7 @@ module.exports.ROUTES = {
   logout: "/logout",
   register: "/register",
   account: "/account",
-  fetchUserHighscores: "/fetch-user-highscores",
+  fetchUserData: "/fetch-user-data",
   changePassword: "/account/change-password",
   updatePassword: "/update-password",
   changeProfile: "/account/change-profile",
