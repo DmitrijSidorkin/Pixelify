@@ -50,3 +50,36 @@ module.exports.getMaxDate = () => {
 
   return `${year}-${month}-${day}`;
 };
+
+function checkMediaLink(mediaLink, linkRegex) {
+  const match = mediaLink.match(linkRegex);
+  console.log(match && match[3]);
+  return match && match[3];
+}
+
+module.exports.mediaLinkValidation = (facebook, twitter, instagram, tumblr) => {
+  const mediaRegex = {
+    facebook:
+      /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?$/,
+    twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})\/?$/,
+    instagram:
+      /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
+    tumblr: /^(https?:\/\/)?(www\.)?tumblr\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
+  };
+  let validLinks = {};
+  if (checkMediaLink(facebook, mediaRegex.facebook)) {
+    validLinks.facebook = facebook;
+  }
+  if (checkMediaLink(twitter, mediaRegex.twitter)) {
+    validLinks.twitter = twitter;
+  }
+  if (checkMediaLink(instagram, mediaRegex.instagram)) {
+    validLinks.instagram = instagram;
+  }
+  if (checkMediaLink(tumblr, mediaRegex.tumblr)) {
+    validLinks.tumblr = tumblr;
+  }
+  return validLinks;
+};
+
+//matchIndex is necessary because tumblr links have a different structure
