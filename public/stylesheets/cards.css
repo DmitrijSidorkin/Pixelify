@@ -62,11 +62,7 @@ body {
   border-radius: 5px;
   padding: 3px;
 }
-.field-input-wrapper {
-  display: inline;
-  margin-right: 10px;
-  white-space: nowrap;
-}
+
 .card-shadow {
   height: 70vh;
 }
@@ -105,7 +101,9 @@ body {
   padding: 0px 20px;
   margin: auto;
 }
-
+#guess-wrapper {
+  margin-bottom: 20px;
+}
 .settings-select {
   font-size: 13px;
 }
@@ -122,12 +120,54 @@ body {
 fieldset {
   border: none;
 }
-.field-input:checked ~ label {
-  color: rgba(1, 172, 1, 0.801);
+.field-input-wrapper {
+  display: inline-block;
+  margin: 8px;
+  position: relative;
 }
-label:hover {
-  color: rgba(2, 146, 2, 0.801);
+.field-input {
+  display: none;
 }
+
+.field-input + label {
+  background-color: rgba(1, 172, 1, 0.801);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.field-input:checked + label {
+  background-color: rgba(1, 112, 0, 0.801);
+}
+.field-input:hover + label {
+  background-color: rgba(1, 112, 2, 0.801);
+}
+.field-input:active + label {
+  background-color: rgba(1, 172, 1, 0.801);
+}
+#gameGuesses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.game-guess-wrapper {
+  flex-basis: 49%;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 1px;
+}
+
 .page-title {
   padding: 15px;
   font-size: 40px;
@@ -268,5 +308,9 @@ label:hover {
   #button-continue,
   #button-start-new {
     font-size: 12px;
+  }
+  .field-input + label {
+    padding: 5px 10px;
+    font-size: 18px;
   }
 }
