@@ -84,23 +84,42 @@ body {
   max-width: 90%;
   margin: auto;
 }
-.highscores-box {
-  display: flex;
-  flex-direction: column;
-  border: solid black 2px;
+.highlighted-text {
+  color: white;
+  display: inline;
 }
+#highscore-1 {
+  color: #ffd700;
+  border-color: #ffd700;
+}
+#highscore-2 {
+  color: #a9a9a9;
+  border-color: #a9a9a9;
+}
+#highscore-3 {
+  color: #cd7f32;
+  border-color: #cd7f32;
+}
+
 .score {
   width: 100%;
   display: flex;
   flex-direction: row;
   border: solid black 2px;
   align-items: center;
+  user-select: none;
+}
+.score:hover {
+  background-color: rgba(255, 255, 255, 0.068);
 }
 .highscores-title {
   color: white;
   text-align: center;
   padding: 11px;
   font-size: 41px;
+}
+#highscores-box {
+  padding: 5px;
 }
 .score-pfp {
   width: 70px;

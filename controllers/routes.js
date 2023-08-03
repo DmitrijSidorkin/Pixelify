@@ -15,6 +15,7 @@ module.exports.ROUTES = {
   updateProfile: "/update-profile",
   viewProfile: "/view-profile/:id",
   results: "/results/:id",
+  fetchTopHighscores: "/fetch-top-highscores",
   detailedResults: "/detailed-results/:id",
   fetchDetailedGameData: "/fetch-detailed-game-data",
   playSettings: "/play-settings",
