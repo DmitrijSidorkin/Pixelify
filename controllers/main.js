@@ -63,6 +63,7 @@ module.exports.renderContinue = async (req, res) => {
 module.exports.fetchPlayGameData = async (req, res) => {
   const { id, pageNum } = req.params;
   const playSessionData = await PlaySession.findOne({ sessionId: id });
+  const sessionLength = playSessionData.length;
   if (playSessionData.sessionEnded) {
     res.redirect("/results");
   }
@@ -94,15 +95,18 @@ module.exports.fetchPlayGameData = async (req, res) => {
   } else {
     pageGameData = playSessionData.sessionData[parseInt(pageNum) - 1];
   }
+
   //pixelating image
   const image = await pixelateImageFromURL(
     pageGameData.imgLink,
     playSessionData.difficulty
   );
+
   const responseData = JSON.stringify({
     gamesArray: pageGameData.gamesArray,
     pageGameDataId: pageGameData._id,
     userGuessText: pageGameData?.userGuessText || "",
+    sessionLength,
     image,
   });
   res.json(responseData);
