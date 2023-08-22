@@ -86,13 +86,13 @@ module.exports.updateProfile = async (req, res) => {
     mediaLinks: {},
   };
 
-  const { facebook, twitter, instagram, tumblr } = req.body;
-  profileData.mediaLinks = mediaLinkValidation(
-    facebook,
-    twitter,
-    instagram,
-    tumblr
-  );
+  const userMediaLinks = {
+    facebook: req.body.facebook,
+    twitter: req.body.twitter,
+    instagram: req.body.instagram,
+    tumblr: req.body.tumblr,
+  };
+  profileData.mediaLinks = mediaLinkValidation(userMediaLinks);
 
   const maxDate = getMaxDate();
   if (req.body.birthDate <= maxDate) {
@@ -122,6 +122,7 @@ module.exports.viewProfile = async (req, res) => {
   const profileData = await fetchProfileData(id);
   const jsonData = encodeURIComponent(JSON.stringify(profileData));
   const highscores = encodeURIComponent(JSON.stringify(profileData.bestScores));
+  consol;
   res.render("account/view-profile.ejs", {
     extraStyles: viewProfileStyle + accountHighscoresGridStyle,
     profileData,

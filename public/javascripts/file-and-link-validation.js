@@ -19,6 +19,9 @@ function fileValidation() {
 }
 
 function checkMediaLink(input, link, medium) {
+  if (link === "") {
+    return;
+  }
   const mediaRegex = {
     facebook:
       /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?$/,

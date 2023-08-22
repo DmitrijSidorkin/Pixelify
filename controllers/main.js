@@ -14,6 +14,7 @@ const {
 const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 const { pixelateImageFromURL } = require("../middleware/imagePixelation");
+const { getTop10Users } = require("../middleware/helpers.js");
 
 module.exports.playOrContinue = async (req, res) => {
   if (req.user?._id) {
@@ -134,25 +135,7 @@ module.exports.renderResults = async (req, res, next) => {
 module.exports.fetchTopHighscores = async (req, res) => {
   const { difficulty, length } = req.query;
   const dbSearchFilter = `bestScores.${difficulty}.${length}`;
-  async function getTop10Users() {
-    const pipeline = [
-      { $sort: { [dbSearchFilter]: -1 } },
-      { $limit: 10 },
-      {
-        $project: {
-          _id: 1,
-          username: 1,
-          profileImage: 1,
-          country: 1,
-          profileImg: 1,
-          score: `$${dbSearchFilter}`,
-        },
-      },
-    ];
-    const topUsers = await User.aggregate(pipeline);
-    return topUsers;
-  }
-  const highscoresData = await getTop10Users();
+  const highscoresData = await getTop10Users(dbSearchFilter);
   const highscoreText = `${remapDifficultyTexts[difficulty]} ${length}`;
   const responseData = { highscoresData, highscoreText };
   res.json(JSON.stringify(responseData));

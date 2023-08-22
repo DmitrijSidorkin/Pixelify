@@ -56,29 +56,52 @@ function checkMediaLink(mediaLink, linkRegex) {
   return match && match[3];
 }
 
-module.exports.mediaLinkValidation = (facebook, twitter, instagram, tumblr) => {
-  const mediaRegex = {
-    facebook:
-      /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?$/,
-    twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})\/?$/,
-    instagram:
-      /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
-    tumblr: /^(https?:\/\/)?(www\.)?tumblr\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
-  };
-  let validLinks = {};
-  if (checkMediaLink(facebook, mediaRegex.facebook)) {
+module.exports.mediaLinkValidation = ({
+  facebook,
+  twitter,
+  instagram,
+  tumblr,
+}) => {
+  const facebookRegex =
+    /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?$/;
+  const twitterRegex =
+    /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})\/?$/;
+  const instagramRegex =
+    /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]{1,30})\/?$/;
+  const tumblrRegex =
+    /^(https?:\/\/)?(www\.)?tumblr\.com\/([a-zA-Z0-9_.]{1,30})\/?$/;
+
+  const validLinks = {};
+  if (checkMediaLink(facebook, facebookRegex)) {
     validLinks.facebook = facebook;
   }
-  if (checkMediaLink(twitter, mediaRegex.twitter)) {
+  if (checkMediaLink(twitter, twitterRegex)) {
     validLinks.twitter = twitter;
   }
-  if (checkMediaLink(instagram, mediaRegex.instagram)) {
+  if (checkMediaLink(instagram, instagramRegex)) {
     validLinks.instagram = instagram;
   }
-  if (checkMediaLink(tumblr, mediaRegex.tumblr)) {
+  if (checkMediaLink(tumblr, tumblrRegex)) {
     validLinks.tumblr = tumblr;
   }
   return validLinks;
 };
 
-//matchIndex is necessary because tumblr links have a different structure
+module.exports.getTop10Users = async (dbSearchFilter) => {
+  const pipeline = [
+    { $sort: { [dbSearchFilter]: -1 } },
+    { $limit: 10 },
+    {
+      $project: {
+        _id: 1,
+        username: 1,
+        profileImage: 1,
+        country: 1,
+        profileImg: 1,
+        score: `$${dbSearchFilter}`,
+      },
+    },
+  ];
+  const topUsers = await User.aggregate(pipeline);
+  return topUsers;
+};
