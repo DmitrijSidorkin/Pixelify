@@ -122,7 +122,6 @@ module.exports.viewProfile = async (req, res) => {
   const profileData = await fetchProfileData(id);
   const jsonData = encodeURIComponent(JSON.stringify(profileData));
   const highscores = encodeURIComponent(JSON.stringify(profileData.bestScores));
-  consol;
   res.render("account/view-profile.ejs", {
     extraStyles: viewProfileStyle + accountHighscoresGridStyle,
     profileData,

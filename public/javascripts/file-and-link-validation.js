@@ -24,15 +24,16 @@ function checkMediaLink(input, link, medium) {
   }
   const mediaRegex = {
     facebook:
-      /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?$/,
-    twitter: /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})\/?$/,
+      /^(https?:\/\/)?(www\.)?facebook\.com\/(?:[a-zA-Z0-9.]+\/)?(?:profile\.php\?id=(\d+)|([a-zA-Z0-9.]+))\/?(?:\?.*)?$/,
+    twitter:
+      /^(https?:\/\/)?(www\.)?twitter\.com\/([a-zA-Z0-9_]{1,15})\/?(?:\?.*)?$/,
     instagram:
-      /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
-    tumblr: /^(https?:\/\/)?(www\.)?tumblr\.com\/([a-zA-Z0-9_.]{1,30})\/?$/,
+      /^(https?:\/\/)?(www\.)?instagram\.com\/([a-zA-Z0-9_.]{1,30})\/?(?:\?.*)?$/,
+    tumblr:
+      /^(https?:\/\/)?(www\.)?tumblr\.com\/([a-zA-Z0-9_.]{1,30})\/?(?:\?.*)?$/,
   };
-  let matchIndex = 3;
   const match = link.match(mediaRegex[medium]);
-  if (!(match && match[matchIndex])) {
+  if (!(match && match[3])) {
     if (input.nextElementSibling) {
       return;
     }
