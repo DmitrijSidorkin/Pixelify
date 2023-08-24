@@ -30,7 +30,7 @@ function fetchPlayGameData() {
           <label for="guess-${index}">${game.gameName}</label>
         </div>`;
         } else {
-          fieldsetOptions += `<div>
+          fieldsetOptions += `<div class="game-guess-wrapper">
                <input class="field-input" type="radio" id="guess-${index}"
                name="guess" value="${game.gameName}">
                <label for="guess-${index}">${game.gameName}</label>
