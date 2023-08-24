@@ -9,6 +9,7 @@ const {
   fetchProfileData,
   defaultProfileImg,
   getMaxDate,
+  mediaLinkValidation,
 } = require("../middleware/helpers.js");
 const User = require("../models/user");
 const { countries } = require("../public/javascripts/countries.js");
@@ -23,7 +24,7 @@ module.exports.renderAccountMain = async (req, res) => {
   });
 };
 
-module.exports.fetchUserHighscores = async (req, res) => {
+module.exports.fetchUserData = async (req, res) => {
   const responseData = {
     lengthSettingsOptions,
     highscores: req.user.bestScores,
@@ -82,7 +83,16 @@ module.exports.updateProfile = async (req, res) => {
     realName: req.body.realName,
     location: req.body.location,
     bio: req.body.bio,
+    mediaLinks: {},
   };
+
+  const userMediaLinks = {
+    facebook: req.body.facebook,
+    twitter: req.body.twitter,
+    instagram: req.body.instagram,
+    tumblr: req.body.tumblr,
+  };
+  profileData.mediaLinks = mediaLinkValidation(userMediaLinks);
 
   const maxDate = getMaxDate();
   if (req.body.birthDate <= maxDate) {
@@ -102,6 +112,7 @@ module.exports.updateProfile = async (req, res) => {
       filename: req.file.filename,
     };
   }
+
   await User.findByIdAndUpdate(req.user._id, profileData);
   res.redirect("/account");
 };
@@ -109,9 +120,14 @@ module.exports.updateProfile = async (req, res) => {
 module.exports.viewProfile = async (req, res) => {
   const { id } = req.params;
   const profileData = await fetchProfileData(id);
+  const jsonData = encodeURIComponent(JSON.stringify(profileData));
+  const highscores = encodeURIComponent(JSON.stringify(profileData.bestScores));
   res.render("account/view-profile.ejs", {
     extraStyles: viewProfileStyle + accountHighscoresGridStyle,
     profileData,
+    jsonData,
+    highscores,
+    lengthSettingsOptions,
     defaultProfileImg,
   });
 };

@@ -33,7 +33,12 @@ const UserSchema = new Schema({
     5: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
   },
   customSessionHighScores: {},
-  mediaLinks: {},
+  mediaLinks: {
+    facebook: String,
+    twitter: String,
+    instagram: String,
+    tumblr: String,
+  },
 });
 
 UserSchema.plugin(passportLocalMongoose);

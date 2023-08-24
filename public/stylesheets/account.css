@@ -41,6 +41,7 @@ main {
 }
 .profile-form-input-wrapper {
   display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 5px;
 }
@@ -49,11 +50,11 @@ main {
   min-width: 30px;
 }
 .bio {
-  box-sizing: border-box;
-  font-size: 17px;
+  resize: vertical;
   word-wrap: break-word;
+  flex-grow: 1;
 }
-.form-section:first-of-type {
+.form-section {
   padding-bottom: 30px;
 }
 .form-section-label {
@@ -123,6 +124,27 @@ main {
   border-bottom: solid 2px rgba(1, 172, 1, 0.801);
   padding: 15px 0px;
 }
+.link-warning {
+  color: rgb(253, 84, 84);
+}
+.social-media-icon {
+  display: inline;
+  width: 30px;
+  height: 30px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+.account-media-links {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.social-media-link {
+  text-decoration: none;
+}
 
 @media (max-width: 1024px) {
   body {
@@ -134,9 +156,6 @@ main {
   }
   main {
     padding: 70px 8% 70px 5%;
-  }
-  .profile-form-input-wrapper {
-    flex-direction: column;
   }
 }
 

@@ -7,3 +7,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+input:focus,
+textarea:focus {
+  outline: rgba(1, 172, 1, 0.801) solid 3px;
+}
+input::selection {
+  background: rgba(1, 172, 1, 0.801);
+}

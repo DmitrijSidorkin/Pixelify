@@ -94,10 +94,74 @@
           >
         </div>
       </div>
+      <div class="form-section">
+        <div class="form-section-label">Media Links</div>
+        <div class="profile-form-input-wrapper">
+          <label for="facebook" class="form-input-label"
+            ><img
+              class="social-media-icon"
+              src="../../icons/social-media-icons/facebook.svg"
+          /></label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="facebook"
+            id="facebook"
+            value="<%= profileData.mediaLinks.facebook %>"
+            onfocusout="checkMediaLink(this, this.value, this.name)"
+          />
+        </div>
+        <div class="profile-form-input-wrapper">
+          <label for="real-name" class="form-input-label"
+            ><img
+              class="social-media-icon"
+              src="../../icons/social-media-icons/twitter.svg"
+          /></label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="twitter"
+            id="twitter"
+            value="<%= profileData.mediaLinks.twitter %>"
+            onfocusout="checkMediaLink(this, this.value, this.name)"
+          />
+        </div>
+        <div class="profile-form-input-wrapper">
+          <label for="real-name" class="form-input-label"
+            ><img
+              class="social-media-icon"
+              src="../../icons/social-media-icons/instagram.svg"
+          /></label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="instagram"
+            id="instagram"
+            value="<%= profileData.mediaLinks.instagram %>"
+            onfocusout="checkMediaLink(this, this.value, this.name)"
+          />
+        </div>
+        <div class="profile-form-input-wrapper">
+          <label for="real-name" class="form-input-label"
+            ><img
+              class="social-media-icon"
+              src="../../icons/social-media-icons/tumblr.svg"
+          /></label>
+          <input
+            type="text"
+            class="profile-form-input"
+            name="tumblr"
+            id="tumblr"
+            value="<%= profileData.mediaLinks.tumblr %>"
+            onfocusout="checkMediaLink(this, this.value, this.name)"
+          />
+        </div>
+      </div>
+
       <button class="form-button">Update</button>
     </form>
   </div>
 </div>
 
-<script src="/javascripts/file-validation.js"></script>
+<script src="/javascripts/file-and-link-validation.js"></script>
 <script src="/javascripts/autofill-profile-form.js"></script>
