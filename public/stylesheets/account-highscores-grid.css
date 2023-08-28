@@ -16,6 +16,8 @@
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
+  align-items: center;
+  line-height: 1.4;
 }
 .grid-score,
 .grid-difficulty {

@@ -52,15 +52,38 @@ function calculateAge(birthdate) {
   return age;
 }
 
+function generateScoreStyle(score, difficulty, sessionLength) {
+  const difficultyModifier = 1 + 0.5 * difficulty;
+  //maximum guess score + maximum time bonus score
+  const maxScore =
+    1000 * difficultyModifier * sessionLength + 15 * 50 * difficultyModifier;
+
+  const minFontSize = 0.8;
+  const maxFontSize = 1.3;
+  const fontSize =
+    minFontSize + (score / maxScore) * (maxFontSize - minFontSize);
+
+  const greenValue = Math.floor(Math.min(255, (255 * score) / maxScore) + 1);
+  const redValue = Math.floor(
+    Math.min(255, (255 * (maxScore - score)) / maxScore) + 1
+  );
+
+  return `font-size: ${fontSize}em; color: rgb(${redValue}, ${greenValue}, 0)`;
+}
+
 function generateHighscores(highscores, lengthSettingsOptions) {
   let htmlRows = "";
   lengthSettingsOptions.forEach((setting) => {
     htmlRows += `<div class="grid-length">${setting}</div>`;
     Object.keys(highscores).forEach((difficulty) => {
       if (!highscores[difficulty][setting]) {
-        htmlRows += `<div class="grid-score">0</div>`;
+        htmlRows += `<div class="grid-score" style="font-size: 0.8em; color: red">0</div>`;
       } else {
-        htmlRows += `<div class="grid-score">${highscores[difficulty][setting]}</div>`;
+        htmlRows += `<div class="grid-score" style="${generateScoreStyle(
+          highscores[difficulty][setting],
+          difficulty,
+          setting
+        )}"">${highscores[difficulty][setting]}</div>`;
       }
     });
   });
