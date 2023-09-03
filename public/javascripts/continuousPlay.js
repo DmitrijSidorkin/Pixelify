@@ -59,9 +59,8 @@ form.addEventListener("submit", function (event) {
   if (event.submitter.value === "back") {
     window.location.href = `/play/${sessionId}/${pageNum - 1}`;
   } else {
-    const elemId = document.getElementById("elemId").value;
     const action = event.submitter.value;
-    const additionalData = { sessionId, pageNum, action, elemId };
+    const additionalData = { sessionId, pageNum, action };
     //creating a hidden input element with necessary data and submitting form
     const additionalDataInput = document.createElement("input");
     additionalDataInput.type = "hidden";

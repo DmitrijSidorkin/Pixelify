@@ -14,9 +14,9 @@ router.route(ROUTES.fetchUserData).get(account.fetchUserData);
 router
   .route(ROUTES.changePassword)
   .get(isLoggedIn, account.renderChangePassword);
+router.route(ROUTES.updatePassword).post(isLoggedIn, account.updatePassword);
 
 router.route(ROUTES.changeProfile).get(isLoggedIn, account.renderChangeProfile);
-router.route(ROUTES.updatePassword).post(isLoggedIn, account.updatePassword);
 router
   .route(ROUTES.updateProfile)
   .post(isLoggedIn, upload.single("profileImg"), account.updateProfile);

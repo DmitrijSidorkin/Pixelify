@@ -3,7 +3,11 @@ const { v4: uuidv4 } = require("uuid");
 const PlaySession = require("../models/session");
 const User = require("../models/user");
 const GameData = require("../models/game-data");
-const { fetchRandomGameDataArr, calculateScore } = require("../middleware");
+const {
+  fetchRandomGameDataArr,
+  calculateScore,
+  dataSchemaValidation,
+} = require("../middleware");
 const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
@@ -15,6 +19,7 @@ const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 const { pixelateImageFromURL } = require("../middleware/imagePixelation");
 const { getTop10Users } = require("../middleware/helpers.js");
+const { sendPlayDataSchema, updatePlayDataSchema } = require("../schemas");
 
 module.exports.playOrContinue = async (req, res) => {
   if (req.user?._id) {
@@ -158,89 +163,98 @@ module.exports.renderDetailedResults = async (req, res, next) => {
 };
 
 module.exports.sendPlayData = async (req, res, next) => {
-  const id = uuidv4();
-  const difficulty = parseInt(req.body.difficulty);
-  const length = parseInt(req.body.sessionLength);
-  if (
-    !(difficulty in remapDifficultyTexts) ||
-    !lengthSettingsOptions.includes(length)
-  ) {
-    //send feedback to user on selected play settings being invalid
-    res.redirect("/play-settings");
+  if (dataSchemaValidation(req.body, sendPlayDataSchema)) {
+    const id = uuidv4();
+    const difficulty = parseInt(req.body.difficulty);
+    const length = parseInt(req.body.sessionLength);
+    if (
+      !(difficulty in remapDifficultyTexts) ||
+      !lengthSettingsOptions.includes(length)
+    ) {
+      res.redirect("/play-settings");
+    } else {
+      const playSession = new PlaySession({
+        userId: req.user?._id || "guest",
+        sessionId: id,
+        difficulty,
+        length,
+        sessionData: [],
+        sessionEnded: false,
+        sessionStartTime: Date.now(),
+      });
+      await playSession.save();
+      res.redirect(`/play/${id}/1`);
+      next();
+    }
   } else {
-    const playSession = new PlaySession({
-      userId: req.user?._id || "guest",
-      sessionId: id,
-      difficulty,
-      length,
-      sessionData: [],
-      sessionEnded: false,
-      sessionStartTime: Date.now(),
-    });
-    await playSession.save();
-    res.redirect(`/play/${id}/1`);
-    next();
+    res.redirect("/play-settings");
   }
 };
 
 module.exports.updatePlayData = async (req, res, next) => {
   const additionalData = JSON.parse(req.body.additionalData);
-  const sessionId = additionalData.sessionId;
-  const thisSession = await PlaySession.findOne({ sessionId });
-  //if session has already previously ended redirect to results page
-  if (thisSession.sessionEnded) {
-    res.redirect(`/results/${sessionId}`);
-  }
-  const pageNum = parseInt(additionalData.pageNum);
-  const userGuess =
-    req.body.guess === thisSession.sessionData[pageNum - 1].gameName;
-  await PlaySession.updateOne(
-    { sessionId },
-    {
-      $set: {
-        "sessionData.$[elem].userGuess": userGuess,
-        "sessionData.$[elem].userGuessText": req.body.guess,
-      },
-    },
-    { arrayFilters: [{ "elem._id": additionalData.elemId }] }
-  );
-  const thisUpdatedSession = await PlaySession.findOne({ sessionId });
-
-  //if back button was pressed, go back a page in /play
-  if (additionalData.action === "back") {
-    res.redirect(`/play/${sessionId}/${pageNum - 1}`);
-  }
-  //if updating session data on last page, setting sessionEnded to true, calculating session score
-  //and (if necessary) updating highscores and redirecting to results page
-  if (thisUpdatedSession.length === parseInt(additionalData.pageNum)) {
-    const userId = thisUpdatedSession.userId;
-    const currentUser = await User.findOne({ _id: userId });
-    const score = calculateScore(thisUpdatedSession, Date.now());
+  req.body.additionalData = additionalData;
+  if (dataSchemaValidation(req.body, updatePlayDataSchema)) {
+    const sessionId = additionalData.sessionId;
+    const thisSession = await PlaySession.findOne({ sessionId });
+    //if session has already previously ended redirect to results page
+    if (thisSession.sessionEnded) {
+      res.redirect(`/results/${sessionId}`);
+    }
+    const pageNum = parseInt(additionalData.pageNum);
+    const userGuess =
+      req.body.guess === thisSession.sessionData[pageNum - 1].gameName;
     await PlaySession.updateOne(
       { sessionId },
-      { $set: { sessionEnded: true, sessionScore: score } }
+      {
+        $set: {
+          "sessionData.$[elem].userGuess": userGuess,
+          "sessionData.$[elem].userGuessText": req.body.guess,
+        },
+      },
+      { arrayFilters: [{ "elem._id": req.body.elemId }] }
     );
-    if (
-      currentUser.bestScores[thisSession.difficulty][thisSession.length] ===
-        undefined ||
-      currentUser.bestScores[thisSession.difficulty][thisSession.length] < score
-    ) {
-      await User.updateOne(
-        { _id: userId },
-        {
-          $set: {
-            [`bestScores.${thisSession.difficulty}.${thisSession.length}`]:
-              score,
-          },
-        }
-      );
-    }
-    res.redirect(`/results/${sessionId}`);
-  }
+    const thisUpdatedSession = await PlaySession.findOne({ sessionId });
 
-  //redirecting to next guess page
-  res.redirect(`/play/${sessionId}/${pageNum + 1}`);
-  next();
+    //if back button was pressed, go back a page in /play
+    if (additionalData.action === "back") {
+      res.redirect(`/play/${sessionId}/${pageNum - 1}`);
+    }
+    //if updating session data on last page, setting sessionEnded to true, calculating session score
+    //and (if necessary) updating highscores and redirecting to results page
+    if (thisUpdatedSession.length === parseInt(additionalData.pageNum)) {
+      const userId = thisUpdatedSession.userId;
+      const currentUser = await User.findOne({ _id: userId });
+      const score = calculateScore(thisUpdatedSession, Date.now());
+      await PlaySession.updateOne(
+        { sessionId },
+        { $set: { sessionEnded: true, sessionScore: score } }
+      );
+      if (
+        currentUser.bestScores[thisSession.difficulty][thisSession.length] ===
+          undefined ||
+        currentUser.bestScores[thisSession.difficulty][thisSession.length] <
+          score
+      ) {
+        await User.updateOne(
+          { _id: userId },
+          {
+            $set: {
+              [`bestScores.${thisSession.difficulty}.${thisSession.length}`]:
+                score,
+            },
+          }
+        );
+      }
+      res.redirect(`/results/${sessionId}`);
+    }
+
+    //redirecting to next guess page
+    res.redirect(`/play/${sessionId}/${pageNum + 1}`);
+    next();
+  } else {
+    res.redirect(`/play/${req.body.sessionId}/${req.body.pageNum}`);
+  }
 };
 
 module.exports.fetchDetailedGameData = async (req, res) => {

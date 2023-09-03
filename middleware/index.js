@@ -4,6 +4,7 @@ const {
   fetchRandomGameDataArr,
   isLoggedIn,
   calculateScore,
+  dataSchemaValidation,
 } = require("./middleware");
 const { generateUniqueRandomArr } = require("./helpers");
 
@@ -14,4 +15,5 @@ module.exports = {
   isLoggedIn,
   generateUniqueRandomArr,
   calculateScore,
+  dataSchemaValidation,
 };

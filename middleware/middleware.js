@@ -183,3 +183,12 @@ module.exports.calculateScore = (session, sessionEnd) => {
     return guessesScore + timeBonusScore;
   }
 };
+
+module.exports.dataSchemaValidation = (form, schema) => {
+  const { error } = schema.validate(form);
+  if (error) {
+    console.log(error);
+  }
+  console.log(!error);
+  return !error;
+};
