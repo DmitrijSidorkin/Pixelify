@@ -3,8 +3,8 @@ const { pixelateImageFromURL } = require("../middleware/imagePixelation");
 const { ROUTES } = require("./routes");
 
 const { cardStyle } = require("../public/javascripts/extraStyles.js");
-const { dataSchemaValidation } = require("../middleware");
-const { registrationSchema } = require("../schemas");
+const { dataSchemaValidation } = require("../middleware/middleware");
+const { schemas } = require("../schemas");
 
 module.exports.renderRegister = async (req, res) => {
   const image = await pixelateImageFromURL(req.gameData.background_image);
@@ -12,22 +12,19 @@ module.exports.renderRegister = async (req, res) => {
 };
 
 module.exports.register = async (req, res, next) => {
-  if (dataSchemaValidation(req.body, registrationSchema)) {
-    try {
-      const { email, username, password } = req.body;
-      const user = new User({ email, username });
-      const registeredUser = await User.register(user, password);
-      req.login(registeredUser, (err) => {
-        if (err) return next(err);
-        req.flash("success", "Welcome!");
-        res.redirect(ROUTES.index);
-      });
-    } catch (e) {
-      req.flash("error", e.message);
-      res.redirect(ROUTES.register);
-    }
-  } else {
-    res.redirect("/register");
+  dataSchemaValidation(req.body, schemas.registrationSchema);
+  try {
+    const { email, username, password } = req.body;
+    const user = new User({ email, username });
+    const registeredUser = await User.register(user, password);
+    req.login(registeredUser, (err) => {
+      if (err) return next(err);
+      req.flash("success", "Welcome!");
+      res.redirect(ROUTES.index);
+    });
+  } catch (e) {
+    req.flash("error", e.message);
+    res.redirect(ROUTES.register);
   }
 };
 

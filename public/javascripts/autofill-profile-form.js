@@ -20,7 +20,7 @@ function checkDate(date) {
 
 function removeTextAreaWhiteSpace() {
   const myTxtArea = document.getElementById(`bio`);
-  myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g, ``);
+  myTxtArea.innerText = myTxtArea.innerText.trim();
 }
 
 removeTextAreaWhiteSpace();

@@ -1,4 +1,5 @@
 const axios = require("axios");
+const Joi = require("joi");
 
 const { ROUTES } = require("../controllers/routes");
 const { generateUniqueRandomArr, generateRandomNum } = require("./helpers");
@@ -186,9 +187,9 @@ module.exports.calculateScore = (session, sessionEnd) => {
 
 module.exports.dataSchemaValidation = (form, schema) => {
   const { error } = schema.validate(form);
+  console.log(error.details[0].message);
   if (error) {
-    console.log(error);
+    throw new Error(error);
   }
-  console.log(!error);
   return !error;
 };

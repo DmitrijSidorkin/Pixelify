@@ -14,8 +14,8 @@ const {
 const User = require("../models/user");
 const { countries } = require("../public/javascripts/countries.js");
 const { lengthSettingsOptions } = require("../middleware/remaps.js");
-const { dataSchemaValidation } = require("../middleware");
-const { changePasswordSchema, editProfileSchema } = require("../schemas");
+const { dataSchemaValidation } = require("../middleware/middleware");
+const { schemas } = require("../schemas");
 
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
@@ -57,7 +57,7 @@ module.exports.renderChangeProfile = async (req, res) => {
 };
 
 module.exports.updatePassword = async (req, res) => {
-  dataSchemaValidation(req.body, changePasswordSchema);
+  dataSchemaValidation(req.body, schemas.changePasswordSchema);
   const { oldPassword, newPassword, repeatPassword } = req.body;
 
   if (!oldPassword || !newPassword || !repeatPassword) {
@@ -81,47 +81,44 @@ module.exports.updatePassword = async (req, res) => {
 };
 
 module.exports.updateProfile = async (req, res) => {
-  if (dataSchemaValidation(req.body, editProfileSchema)) {
-    const profileData = {
-      displayName: req.body.displayName,
-      realName: req.body.realName,
-      location: req.body.location,
-      bio: req.body.bio,
-      mediaLinks: {},
-    };
+  dataSchemaValidation(req.body, schemas.editProfileSchema);
+  const profileData = {
+    displayName: req.body.displayName,
+    realName: req.body.realName,
+    location: req.body.location,
+    bio: req.body.bio,
+    mediaLinks: {},
+  };
 
-    const userMediaLinks = {
-      facebook: req.body.facebook,
-      twitter: req.body.twitter,
-      instagram: req.body.instagram,
-      tumblr: req.body.tumblr,
-    };
-    profileData.mediaLinks = mediaLinkValidation(userMediaLinks);
+  const userMediaLinks = {
+    facebook: req.body.facebook,
+    twitter: req.body.twitter,
+    instagram: req.body.instagram,
+    tumblr: req.body.tumblr,
+  };
+  profileData.mediaLinks = mediaLinkValidation(userMediaLinks);
 
-    const maxDate = getMaxDate();
-    if (req.body.birthDate <= maxDate) {
-      profileData.birthDate = req.body.birthDate;
-    }
-    if (countries.some((country) => country.value === req.body.country)) {
-      profileData.country = req.body.country;
-    }
-
-    if (req.file) {
-      const user = await User.findById(req.user._id);
-      if (user.profileImg) {
-        cloudinary.uploader.destroy(user.profileImg.filename);
-      }
-      profileData.profileImg = {
-        url: req.file.path,
-        filename: req.file.filename,
-      };
-    }
-
-    await User.findByIdAndUpdate(req.user._id, profileData);
-    res.redirect("/account");
-  } else {
-    location.reload;
+  const maxDate = getMaxDate();
+  if (req.body.birthDate <= maxDate) {
+    profileData.birthDate = req.body.birthDate;
   }
+  if (countries.some((country) => country.value === req.body.country)) {
+    profileData.country = req.body.country;
+  }
+
+  if (req.file) {
+    const user = await User.findById(req.user._id);
+    if (user.profileImg) {
+      cloudinary.uploader.destroy(user.profileImg.filename);
+    }
+    profileData.profileImg = {
+      url: req.file.path,
+      filename: req.file.filename,
+    };
+  }
+
+  await User.findByIdAndUpdate(req.user._id, profileData);
+  res.redirect("/account");
 };
 
 module.exports.viewProfile = async (req, res) => {
