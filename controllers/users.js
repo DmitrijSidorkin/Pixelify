@@ -3,6 +3,8 @@ const { pixelateImageFromURL } = require("../middleware/imagePixelation");
 const { ROUTES } = require("./routes");
 
 const { cardStyle } = require("../public/javascripts/extraStyles.js");
+const { dataSchemaValidation } = require("../middleware/middleware");
+const { schemas } = require("../schemas");
 
 module.exports.renderRegister = async (req, res) => {
   const image = await pixelateImageFromURL(req.gameData.background_image);
@@ -10,6 +12,7 @@ module.exports.renderRegister = async (req, res) => {
 };
 
 module.exports.register = async (req, res, next) => {
+  dataSchemaValidation(req.body, schemas.registrationSchema);
   try {
     const { email, username, password } = req.body;
     const user = new User({ email, username });

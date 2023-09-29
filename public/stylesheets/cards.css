@@ -58,11 +58,11 @@ body {
   margin-bottom: 3px;
   display: block;
 }
-.field-input {
+.field-input,
+.text-input {
   border-radius: 5px;
   padding: 3px;
 }
-
 .card-shadow {
   height: 70vh;
 }

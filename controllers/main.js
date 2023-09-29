@@ -3,7 +3,11 @@ const { v4: uuidv4 } = require("uuid");
 const PlaySession = require("../models/session");
 const User = require("../models/user");
 const GameData = require("../models/game-data");
-const { fetchRandomGameDataArr, calculateScore } = require("../middleware");
+const {
+  fetchRandomGameDataArr,
+  calculateScore,
+  dataSchemaValidation,
+} = require("../middleware");
 const { fetchPlaySessionData } = require("../middleware/helpers");
 const {
   cardStyle,
@@ -15,6 +19,7 @@ const { lengthSettingsOptions } = require("../middleware/remaps");
 const { remapDifficultyTexts } = require("../public/helpers.js");
 const { pixelateImageFromURL } = require("../middleware/imagePixelation");
 const { getTop10Users } = require("../middleware/helpers.js");
+const { schemas } = require("../schemas");
 
 module.exports.playOrContinue = async (req, res) => {
   if (req.user?._id) {
@@ -161,11 +166,11 @@ module.exports.sendPlayData = async (req, res, next) => {
   const id = uuidv4();
   const difficulty = parseInt(req.body.difficulty);
   const length = parseInt(req.body.sessionLength);
+  dataSchemaValidation({ difficulty, length }, schemas.sendPlayDataSchema);
   if (
     !(difficulty in remapDifficultyTexts) ||
     !lengthSettingsOptions.includes(length)
   ) {
-    //send feedback to user on selected play settings being invalid
     res.redirect("/play-settings");
   } else {
     const playSession = new PlaySession({
@@ -185,7 +190,9 @@ module.exports.sendPlayData = async (req, res, next) => {
 
 module.exports.updatePlayData = async (req, res, next) => {
   const additionalData = JSON.parse(req.body.additionalData);
+  req.body.additionalData = additionalData;
   const sessionId = additionalData.sessionId;
+  dataSchemaValidation(req.body, schemas.updatePlayDataSchema);
   const thisSession = await PlaySession.findOne({ sessionId });
   //if session has already previously ended redirect to results page
   if (thisSession.sessionEnded) {
@@ -202,7 +209,7 @@ module.exports.updatePlayData = async (req, res, next) => {
         "sessionData.$[elem].userGuessText": req.body.guess,
       },
     },
-    { arrayFilters: [{ "elem._id": additionalData.elemId }] }
+    { arrayFilters: [{ "elem._id": req.body.elemId }] }
   );
   const thisUpdatedSession = await PlaySession.findOne({ sessionId });
 

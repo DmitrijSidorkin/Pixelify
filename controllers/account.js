@@ -14,6 +14,8 @@ const {
 const User = require("../models/user");
 const { countries } = require("../public/javascripts/countries.js");
 const { lengthSettingsOptions } = require("../middleware/remaps.js");
+const { dataSchemaValidation } = require("../middleware/middleware");
+const { schemas } = require("../schemas");
 
 module.exports.renderAccountMain = async (req, res) => {
   const profileData = await fetchProfileData(req.user._id);
@@ -55,6 +57,7 @@ module.exports.renderChangeProfile = async (req, res) => {
 };
 
 module.exports.updatePassword = async (req, res) => {
+  dataSchemaValidation(req.body, schemas.changePasswordSchema);
   const { oldPassword, newPassword, repeatPassword } = req.body;
 
   if (!oldPassword || !newPassword || !repeatPassword) {
@@ -78,6 +81,7 @@ module.exports.updatePassword = async (req, res) => {
 };
 
 module.exports.updateProfile = async (req, res) => {
+  dataSchemaValidation(req.body, schemas.editProfileSchema);
   const profileData = {
     displayName: req.body.displayName,
     realName: req.body.realName,

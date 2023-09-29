@@ -17,3 +17,10 @@ function checkDate(date) {
     date.value = "";
   }
 }
+
+function removeTextAreaWhiteSpace() {
+  const myTxtArea = document.getElementById(`bio`);
+  myTxtArea.innerText = myTxtArea.innerText.trim();
+}
+
+removeTextAreaWhiteSpace();
