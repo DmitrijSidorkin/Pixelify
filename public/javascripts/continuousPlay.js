@@ -24,7 +24,7 @@ function fetchPlayGameData() {
       data.gamesArray.forEach((game, index) => {
         //looking for previously selected option and automatically checking it
         if (game.gameName === data.userGuessText) {
-          fieldsetOptions += `<div>
+          fieldsetOptions += `<div class="game-guess-wrapper">
           <input class="field-input" type="radio" id="guess-${index}"
           name="guess" value="${game.gameName}" checked>
           <label for="guess-${index}">${game.gameName}</label>
