@@ -10,6 +10,7 @@ const LocalStrategy = require("passport-local");
 const MongoStore = require("connect-mongo");
 const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
+const helmet = require("helmet");
 
 const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
@@ -70,6 +71,26 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'"],
+      scriptSrc: ["'unsafe-inline'", "'self'"],
+      styleSrc: ["'unsafe-inline'", "'self'", "https://fonts.googleapis.com/"],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/dyguovdbc/",
+        "https://media.rawg.io/media/",
+      ],
+    },
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
