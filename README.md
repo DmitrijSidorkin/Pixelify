@@ -27,11 +27,7 @@
 
 ### Prerequisites
 
-<!-- need a bit help with this part -->
-
 ### Installation
-
-<!-- need a bit help with this part -->
 
 ## Roadmap
 
