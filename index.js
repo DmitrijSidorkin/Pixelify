@@ -16,9 +16,10 @@ const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
 const accountRoutes = require("./routes/account");
 const User = require("./models/user");
-// const ExpressError = require("./utils/ExpressError");
 
-const dbUrl = "mongodb://localhost:27017/pixelify"; //process.env.DB_URL ||
+const dbUrl = process.env.IN_DEVELOPMENT
+  ? "mongodb://localhost:27017/pixelify"
+  : process.env.DB_URL;
 
 mongoose.set("strictQuery", false);
 mongoose.connect(dbUrl, {
