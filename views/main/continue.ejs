@@ -22,20 +22,20 @@
       </div>
     </div>
     <div class="continue-card-buttons">
-      <button
-        onclick="window.location='/play-settings';"
+      <a
+        href="/play-settings"
         class="card-button"
         id="button-start-new"
       >
         Start New
-      </button>
-      <button
-        onclick="window.location='/play/<%=sessionData.id%>/<%=sessionData.progress%>';"
+      </a>
+      <a
+        href='/play/<%=sessionData.id%>/<%=sessionData.progress%>'
         class="card-button"
         id="button-continue"
       >
         Continue
-      </button>
+      </a>
     </div>
   </div>
 </div>
