@@ -83,10 +83,13 @@ module.exports.completeAndStoreGameData = async (detailedGameData) => {
   const gameData = await this.fetchAdditionalGameData(GAME_DATA_URL);
   const gameStoresResponse = await this.fetchAdditionalGameData(STORES_URL);
 
-  const developerNames = gameData.developers.map((developer) => developer.name);
-  const gameStoresLinks = gameStoresResponse.results.map(
-    ({ url, store_id }) => ({ url, store_id })
-  );
+  const developerNames =
+    gameData.developers.map((developer) => developer.name) || "";
+  const gameStoresLinks =
+    gameStoresResponse.results.map(({ url, store_id }) => ({
+      url,
+      store_id,
+    })) || "";
 
   const updatedGameData = {
     ...detailedGameData,
