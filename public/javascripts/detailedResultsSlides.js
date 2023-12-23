@@ -28,7 +28,7 @@ function fetchSlideData(textHtml) {
         metaScoreClass = "meta-red";
       }
       data.stores.forEach((store) => {
-        stores += `<a href="${store.url}"><img class="store-icons" src="../../icons/store-icons/${store.store_id}.png"></a>`;
+        stores += `<a href="${store.url}" target="_blank"><img class="store-icons" src="../../icons/store-icons/${store.store_id}.png"></a>`;
       });
       let htmlToAdd = `<div class="game-name user-guess-${
         playSessionData.sessionData[slideIndex - 1].userGuess
@@ -47,7 +47,7 @@ function fetchSlideData(textHtml) {
       }
 
       if (data.website) {
-        htmlToAdd += `<div class="game-game-details-text-wrapper">Official Website:<a class="game-website" href="${data.website}">${data.website}</a></div>
+        htmlToAdd += `<div class="game-game-details-text-wrapper">Official Website:<a class="game-website" href="${data.website}" target="_blank">${data.website}</a></div>
         </div>`;
       }
 
