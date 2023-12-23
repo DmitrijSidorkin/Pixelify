@@ -243,10 +243,9 @@ module.exports.updatePlayData = async (req, res, next) => {
       );
     }
     res.redirect(`/results/${sessionId}`);
+  } else {
+    res.redirect(`/play/${sessionId}/${pageNum + 1}`);
   }
-
-  //redirecting to next guess page
-  res.redirect(`/play/${sessionId}/${pageNum + 1}`);
   next();
 };
 
