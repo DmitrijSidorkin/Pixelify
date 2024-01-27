@@ -1,4 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
+const {ObjectId} = require("mongodb")
+const crypto = require('crypto');
+
 
 const PlaySession = require("../models/session");
 const User = require("../models/user");
@@ -164,6 +167,7 @@ module.exports.renderDetailedResults = async (req, res, next) => {
 
 module.exports.sendPlayData = async (req, res, next) => {
   const id = uuidv4();
+  const objectId = new ObjectId(crypto.randomBytes(12).toString("hex"));
   const difficulty = parseInt(req.body.difficulty);
   const length = parseInt(req.body.sessionLength);
   dataSchemaValidation({ difficulty, length }, schemas.sendPlayDataSchema);
@@ -174,7 +178,7 @@ module.exports.sendPlayData = async (req, res, next) => {
     res.redirect("/play-settings");
   } else {
     const playSession = new PlaySession({
-      userId: req.user?._id || "guest",
+      userId: req.user?._id || objectId,
       sessionId: id,
       difficulty,
       length,
@@ -227,6 +231,7 @@ module.exports.updatePlayData = async (req, res, next) => {
       { sessionId },
       { $set: { sessionEnded: true, sessionScore: score } }
     );
+    if(currentUser){
     if (
       currentUser.bestScores[thisSession.difficulty][thisSession.length] ===
         undefined ||
@@ -242,6 +247,7 @@ module.exports.updatePlayData = async (req, res, next) => {
         }
       );
     }
+  }
     res.redirect(`/results/${sessionId}`);
   } else {
     res.redirect(`/play/${sessionId}/${pageNum + 1}`);
