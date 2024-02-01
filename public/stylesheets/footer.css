@@ -4,12 +4,13 @@
 .my-footer {
   width: 100%;
   display: flex;
-  background-color: #333;
+  background-color: #000000;
   color: rgba(0, 231, 0, 0.801);
   padding: 20px 0px;
   justify-content: center;
   position: fixed;
   bottom: 0px;
+  font-size: 16px;
 }
 
 @media (max-width: 1024px) {

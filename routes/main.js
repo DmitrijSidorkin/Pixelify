@@ -4,14 +4,14 @@ const router = express.Router();
 
 const main = require("../controllers/main");
 const { ROUTES } = require("../controllers/routes");
-const { mainStyle, cardStyle } = require("../public/javascripts/extraStyles");
+const { mainStyle } = require("../public/javascripts/extraStyles");
 
 router.route(ROUTES.index).get((req, res) => {
   res.render("home", { extraStyles: mainStyle });
 });
 
 router.route(ROUTES.error).get((req, res) => {
-  res.render("error", { extraStyles: cardStyle, error: req.session.error });
+  res.render("error", { error: req.session.error });
 });
 
 router.route(ROUTES.playSettings).get(main.renderPlaySettings);

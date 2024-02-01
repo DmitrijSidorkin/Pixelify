@@ -191,7 +191,7 @@ module.exports.calculateScore = (session, sessionEnd) => {
 module.exports.dataSchemaValidation = (form, schema) => {
   const { error } = schema.validate(form);
   if (error) {
-    throw new Error(error);
+    return { error: true, redirectTo: "/error" };
   }
   return !error;
 };
