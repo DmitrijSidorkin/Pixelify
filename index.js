@@ -15,6 +15,7 @@ const userRoutes = require("./routes/users");
 const mainRoutes = require("./routes/main");
 const accountRoutes = require("./routes/account");
 const User = require("./models/user");
+const ExpressError = require("./utils/ExpressError")
 
 const dbUrl = process.env.IN_DEVELOPMENT
   ? "mongodb://localhost:27017/pixelify"
@@ -88,9 +89,9 @@ app.use((req, res, next) => {
 
 app.use("/", mainRoutes, userRoutes, accountRoutes);
 
-// app.all("*", (req, res, next) => {
-//   next(new ExpressError("Page Not Found", 404));
-// });
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
 
 /* eslint-disable no-unused-vars */
 app.use((err, req, res, next) => {

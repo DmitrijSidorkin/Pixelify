@@ -1,8 +1,30 @@
-<% layout('layouts/boilerplate')%>
-<div class="card">
-  <div class="card-box">
-    <% if (process.env.NODE_ENV !== "production") { %>
-    <h5 class="card-title"><%- error%> - OOPS!</h5>
-    <% } %>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIXELIFY</title>
+    <link rel="stylesheet" href="/stylesheets/general.css" />
+    <link rel="stylesheet" href="/stylesheets/navbar.css" />
+    <link rel="stylesheet" href="/stylesheets/footer.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/cards.css" />
+    <%-include("./partials/font.ejs")%> 
+  </head>
+  <body>
+    <%-include("./partials/navbar") %>
+    <main><%-include("./partials/flash")%><div class="card">
+      <div class="card-box error-card">
+        <% if (process.env.NODE_ENV !== "production") { %>
+        <h5 class="card-title"><%- error%> - OOPS!</h5>
+        <p class="text-hf">Something went wrong...</br>Go back and try again</p>
+
+
+        <% } %>
+      </div>
+    </div></main>
+    <%-include("./partials/footer") %>
+  </body>
+</html>
+
