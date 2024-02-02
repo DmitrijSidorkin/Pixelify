@@ -1,6 +1,5 @@
 const PlaySession = require("../models/session");
 const User = require("../models/user");
-// myCollection = "", myFilter = ""
 
 const defaultProfileImg = "../../images/default-pfp.png";
 

@@ -22,5 +22,4 @@ module.exports.ROUTES = {
   sendPlayData: "/send-play-data",
   updatePlayData: "/update-play-data",
   error: "/error",
-  test: "/test",
 };
