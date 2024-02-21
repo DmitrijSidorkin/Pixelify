@@ -26,11 +26,11 @@ const UserSchema = new Schema({
   bestScores: {
     //1/2/3/4/5 represent sessiong difficulty
     //3/5/7/9/11 represent session length
-    1: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
-    2: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
-    3: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
-    4: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
-    5: { 3: Number, 5: Number, 7: Number, 9: Number, 11: Number },
+    1: { 10: Number, 20: Number, 50: Number, 100: Number, 200: Number },
+    2: { 10: Number, 20: Number, 50: Number, 100: Number, 200: Number },
+    3: { 10: Number, 20: Number, 50: Number, 100: Number, 200: Number },
+    4: { 10: Number, 20: Number, 50: Number, 100: Number, 200: Number },
+    5: { 10: Number, 20: Number, 50: Number, 100: Number, 200: Number },
   },
   customSessionHighScores: {},
   mediaLinks: {

@@ -263,6 +263,3 @@ module.exports.fetchDetailedGameData = async (req, res) => {
   res.json(requestedGameData);
 };
 
-module.exports.renderTest = async (req, res) => {
-  res.render("main/test.ejs");
-};

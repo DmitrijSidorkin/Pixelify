@@ -27,6 +27,5 @@ router.route(ROUTES.fetchDetailedGameData).get(main.fetchDetailedGameData);
 
 router.route(ROUTES.sendPlayData).post(main.sendPlayData);
 router.route(ROUTES.updatePlayData).post(main.updatePlayData);
-router.route(ROUTES.test).get(main.renderTest);
 
 module.exports = router;
