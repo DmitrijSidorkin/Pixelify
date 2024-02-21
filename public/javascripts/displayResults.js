@@ -23,9 +23,9 @@ if (correctAnswers > Math.floor(userGuessData.length / 2)) {
   resultsImage.src =
     "https://i.kym-cdn.com/photos/images/original/000/707/322/fac.gif";
 } else {
-  resultsTitle.innerText = "OOF...";
+  resultsTitle.innerText = "Better luck next time...";
   resultsImage.src =
-    "https://res.cloudinary.com/dyguovdbc/image/upload/v1686922995/pixelify/1T2p_y30bdx.gif";
+    "https://res.cloudinary.com/dyguovdbc/image/upload/v1708516452/pixelify/jfv3nelmgdkahcnoe77q.gif";
 }
 
 //printing response depending on results
